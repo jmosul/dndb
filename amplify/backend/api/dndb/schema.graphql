@@ -1,0 +1,63 @@
+enum Race {
+    DwarfHill,
+    DwarfMountain,
+    ElfHigh,
+    ElfWood,
+    ElfDark,
+    HalflingLightfoot,
+    HalflingStout,
+    Human,
+    Dragonborn,
+    GnomeForest,
+    GnomeRock,
+    HalfElf,
+    HalfOrc,
+    Tiefling,
+}
+
+enum OccupationClass {
+    Barbarian,
+    Bard,
+    Cleric,
+    Druid,
+    Fighter,
+    Monk,
+    Paladin,
+    Ranger,
+    Rogue,
+    Sorcerer,
+    Warlock,
+    Wizard,
+    Commoner
+}
+
+type NonPlayerCharacter @model {
+    dm: String!
+    id: ID!
+    name: String!
+    class: OccupationClass,
+    occupation: String,
+    race: Race,
+    age: Int,
+    height: Int,
+    weight: Int,
+    description: String,
+    history: String,
+    voice: String,
+    strength: Int,
+    dexterity: Int,
+    constitution: Int,
+    intelligence: Int,
+    wisdom: Int,
+    charisma: Int,
+    alignment_moral: String,
+    alignment_order: String,
+    personality: String,
+    ideal: String,
+    bond: String,
+    flaw: String
+    talent: String,
+    mannerisms: String,
+    interaction: String,
+    secrets: String,
+}
