@@ -34,6 +34,7 @@ export const getNonPlayerCharacter = /* GraphQL */ `
       secrets
       notes
       image
+      party_opinion
     }
   }
 `;
@@ -79,6 +80,7 @@ export const listNonPlayerCharacters = /* GraphQL */ `
         secrets
         notes
         image
+        party_opinion
       }
       nextToken
     }

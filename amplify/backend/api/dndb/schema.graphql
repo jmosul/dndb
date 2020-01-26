@@ -85,4 +85,5 @@ type NonPlayerCharacter
     secrets: String,
     notes: String,
     image: String,
+    party_opinion: Int,
 }

@@ -34,6 +34,7 @@ export const onCreateNonPlayerCharacter = /* GraphQL */ `
       secrets
       notes
       image
+      party_opinion
     }
   }
 `;
@@ -70,6 +71,7 @@ export const onUpdateNonPlayerCharacter = /* GraphQL */ `
       secrets
       notes
       image
+      party_opinion
     }
   }
 `;
@@ -106,6 +108,7 @@ export const onDeleteNonPlayerCharacter = /* GraphQL */ `
       secrets
       notes
       image
+      party_opinion
     }
   }
 `;
