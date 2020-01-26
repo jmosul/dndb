@@ -221,7 +221,12 @@
         }
 
         handleComplete() {
-            // this.$router.
+            this.$router.push({
+                name: 'character',
+                params: {
+                    characterId: this.model.id,
+                },
+            });
         }
 
         get createMutation() {
