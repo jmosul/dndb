@@ -1,6 +1,9 @@
 <template>
     <section class="character view">
-        <amplify-connect :query="character" v-if="$route.params.characterId">
+        <amplify-connect
+            :query="character"
+            v-if="$route.params.characterId"
+        >
             <template slot-scope="{loading, data, errors}">
                 <div v-if="data.getNonPlayerCharacter">
 
@@ -16,7 +19,9 @@
                                 <div class="card">
                                     <div class="card-image" v-if="data.getNonPlayerCharacter.image">
                                         <figure class="image is-4by3">
-                                            <img :src="getImage(data.getNonPlayerCharacter.image)" :alt="data.getNonPlayerCharacter.name">
+                                            <a :href="getImage(data.getNonPlayerCharacter.image)" title="Open image" target="_blank">
+                                                <img :src="getImage(data.getNonPlayerCharacter.image)" :alt="data.getNonPlayerCharacter.name">
+                                            </a>
                                         </figure>
                                     </div>
                                     <div class="card-content">
@@ -37,6 +42,10 @@
                                             </div>
                                         </div>
                                         <div class="content">
+                                            <strong>Party Opinion</strong>
+                                            <party-opinion
+                                                :character="data.getNonPlayerCharacter"
+                                            ></party-opinion>
 
                                             <table>
                                                 <tbody>
@@ -71,7 +80,6 @@
                                 </div>
                             </div>
                             <div class="column is-two-thirds">
-
                                 <section class="columns is-multiline">
                                     <ability-score
                                         v-for="ability in abilities"
@@ -139,6 +147,12 @@
                                     </p>
 
                                 </section>
+
+                                <section>
+                                    <h4 class="title">Notes</h4>
+                                    <hr>
+                                    <character-notes :character="data.getNonPlayerCharacter"></character-notes>
+                                </section>
                             </div>
                         </div>
                     </section>
@@ -155,9 +169,13 @@
     import {components} from 'aws-amplify-vue';
     import AbilityScore from '../../components/AbilityScore';
     import Converter from '../../components/Converter';
+    import PartyOpinion from '../../components/PartyOpinion';
+    import CharacterNotes from '../../components/CharacterNotes';
 
     @Component({
         components: {
+            CharacterNotes,
+            PartyOpinion,
             Converter,
             ...components,
             AbilityScore,
@@ -179,7 +197,6 @@
             return this.formatList([
                 'history',
                 'secrets',
-                'notes',
             ]);
         }
 

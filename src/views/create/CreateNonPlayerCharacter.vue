@@ -145,6 +145,48 @@
                         <b-input type="textarea" v-model="model.personality"></b-input>
                     </b-field>
 
+                    <strong>Party Opinion</strong>
+                    <b-field>
+                        <b-radio-button
+                            v-model="model.party_opinion"
+                            native-value="0"
+                            type="is-danger"
+                        >
+                            <span>Hostile</span>
+                        </b-radio-button>
+
+                        <b-radio-button
+                            v-model="model.party_opinion"
+                            native-value="1"
+                            type="is-warning"
+                        >
+                            <span>-</span>
+                        </b-radio-button>
+
+                        <b-radio-button
+                            v-model="model.party_opinion"
+                            native-value="2"
+                            type="is-primary"
+                        >
+                            Indifferent
+                        </b-radio-button>
+
+                        <b-radio-button
+                            v-model="model.party_opinion"
+                            native-value="3"
+                            type="is-info"
+                        >
+                            <span>-</span>
+                        </b-radio-button>
+                        <b-radio-button
+                            v-model="model.party_opinion"
+                            native-value="4"
+                            type="is-success"
+                        >
+                            Friendly
+                        </b-radio-button>
+                    </b-field>
+
                     <b-field label="Ideal">
                         <b-input type="text" v-model="model.ideal"></b-input>
                     </b-field>
@@ -214,6 +256,7 @@
             class: 'Commoner',
             alignment_moral: 'Neutral',
             alignment_order: 'Neutral',
+            party_opinion: 2,
         };
 
         mounted() {
