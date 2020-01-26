@@ -118,7 +118,7 @@
                     </b-field>
 
                     <b-field label="Height">
-                        <b-input type="number" v-model="model.height"></b-input>
+                        <b-input type="number" v-model="model.height"></b-input
                     </b-field>
 
                     <b-field label="Weight">
