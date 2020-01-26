@@ -14,9 +14,9 @@
                         <div class="columns">
                             <div class="column is-one-third">
                                 <div class="card">
-                                    <div class="card-image">
+                                    <div class="card-image" v-if="data.getNonPlayerCharacter.image">
                                         <figure class="image is-4by3">
-                                            <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+                                            <img :src="getImage(data.getNonPlayerCharacter.image)" :alt="data.getNonPlayerCharacter.name">
                                         </figure>
                                     </div>
                                     <div class="card-content">
@@ -57,8 +57,15 @@
                             </div>
                             <div class="column is-two-thirds">
 
-                                <section>
-                                    ABILITIES
+                                <section class="columns is-multiline">
+                                    <ability-score
+                                        v-for="ability in abilities"
+                                        v-if="data.getNonPlayerCharacter[ability.id]"
+                                        :key="ability.id"
+                                        :score="data.getNonPlayerCharacter[ability.id]"
+                                        :ability="ability.title"
+                                        class="column"
+                                    ></ability-score>
                                 </section>
 
                                 <section
@@ -87,28 +94,63 @@
     import AppComponent from '../../AppComponent';
     import {getNonPlayerCharacter} from '../../graphql/queries';
     import {components} from 'aws-amplify-vue';
+    import AbilityScore from '../../components/AbilityScore';
+
 
     @Component({
-        components,
+        components: {
+            ...components,
+            AbilityScore,
+        },
     })
     export default class Character extends AppComponent {
-        articles = [
-            {
-                id: 'description',
-                title: 'Description',
-            },
-            {
-                id: 'history',
-                title: 'History',
-            },
-            {
-                id: 'notes',
-                title: 'Notes',
-            },
-        ];
+        get abilities() {
+            return this.formatList([
+                'strength',
+                'dexterity',
+                'constitution',
+                'intelligence',
+                'wisdom',
+                'charisma',
+            ]);
+        }
+
+        get articles() {
+            return this.formatList([
+                'description',
+                'history',
+                'notes',
+            ]);
+        }
 
         get character() {
             return this.$Amplify.graphqlOperation(getNonPlayerCharacter, {id: this.$route.params.characterId});
         }
+
+        getImage(image) {
+            return `/images/characters/${image}`;
+        }
+
+        formatList(list) {
+            return list.map((id) => ({
+                id,
+                title: id.charAt(0).toUpperCase() + id.slice(1),
+            }));
+        }
     }
 </script>
+
+<style scoped lang="scss">
+    .view section {
+        margin-bottom: 30px;
+
+        hr {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        h4.title {
+            margin-bottom: 10px;
+        }
+    }
+</style>
