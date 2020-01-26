@@ -18,7 +18,7 @@
                             <div class="column is-one-third">
                                 <div class="card">
                                     <div class="card-image" v-if="data.getNonPlayerCharacter.image">
-                                        <figure class="image is-4by3">
+                                        <figure class="image is-3by4">
                                             <a :href="getImage(data.getNonPlayerCharacter.image)" title="Open image" target="_blank">
                                                 <img :src="getImage(data.getNonPlayerCharacter.image)" :alt="data.getNonPlayerCharacter.name">
                                             </a>
