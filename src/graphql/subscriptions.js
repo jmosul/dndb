@@ -2,8 +2,8 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreateNonPlayerCharacter = /* GraphQL */ `
-  subscription OnCreateNonPlayerCharacter {
-    onCreateNonPlayerCharacter {
+  subscription OnCreateNonPlayerCharacter($dmn: String!) {
+    onCreateNonPlayerCharacter(dmn: $dmn) {
       dm
       id
       name
@@ -33,12 +33,13 @@ export const onCreateNonPlayerCharacter = /* GraphQL */ `
       interaction
       secrets
       notes
+      image
     }
   }
 `;
 export const onUpdateNonPlayerCharacter = /* GraphQL */ `
-  subscription OnUpdateNonPlayerCharacter {
-    onUpdateNonPlayerCharacter {
+  subscription OnUpdateNonPlayerCharacter($dmn: String!) {
+    onUpdateNonPlayerCharacter(dmn: $dmn) {
       dm
       id
       name
@@ -68,12 +69,13 @@ export const onUpdateNonPlayerCharacter = /* GraphQL */ `
       interaction
       secrets
       notes
+      image
     }
   }
 `;
 export const onDeleteNonPlayerCharacter = /* GraphQL */ `
-  subscription OnDeleteNonPlayerCharacter {
-    onDeleteNonPlayerCharacter {
+  subscription OnDeleteNonPlayerCharacter($dmn: String!) {
+    onDeleteNonPlayerCharacter(dmn: $dmn) {
       dm
       id
       name
@@ -103,6 +105,7 @@ export const onDeleteNonPlayerCharacter = /* GraphQL */ `
       interaction
       secrets
       notes
+      image
     }
   }
 `;

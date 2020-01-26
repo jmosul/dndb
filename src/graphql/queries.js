@@ -33,6 +33,7 @@ export const getNonPlayerCharacter = /* GraphQL */ `
       interaction
       secrets
       notes
+      image
     }
   }
 `;
@@ -77,6 +78,7 @@ export const listNonPlayerCharacters = /* GraphQL */ `
         interaction
         secrets
         notes
+        image
       }
       nextToken
     }

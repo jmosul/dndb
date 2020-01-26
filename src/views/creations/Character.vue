@@ -44,13 +44,28 @@
                                                         <th>Race</th>
                                                         <td>{{data.getNonPlayerCharacter.race}}</td>
                                                     </tr>
-
                                                     <tr>
                                                         <th>Age</th>
                                                         <td>{{data.getNonPlayerCharacter.age}}</td>
                                                     </tr>
+                                                    <tr v-if="data.getNonPlayerCharacter.height">
+                                                        <th>Height</th>
+                                                        <td>
+                                                            <converter :value="data.getNonPlayerCharacter.height" type="length"></converter>
+                                                        </td>
+                                                    </tr>
+                                                    <tr v-if="data.getNonPlayerCharacter.weight">
+                                                        <th>Weight</th>
+                                                        <td>
+                                                            <converter :value="data.getNonPlayerCharacter.weight" type="weight"></converter>
+                                                        </td>
+                                                    </tr>
                                                 </tbody>
                                             </table>
+
+                                            <p>
+                                                {{data.getNonPlayerCharacter.description}}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -64,8 +79,42 @@
                                         :key="ability.id"
                                         :score="data.getNonPlayerCharacter[ability.id]"
                                         :ability="ability.title"
-                                        class="column"
+                                        class="column is-half-mobile"
                                     ></ability-score>
+                                </section>
+
+                                <section>
+                                    <h4 class="title">Interaction</h4>
+                                    <hr>
+                                    <p v-if="data.getNonPlayerCharacter.interaction">{{data.getNonPlayerCharacter.interaction}}</p>
+
+                                    <p v-if="data.getNonPlayerCharacter.voice">
+                                        <strong>Voice: </strong>
+                                        {{data.getNonPlayerCharacter.voice}}
+                                    </p>
+                                    <p v-if="data.getNonPlayerCharacter.mannerisms">
+                                        <strong>Mannerisms: </strong>
+                                        {{data.getNonPlayerCharacter.mannerisms}}
+                                    </p>
+                                </section>
+
+                                <section>
+                                    <h4 class="title">Personality</h4>
+                                    <hr>
+                                    <p v-if="data.getNonPlayerCharacter.personality">{{data.getNonPlayerCharacter.personality}}</p>
+
+                                    <p v-if="data.getNonPlayerCharacter.ideal">
+                                        <strong>Ideal: </strong>
+                                        {{data.getNonPlayerCharacter.ideal}}
+                                    </p>
+                                    <p v-if="data.getNonPlayerCharacter.bond">
+                                        <strong>Bond: </strong>
+                                        {{data.getNonPlayerCharacter.bond}}
+                                    </p>
+                                    <p v-if="data.getNonPlayerCharacter.flaw">
+                                        <strong>Flaw: </strong>
+                                        {{data.getNonPlayerCharacter.flaw}}
+                                    </p>
                                 </section>
 
                                 <section
@@ -95,10 +144,11 @@
     import {getNonPlayerCharacter} from '../../graphql/queries';
     import {components} from 'aws-amplify-vue';
     import AbilityScore from '../../components/AbilityScore';
-
+    import Converter from '../../components/Converter';
 
     @Component({
         components: {
+            Converter,
             ...components,
             AbilityScore,
         },
@@ -117,8 +167,8 @@
 
         get articles() {
             return this.formatList([
-                'description',
                 'history',
+                'secrets',
                 'notes',
             ]);
         }
@@ -147,6 +197,10 @@
         hr {
             margin-top: 5px;
             margin-bottom: 5px;
+        }
+
+        .card h4.title {
+            margin: 0;
         }
 
         h4.title {

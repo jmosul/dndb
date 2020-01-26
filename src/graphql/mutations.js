@@ -36,6 +36,7 @@ export const createNonPlayerCharacter = /* GraphQL */ `
       interaction
       secrets
       notes
+      image
     }
   }
 `;
@@ -74,6 +75,7 @@ export const updateNonPlayerCharacter = /* GraphQL */ `
       interaction
       secrets
       notes
+      image
     }
   }
 `;
@@ -112,6 +114,7 @@ export const deleteNonPlayerCharacter = /* GraphQL */ `
       interaction
       secrets
       notes
+      image
     }
   }
 `;

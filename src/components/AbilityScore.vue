@@ -40,7 +40,7 @@
     }
 
     .ability {
-        margin: 5px;
+        margin: 5px 5px 20px;
         padding: 10px 10px 20px;
         position: relative;
         text-align: center;
