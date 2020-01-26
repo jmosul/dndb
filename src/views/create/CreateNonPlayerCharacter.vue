@@ -217,15 +217,21 @@
         };
 
         mounted() {
-            this.model.dm = this.dungeonMasterId;
             this.model.id = uuid.v4();
         }
 
         handleComplete() {
-            console.log('complete');
+            this.$router.push({
+                name: 'character',
+                params: {
+                    characterId: this.model.id,
+                },
+            });
         }
 
         get createMutation() {
+            this.model.dm = this.dungeonMasterId;
+
             return this.$Amplify.graphqlOperation(this.mutation, {input: this.model});
         }
     }

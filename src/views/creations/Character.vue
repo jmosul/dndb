@@ -14,9 +14,9 @@
                         <div class="columns">
                             <div class="column is-one-third">
                                 <div class="card">
-                                    <div class="card-image">
+                                    <div class="card-image" v-if="data.getNonPlayerCharacter.image">
                                         <figure class="image is-4by3">
-                                            <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+                                            <img :src="getImage(data.getNonPlayerCharacter.image)" :alt="data.getNonPlayerCharacter.name">
                                         </figure>
                                     </div>
                                     <div class="card-content">
@@ -44,21 +44,77 @@
                                                         <th>Race</th>
                                                         <td>{{data.getNonPlayerCharacter.race}}</td>
                                                     </tr>
-
                                                     <tr>
                                                         <th>Age</th>
                                                         <td>{{data.getNonPlayerCharacter.age}}</td>
                                                     </tr>
+                                                    <tr v-if="data.getNonPlayerCharacter.height">
+                                                        <th>Height</th>
+                                                        <td>
+                                                            <converter :value="data.getNonPlayerCharacter.height" type="length"></converter>
+                                                        </td>
+                                                    </tr>
+                                                    <tr v-if="data.getNonPlayerCharacter.weight">
+                                                        <th>Weight</th>
+                                                        <td>
+                                                            <converter :value="data.getNonPlayerCharacter.weight" type="weight"></converter>
+                                                        </td>
+                                                    </tr>
                                                 </tbody>
                                             </table>
+
+                                            <p>
+                                                {{data.getNonPlayerCharacter.description}}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="column is-two-thirds">
 
+                                <section class="columns is-multiline">
+                                    <ability-score
+                                        v-for="ability in abilities"
+                                        v-if="data.getNonPlayerCharacter[ability.id]"
+                                        :key="ability.id"
+                                        :score="data.getNonPlayerCharacter[ability.id]"
+                                        :ability="ability.title"
+                                        class="column is-half-mobile"
+                                    ></ability-score>
+                                </section>
+
                                 <section>
-                                    ABILITIES
+                                    <h4 class="title">Interaction</h4>
+                                    <hr>
+                                    <p v-if="data.getNonPlayerCharacter.interaction">{{data.getNonPlayerCharacter.interaction}}</p>
+
+                                    <p v-if="data.getNonPlayerCharacter.voice">
+                                        <strong>Voice: </strong>
+                                        {{data.getNonPlayerCharacter.voice}}
+                                    </p>
+                                    <p v-if="data.getNonPlayerCharacter.mannerisms">
+                                        <strong>Mannerisms: </strong>
+                                        {{data.getNonPlayerCharacter.mannerisms}}
+                                    </p>
+                                </section>
+
+                                <section>
+                                    <h4 class="title">Personality</h4>
+                                    <hr>
+                                    <p v-if="data.getNonPlayerCharacter.personality">{{data.getNonPlayerCharacter.personality}}</p>
+
+                                    <p v-if="data.getNonPlayerCharacter.ideal">
+                                        <strong>Ideal: </strong>
+                                        {{data.getNonPlayerCharacter.ideal}}
+                                    </p>
+                                    <p v-if="data.getNonPlayerCharacter.bond">
+                                        <strong>Bond: </strong>
+                                        {{data.getNonPlayerCharacter.bond}}
+                                    </p>
+                                    <p v-if="data.getNonPlayerCharacter.flaw">
+                                        <strong>Flaw: </strong>
+                                        {{data.getNonPlayerCharacter.flaw}}
+                                    </p>
                                 </section>
 
                                 <section
@@ -87,28 +143,68 @@
     import AppComponent from '../../AppComponent';
     import {getNonPlayerCharacter} from '../../graphql/queries';
     import {components} from 'aws-amplify-vue';
+    import AbilityScore from '../../components/AbilityScore';
+    import Converter from '../../components/Converter';
 
     @Component({
-        components,
+        components: {
+            Converter,
+            ...components,
+            AbilityScore,
+        },
     })
     export default class Character extends AppComponent {
-        articles = [
-            {
-                id: 'description',
-                title: 'Description',
-            },
-            {
-                id: 'history',
-                title: 'History',
-            },
-            {
-                id: 'notes',
-                title: 'Notes',
-            },
-        ];
+        get abilities() {
+            return this.formatList([
+                'strength',
+                'dexterity',
+                'constitution',
+                'intelligence',
+                'wisdom',
+                'charisma',
+            ]);
+        }
+
+        get articles() {
+            return this.formatList([
+                'history',
+                'secrets',
+                'notes',
+            ]);
+        }
 
         get character() {
             return this.$Amplify.graphqlOperation(getNonPlayerCharacter, {id: this.$route.params.characterId});
         }
+
+        getImage(image) {
+            return `/images/characters/${image}`;
+        }
+
+        formatList(list) {
+            return list.map((id) => ({
+                id,
+                title: id.charAt(0).toUpperCase() + id.slice(1),
+            }));
+        }
     }
 </script>
+
+<style scoped lang="scss">
+    .view section {
+        margin-bottom: 30px;
+
+        hr {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        .card h4.title {
+            margin: 0;
+        }
+
+        h4.title {
+            margin-bottom: 10px;
+        }
+    }
+</style>
