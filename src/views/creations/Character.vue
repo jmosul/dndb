@@ -103,6 +103,16 @@
                                     <hr>
                                     <p v-if="data.getNonPlayerCharacter.personality">{{data.getNonPlayerCharacter.personality}}</p>
 
+                                    <p>
+                                        <strong>Alignment: </strong>
+                                        <span v-if="data.getNonPlayerCharacter.alignment_order === data.getNonPlayerCharacter.alignment_order">
+                                            True {{data.getNonPlayerCharacter.alignment_order}}
+                                        </span>
+                                        <span v-else>
+                                            {{data.getNonPlayerCharacter.alignment_order}} {{data.getNonPlayerCharacter.alignment_order}}
+                                        </span>
+                                    </p>
+
                                     <p v-if="data.getNonPlayerCharacter.ideal">
                                         <strong>Ideal: </strong>
                                         {{data.getNonPlayerCharacter.ideal}}
