@@ -31,7 +31,30 @@ enum OccupationClass {
     Commoner
 }
 
-type NonPlayerCharacter @model {
+enum AlignmentMoral {
+    Evil,
+    Neutral,
+    Good
+}
+
+enum AlignmentOrder {
+    Lawful,
+    Neutral,
+    Chaotic
+}
+
+type NonPlayerCharacter
+    @model
+    @auth(
+        rules: [
+            {
+                allow: owner,
+                ownerField: "dmn",
+                operations: [create, update, delete, read]
+            },
+        ]
+    )
+{
     dm: String!
     id: ID!
     name: String!
@@ -50,8 +73,8 @@ type NonPlayerCharacter @model {
     intelligence: Int,
     wisdom: Int,
     charisma: Int,
-    alignment_moral: String,
-    alignment_order: String,
+    alignment_moral: AlignmentMoral,
+    alignment_order: AlignmentOrder,
     personality: String,
     ideal: String,
     bond: String,
@@ -60,4 +83,6 @@ type NonPlayerCharacter @model {
     mannerisms: String,
     interaction: String,
     secrets: String,
+    notes: String,
+    image: String,
 }

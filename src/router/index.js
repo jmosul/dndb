@@ -1,27 +1,57 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import store from '../stores';
+import Home from '../views/Home.vue';
+import Character from '../views/creations/Character';
+import Identity from '../views/Identity';
+import CreateNonPlayerCharacter from '../views/create/CreateNonPlayerCharacter';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
-]
+    {
+        path: '/',
+        name: 'home',
+        component: Home,
+    },
+    {
+        path: '/character/:characterId',
+        name: 'character',
+        component: Character,
+        props: {
+            characterId: '',
+        },
+    },
+    {
+        path: '/identity',
+        name: 'identity',
+        component: Identity,
+        meta: {
+            signedOutOnly: true,
+        },
+    },
+    {
+        path: '/create/npc',
+        name: 'createNPC',
+        component: CreateNonPlayerCharacter,
+    },
+];
 
 const router = new VueRouter({
-  routes
-})
+    routes,
+});
 
-export default router
+router.beforeResolve((to, from, next) => {
+    if (to.path !== '*') {
+        Vue.prototype.$Amplify.Auth.currentAuthenticatedUser()
+            .then(data => {
+                store.commit('dungeonMaster/id', data.attributes.sub);
+            })
+            .catch((e) => next({path: '/identity'})
+            );
+    }
+
+    next();
+});
+
+export default router;

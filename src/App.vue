@@ -1,32 +1,138 @@
+// src/components/App.vue
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div class="app">
+        <app-header></app-header>
+        <main>
+            <router-view></router-view>
+        </main>
+        <app-footer></app-footer>
     </div>
-    <router-view/>
-  </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+    import {AmplifyEventBus} from 'aws-amplify-vue';
+    import {Auth} from 'aws-amplify';
+    import Vue from 'vue';
+    import Component from 'vue-class-component';
+    import AppHeader from './components/AppHeader';
+    import AppFooter from './components/AppFooter';
 
-#nav {
-  padding: 30px;
+    @Component({
+        components: {
+            AppFooter,
+            AppHeader,
+        },
+    })
+    export default class App extends Vue {
+        beforeCreate() {
+            AmplifyEventBus.$on('authState', info => {
+                if (info === 'signedIn') {
+                    this.signedIn = true;
+                }
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+                if (info === 'signedOut') {
+                    this.$router.push('/auth');
+                    this.signedIn = false;
+                }
+            });
 
-    &.router-link-exact-active {
-      color: #42b983;
+            Auth.currentAuthenticatedUser()
+                .then(user => this.signedIn = true)
+                .catch(() => this.signedIn = false);
+        }
     }
-  }
-}
+</script>
+
+<style lang="scss">
+    // Import Bulma's core
+    @import "~bulma/sass/utilities/_all";
+
+    // Set your colors
+    $primary: #8c67ef;
+    $primary-invert: findColorInvert($primary);
+    $secondary: #4099FF;
+    $secondary-invert: findColorInvert($secondary);
+
+    // Setup $colors to use as bulma classes (e.g. 'is-twitter')
+    $colors: (
+        "white": ($white, $black),
+        "black": ($black, $white),
+        "light": ($light, $light-invert),
+        "dark": ($dark, $dark-invert),
+        "primary": ($primary, $primary-invert),
+        "info": ($info, $info-invert),
+        "success": ($success, $success-invert),
+        "warning": ($warning, $warning-invert),
+        "danger": ($danger, $danger-invert),
+        "secondary": ($secondary, $secondary-invert)
+    );
+
+    // Links
+    $link: $primary;
+    $link-invert: $primary-invert;
+    $link-focus-border: $primary;
+
+    $margins: 0, 5, 10, 15;
+
+    // Import Bulma and Buefy styles
+    @import "~bulma";
+    @import "~buefy/src/scss/buefy";
+
+    html, body {
+        height: 100%;
+        margin: 0;
+
+        --color-primary: #{$primary};
+        --color-primary-accent: #{$primary-invert};
+        --color-primary-highlight: #{$primary};
+        --color-background: #232f3e;
+        --color-secondary: #{$secondary};
+        --color-secondary-accent: #{$secondary-invert};
+        --color-danger: #{$colors("danger")};
+        --color-error: #d0021b;
+        --gradient-blaze: linear-gradient(270deg,#{$secondary},#{$primary});
+        --button-background-color: #{$primary};
+        --button-color: #{$primary-invert};
+    }
+
+    .app {
+        box-sizing: border-box;
+        position: relative;
+        padding-bottom: 180px; /* Height of footer */
+        min-height: 100%;
+
+        main {
+            padding-bottom: 15px;
+
+            p {
+                margin: 10px;
+            }
+
+            p.panel-heading {
+                margin: 0;
+            }
+        }
+
+        @each $margin in $margins {
+            .m-#{$margin} {
+                margin: #{$margin}px;
+            }
+
+            .mt-#{$margin} {
+                margin-top: #{$margin}px;
+            }
+
+            .mr-#{$margin} {
+                margin-right: #{$margin}px;
+            }
+
+            .mb-#{$margin} {
+                margin-bottom: #{$margin}px;
+            }
+
+            .ml-#{$margin} {
+                margin-left: #{$margin}px;
+            }
+        }
+    }
 </style>
