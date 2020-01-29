@@ -73,8 +73,7 @@
             return [...logs].sort((logA, logB) => {
                 if (logA.date > logB.date) {
                     return 1;
-                }
-                else if (logA.date < logB.date) {
+                } else if (logA.date < logB.date) {
                     return -1;
                 }
 
