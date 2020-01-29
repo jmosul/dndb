@@ -1,0 +1,19 @@
+type CampaignLog
+@model
+@auth(
+    rules: [
+        {
+            allow: owner,
+            ownerField: "dm",
+            operations: [create, update, delete, read]
+        },
+    ]
+)
+{
+    id: ID!
+    dm: String!
+    date: String!,
+    title: String!,
+    content: String,
+    highlights: String,
+}

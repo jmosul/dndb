@@ -44,16 +44,16 @@ enum AlignmentOrder {
 }
 
 type NonPlayerCharacter
-    @model
-    @auth(
-        rules: [
-            {
-                allow: owner,
-                ownerField: "dmn",
-                operations: [create, update, delete, read]
-            },
-        ]
-    )
+@model
+@auth(
+    rules: [
+        {
+            allow: owner,
+            ownerField: "dm",
+            operations: [create, update, delete, read]
+        },
+    ]
+)
 {
     dm: String!
     id: ID!

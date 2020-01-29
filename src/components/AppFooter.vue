@@ -3,7 +3,7 @@
         <div class="content has-text-centered has-text-grey-light">
             <p>
                 <small>
-                    Dungeons and Database | James O'Sullivan | &copy; {{year}}
+                    Dungeons and Databases | James O'Sullivan | &copy; {{year}}
                 </small>
             </p>
 
