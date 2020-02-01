@@ -7,6 +7,7 @@ import Identity from '../views/Identity';
 import CampaignLogs from '../views/CampaignLogs';
 import CreateNonPlayerCharacter from '../views/create/CreateNonPlayerCharacter';
 import CampaignLog from '../views/CampaignLog';
+import Characters from '../views/Characters';
 
 Vue.use(VueRouter);
 
@@ -17,7 +18,12 @@ const routes = [
         component: Home,
     },
     {
-        path: '/character/:characterId',
+        path: '/characters',
+        name: 'characters',
+        component: Characters,
+    },
+    {
+        path: '/characters/:characterId',
         name: 'character',
         component: Character,
         props: {

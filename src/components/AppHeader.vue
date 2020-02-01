@@ -30,6 +30,12 @@
                                 >
                                     {{npc.name}}
                                 </b-navbar-item>
+                                <b-navbar-item
+                                    :to="{name: 'characters'}"
+                                    tag="router-link"
+                                >
+                                    More...
+                                </b-navbar-item>
                             </div>
                         </template>
                     </amplify-connect>
