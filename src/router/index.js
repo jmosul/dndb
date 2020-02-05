@@ -8,6 +8,8 @@ import CampaignLogs from '../views/CampaignLogs';
 import CreateNonPlayerCharacter from '../views/create/CreateNonPlayerCharacter';
 import CampaignLog from '../views/CampaignLog';
 import Characters from '../views/Characters';
+import Player from '../views/creations/Player';
+import CreatePlayerCharacter from '../views/create/CreatePlayerCharacter';
 
 Vue.use(VueRouter);
 
@@ -23,11 +25,19 @@ const routes = [
         component: Characters,
     },
     {
-        path: '/characters/:characterId',
+        path: '/characters/:id',
         name: 'character',
         component: Character,
         props: {
-            characterId: '',
+            id: '',
+        },
+    },
+    {
+        path: '/players/:id',
+        name: 'player',
+        component: Player,
+        props: {
+            id: '',
         },
     },
     {
@@ -55,6 +65,11 @@ const routes = [
         name: 'createNPC',
         component: CreateNonPlayerCharacter,
     },
+    {
+        path: '/create/player',
+        name: 'createPlayer',
+        component: CreatePlayerCharacter,
+    },
 ];
 
 const router = new VueRouter({
@@ -62,8 +77,6 @@ const router = new VueRouter({
 });
 
 router.beforeResolve((to, from, next) => {
-    console.log('qwertyui');
-
     if (to.path !== '*') {
         Vue.prototype.$Amplify.Auth.currentAuthenticatedUser()
             .then(data => {

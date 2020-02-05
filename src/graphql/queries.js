@@ -113,3 +113,62 @@ export const listNonPlayerCharacters = `query ListNonPlayerCharacters(
   }
 }
 `;
+export const getPlayerCharacter = `query GetPlayerCharacter($id: ID!) {
+  getPlayerCharacter(id: $id) {
+    dm
+    id
+    name
+    player
+    class
+    race
+    status
+    age
+    height
+    weight
+    description
+    alignment_moral
+    alignment_order
+    ideal
+    bond
+    flaw
+    history
+    joined
+    secrets
+    notes
+    image
+  }
+}
+`;
+export const listPlayerCharacters = `query ListPlayerCharacters(
+  $filter: ModelPlayerCharacterFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listPlayerCharacters(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      dm
+      id
+      name
+      player
+      class
+      race
+      status
+      age
+      height
+      weight
+      description
+      alignment_moral
+      alignment_order
+      ideal
+      bond
+      flaw
+      history
+      joined
+      secrets
+      notes
+      image
+    }
+    nextToken
+  }
+}
+`;

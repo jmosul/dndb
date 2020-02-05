@@ -160,3 +160,90 @@ export const deleteNonPlayerCharacter = `mutation DeleteNonPlayerCharacter(
   }
 }
 `;
+export const createPlayerCharacter = `mutation CreatePlayerCharacter(
+  $input: CreatePlayerCharacterInput!
+  $condition: ModelPlayerCharacterConditionInput
+) {
+  createPlayerCharacter(input: $input, condition: $condition) {
+    dm
+    id
+    name
+    player
+    class
+    race
+    status
+    age
+    height
+    weight
+    description
+    alignment_moral
+    alignment_order
+    ideal
+    bond
+    flaw
+    history
+    joined
+    secrets
+    notes
+    image
+  }
+}
+`;
+export const updatePlayerCharacter = `mutation UpdatePlayerCharacter(
+  $input: UpdatePlayerCharacterInput!
+  $condition: ModelPlayerCharacterConditionInput
+) {
+  updatePlayerCharacter(input: $input, condition: $condition) {
+    dm
+    id
+    name
+    player
+    class
+    race
+    status
+    age
+    height
+    weight
+    description
+    alignment_moral
+    alignment_order
+    ideal
+    bond
+    flaw
+    history
+    joined
+    secrets
+    notes
+    image
+  }
+}
+`;
+export const deletePlayerCharacter = `mutation DeletePlayerCharacter(
+  $input: DeletePlayerCharacterInput!
+  $condition: ModelPlayerCharacterConditionInput
+) {
+  deletePlayerCharacter(input: $input, condition: $condition) {
+    dm
+    id
+    name
+    player
+    class
+    race
+    status
+    age
+    height
+    weight
+    description
+    alignment_moral
+    alignment_order
+    ideal
+    bond
+    flaw
+    history
+    joined
+    secrets
+    notes
+    image
+  }
+}
+`;

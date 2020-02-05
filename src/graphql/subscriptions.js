@@ -142,3 +142,81 @@ export const onDeleteNonPlayerCharacter = `subscription OnDeleteNonPlayerCharact
   }
 }
 `;
+export const onCreatePlayerCharacter = `subscription OnCreatePlayerCharacter($dm: String!) {
+  onCreatePlayerCharacter(dm: $dm) {
+    dm
+    id
+    name
+    player
+    class
+    race
+    status
+    age
+    height
+    weight
+    description
+    alignment_moral
+    alignment_order
+    ideal
+    bond
+    flaw
+    history
+    joined
+    secrets
+    notes
+    image
+  }
+}
+`;
+export const onUpdatePlayerCharacter = `subscription OnUpdatePlayerCharacter($dm: String!) {
+  onUpdatePlayerCharacter(dm: $dm) {
+    dm
+    id
+    name
+    player
+    class
+    race
+    status
+    age
+    height
+    weight
+    description
+    alignment_moral
+    alignment_order
+    ideal
+    bond
+    flaw
+    history
+    joined
+    secrets
+    notes
+    image
+  }
+}
+`;
+export const onDeletePlayerCharacter = `subscription OnDeletePlayerCharacter($dm: String!) {
+  onDeletePlayerCharacter(dm: $dm) {
+    dm
+    id
+    name
+    player
+    class
+    race
+    status
+    age
+    height
+    weight
+    description
+    alignment_moral
+    alignment_order
+    ideal
+    bond
+    flaw
+    history
+    joined
+    secrets
+    notes
+    image
+  }
+}
+`;
