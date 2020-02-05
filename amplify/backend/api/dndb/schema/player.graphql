@@ -1,4 +1,4 @@
-type NonPlayerCharacter
+type PlayerCharacter
 @model
 @auth(
     rules: [
@@ -13,32 +13,22 @@ type NonPlayerCharacter
     dm: String!
     id: ID!
     name: String!
+    player: String!
     class: OccupationClass,
-    occupation: String,
     race: Race,
+    status: CharacterStatus,
     age: Int,
     height: Int,
     weight: Int,
     description: String,
-    history: String,
-    voice: String,
-    strength: Int,
-    dexterity: Int,
-    constitution: Int,
-    intelligence: Int,
-    wisdom: Int,
-    charisma: Int,
     alignment_moral: AlignmentMoral,
     alignment_order: AlignmentOrder,
-    personality: String,
     ideal: String,
     bond: String,
     flaw: String
-    talent: String,
-    mannerisms: String,
-    interaction: String,
+    history: String,
+    joined: String,
     secrets: String,
     notes: String,
     image: String,
-    party_opinion: Int,
 }
