@@ -102,9 +102,7 @@
         openCharacter({id}) {
             this.$router.push({
                 name: 'character',
-                params: {
-                    characterId: id,
-                },
+                params: {id},
             });
         }
     }
