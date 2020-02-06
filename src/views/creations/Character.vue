@@ -179,6 +179,14 @@
     export default class Character extends CharacterView {
         query = getNonPlayerCharacter;
 
+        get articles() {
+            return this.formatList([
+                'joined',
+                'history',
+                'secrets',
+            ]);
+        }
+
         get abilities() {
             return this.formatList([
                 'strength',
