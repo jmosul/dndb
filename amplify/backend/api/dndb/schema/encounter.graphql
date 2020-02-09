@@ -1,0 +1,18 @@
+type Encounter
+@model
+@auth(
+    rules: [
+        {
+            allow: owner,
+            ownerField: "dm",
+            operations: [create, update, delete, read]
+        },
+    ]
+)
+{
+    id: ID!
+    dm: String!
+    name: String!
+    started: Int
+    combatants: [Combatant]
+}

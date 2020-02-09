@@ -177,7 +177,7 @@
             this.$router.push({
                 name: 'player',
                 params: {
-                    playerId: this.model.id,
+                    id: this.model.id,
                 },
             });
         }

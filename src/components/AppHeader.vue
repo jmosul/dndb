@@ -19,6 +19,9 @@
                     <b-navbar-item tag="router-link" to="/create/player">
                         Player
                     </b-navbar-item>
+                    <b-navbar-item tag="router-link" to="/create/encounter">
+                        Encounter
+                    </b-navbar-item>
                 </b-navbar-dropdown>
 
                 <b-navbar-dropdown label="NPCs">

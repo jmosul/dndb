@@ -1,6 +1,204 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateCombatant = `subscription OnCreateCombatant($dm: String!) {
+  onCreateCombatant(dm: $dm) {
+    id
+    dm
+    name
+    type
+    type_id
+    initative
+    hit_points
+    armour_class
+    team
+    blinded
+    charmed
+    deafened
+    exhaustion
+    frightened
+    grappled
+    incapacitated
+    invisible
+    paralyzed
+    petrified
+    poisoned
+    prone
+    restrained
+    stunned
+    disadvantage
+    advantage
+  }
+}
+`;
+export const onUpdateCombatant = `subscription OnUpdateCombatant($dm: String!) {
+  onUpdateCombatant(dm: $dm) {
+    id
+    dm
+    name
+    type
+    type_id
+    initative
+    hit_points
+    armour_class
+    team
+    blinded
+    charmed
+    deafened
+    exhaustion
+    frightened
+    grappled
+    incapacitated
+    invisible
+    paralyzed
+    petrified
+    poisoned
+    prone
+    restrained
+    stunned
+    disadvantage
+    advantage
+  }
+}
+`;
+export const onDeleteCombatant = `subscription OnDeleteCombatant($dm: String!) {
+  onDeleteCombatant(dm: $dm) {
+    id
+    dm
+    name
+    type
+    type_id
+    initative
+    hit_points
+    armour_class
+    team
+    blinded
+    charmed
+    deafened
+    exhaustion
+    frightened
+    grappled
+    incapacitated
+    invisible
+    paralyzed
+    petrified
+    poisoned
+    prone
+    restrained
+    stunned
+    disadvantage
+    advantage
+  }
+}
+`;
+export const onCreateEncounter = `subscription OnCreateEncounter($dm: String!) {
+  onCreateEncounter(dm: $dm) {
+    id
+    dm
+    name
+    started
+    combatants {
+      id
+      dm
+      name
+      type
+      type_id
+      initative
+      hit_points
+      armour_class
+      team
+      blinded
+      charmed
+      deafened
+      exhaustion
+      frightened
+      grappled
+      incapacitated
+      invisible
+      paralyzed
+      petrified
+      poisoned
+      prone
+      restrained
+      stunned
+      disadvantage
+      advantage
+    }
+  }
+}
+`;
+export const onUpdateEncounter = `subscription OnUpdateEncounter($dm: String!) {
+  onUpdateEncounter(dm: $dm) {
+    id
+    dm
+    name
+    started
+    combatants {
+      id
+      dm
+      name
+      type
+      type_id
+      initative
+      hit_points
+      armour_class
+      team
+      blinded
+      charmed
+      deafened
+      exhaustion
+      frightened
+      grappled
+      incapacitated
+      invisible
+      paralyzed
+      petrified
+      poisoned
+      prone
+      restrained
+      stunned
+      disadvantage
+      advantage
+    }
+  }
+}
+`;
+export const onDeleteEncounter = `subscription OnDeleteEncounter($dm: String!) {
+  onDeleteEncounter(dm: $dm) {
+    id
+    dm
+    name
+    started
+    combatants {
+      id
+      dm
+      name
+      type
+      type_id
+      initative
+      hit_points
+      armour_class
+      team
+      blinded
+      charmed
+      deafened
+      exhaustion
+      frightened
+      grappled
+      incapacitated
+      invisible
+      paralyzed
+      petrified
+      poisoned
+      prone
+      restrained
+      stunned
+      disadvantage
+      advantage
+    }
+  }
+}
+`;
 export const onCreateCampaignLog = `subscription OnCreateCampaignLog($dm: String!) {
   onCreateCampaignLog(dm: $dm) {
     id

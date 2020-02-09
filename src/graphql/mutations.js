@@ -1,6 +1,222 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createCombatant = `mutation CreateCombatant(
+  $input: CreateCombatantInput!
+  $condition: ModelCombatantConditionInput
+) {
+  createCombatant(input: $input, condition: $condition) {
+    id
+    dm
+    name
+    type
+    type_id
+    initative
+    hit_points
+    armour_class
+    team
+    blinded
+    charmed
+    deafened
+    exhaustion
+    frightened
+    grappled
+    incapacitated
+    invisible
+    paralyzed
+    petrified
+    poisoned
+    prone
+    restrained
+    stunned
+    disadvantage
+    advantage
+  }
+}
+`;
+export const updateCombatant = `mutation UpdateCombatant(
+  $input: UpdateCombatantInput!
+  $condition: ModelCombatantConditionInput
+) {
+  updateCombatant(input: $input, condition: $condition) {
+    id
+    dm
+    name
+    type
+    type_id
+    initative
+    hit_points
+    armour_class
+    team
+    blinded
+    charmed
+    deafened
+    exhaustion
+    frightened
+    grappled
+    incapacitated
+    invisible
+    paralyzed
+    petrified
+    poisoned
+    prone
+    restrained
+    stunned
+    disadvantage
+    advantage
+  }
+}
+`;
+export const deleteCombatant = `mutation DeleteCombatant(
+  $input: DeleteCombatantInput!
+  $condition: ModelCombatantConditionInput
+) {
+  deleteCombatant(input: $input, condition: $condition) {
+    id
+    dm
+    name
+    type
+    type_id
+    initative
+    hit_points
+    armour_class
+    team
+    blinded
+    charmed
+    deafened
+    exhaustion
+    frightened
+    grappled
+    incapacitated
+    invisible
+    paralyzed
+    petrified
+    poisoned
+    prone
+    restrained
+    stunned
+    disadvantage
+    advantage
+  }
+}
+`;
+export const createEncounter = `mutation CreateEncounter(
+  $input: CreateEncounterInput!
+  $condition: ModelEncounterConditionInput
+) {
+  createEncounter(input: $input, condition: $condition) {
+    id
+    dm
+    name
+    started
+    combatants {
+      id
+      dm
+      name
+      type
+      type_id
+      initative
+      hit_points
+      armour_class
+      team
+      blinded
+      charmed
+      deafened
+      exhaustion
+      frightened
+      grappled
+      incapacitated
+      invisible
+      paralyzed
+      petrified
+      poisoned
+      prone
+      restrained
+      stunned
+      disadvantage
+      advantage
+    }
+  }
+}
+`;
+export const updateEncounter = `mutation UpdateEncounter(
+  $input: UpdateEncounterInput!
+  $condition: ModelEncounterConditionInput
+) {
+  updateEncounter(input: $input, condition: $condition) {
+    id
+    dm
+    name
+    started
+    combatants {
+      id
+      dm
+      name
+      type
+      type_id
+      initative
+      hit_points
+      armour_class
+      team
+      blinded
+      charmed
+      deafened
+      exhaustion
+      frightened
+      grappled
+      incapacitated
+      invisible
+      paralyzed
+      petrified
+      poisoned
+      prone
+      restrained
+      stunned
+      disadvantage
+      advantage
+    }
+  }
+}
+`;
+export const deleteEncounter = `mutation DeleteEncounter(
+  $input: DeleteEncounterInput!
+  $condition: ModelEncounterConditionInput
+) {
+  deleteEncounter(input: $input, condition: $condition) {
+    id
+    dm
+    name
+    started
+    combatants {
+      id
+      dm
+      name
+      type
+      type_id
+      initative
+      hit_points
+      armour_class
+      team
+      blinded
+      charmed
+      deafened
+      exhaustion
+      frightened
+      grappled
+      incapacitated
+      invisible
+      paralyzed
+      petrified
+      poisoned
+      prone
+      restrained
+      stunned
+      disadvantage
+      advantage
+    }
+  }
+}
+`;
 export const createCampaignLog = `mutation CreateCampaignLog(
   $input: CreateCampaignLogInput!
   $condition: ModelCampaignLogConditionInput

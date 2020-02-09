@@ -10,6 +10,8 @@ import CampaignLog from '../views/CampaignLog';
 import Characters from '../views/Characters';
 import Player from '../views/creations/Player';
 import CreatePlayerCharacter from '../views/create/CreatePlayerCharacter';
+import CreateEncounter from '../views/create/CreateEncounter';
+import Encounter from '../views/creations/Encounter';
 
 Vue.use(VueRouter);
 
@@ -36,6 +38,14 @@ const routes = [
         path: '/players/:id',
         name: 'player',
         component: Player,
+        props: {
+            id: '',
+        },
+    },
+    {
+        path: '/encounters/:id',
+        name: 'encounter',
+        component: Encounter,
         props: {
             id: '',
         },
@@ -70,6 +80,11 @@ const routes = [
         name: 'createPlayer',
         component: CreatePlayerCharacter,
     },
+    {
+        path: '/create/encounter',
+        name: 'createEncounter',
+        component: CreateEncounter,
+    },
 ];
 
 const router = new VueRouter({
@@ -86,8 +101,7 @@ router.beforeResolve((to, from, next) => {
             })
             .catch((e) => next({path: '/identity'})
             );
-    }
-    else {
+    } else {
         next();
     }
 });

@@ -1,0 +1,44 @@
+enum CombatantType {
+    Player,
+    Character,
+    Monster
+}
+
+type Combatant
+@model
+@auth(
+    rules: [
+        {
+            allow: owner,
+            ownerField: "dm",
+            operations: [create, update, delete, read]
+        },
+    ]
+)
+{
+    id: ID!
+    dm: String!
+    name: String!
+    type: CombatantType!
+    type_id: String
+    initative: Int!
+    hit_points: Int!
+    armour_class: Int!
+    team: String!
+    blinded: Boolean!
+    charmed: Boolean!
+    deafened: Boolean!
+    exhaustion: Boolean!
+    frightened: Boolean!
+    grappled: Boolean!
+    incapacitated: Boolean!
+    invisible: Boolean!
+    paralyzed: Boolean!
+    petrified: Boolean!
+    poisoned: Boolean!
+    prone: Boolean!
+    restrained: Boolean!
+    stunned: Boolean!
+    disadvantage: Boolean!
+    advantage: Boolean!
+}

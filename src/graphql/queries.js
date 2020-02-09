@@ -1,6 +1,152 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getCombatant = `query GetCombatant($id: ID!) {
+  getCombatant(id: $id) {
+    id
+    dm
+    name
+    type
+    type_id
+    initative
+    hit_points
+    armour_class
+    team
+    blinded
+    charmed
+    deafened
+    exhaustion
+    frightened
+    grappled
+    incapacitated
+    invisible
+    paralyzed
+    petrified
+    poisoned
+    prone
+    restrained
+    stunned
+    disadvantage
+    advantage
+  }
+}
+`;
+export const listCombatants = `query ListCombatants(
+  $filter: ModelCombatantFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listCombatants(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      dm
+      name
+      type
+      type_id
+      initative
+      hit_points
+      armour_class
+      team
+      blinded
+      charmed
+      deafened
+      exhaustion
+      frightened
+      grappled
+      incapacitated
+      invisible
+      paralyzed
+      petrified
+      poisoned
+      prone
+      restrained
+      stunned
+      disadvantage
+      advantage
+    }
+    nextToken
+  }
+}
+`;
+export const getEncounter = `query GetEncounter($id: ID!) {
+  getEncounter(id: $id) {
+    id
+    dm
+    name
+    started
+    combatants {
+      id
+      dm
+      name
+      type
+      type_id
+      initative
+      hit_points
+      armour_class
+      team
+      blinded
+      charmed
+      deafened
+      exhaustion
+      frightened
+      grappled
+      incapacitated
+      invisible
+      paralyzed
+      petrified
+      poisoned
+      prone
+      restrained
+      stunned
+      disadvantage
+      advantage
+    }
+  }
+}
+`;
+export const listEncounters = `query ListEncounters(
+  $filter: ModelEncounterFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listEncounters(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      dm
+      name
+      started
+      combatants {
+        id
+        dm
+        name
+        type
+        type_id
+        initative
+        hit_points
+        armour_class
+        team
+        blinded
+        charmed
+        deafened
+        exhaustion
+        frightened
+        grappled
+        incapacitated
+        invisible
+        paralyzed
+        petrified
+        poisoned
+        prone
+        restrained
+        stunned
+        disadvantage
+        advantage
+      }
+    }
+    nextToken
+  }
+}
+`;
 export const getCampaignLog = `query GetCampaignLog($id: ID!) {
   getCampaignLog(id: $id) {
     id
