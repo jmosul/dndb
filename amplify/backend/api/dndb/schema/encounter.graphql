@@ -14,5 +14,5 @@ type Encounter
     dm: String!
     name: String!
     started: Int
-    combatants: [Combatant]
+    combatants: [Combatant] @connection(keyName: "byEncounter", fields: ["id"])
 }

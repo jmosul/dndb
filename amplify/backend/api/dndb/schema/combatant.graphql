@@ -15,13 +15,22 @@ type Combatant
         },
     ]
 )
+@key(
+    name: "byEncounter",
+    fields: [
+        "encounterId",
+    ]
+)
 {
     id: ID!
     dm: String!
+    encounterId: ID!
     name: String!
+    creature: String!
     type: CombatantType!
     type_id: String
-    initative: Int!
+    initiative: Int!
+    damage_taken: Int!
     hit_points: Int!
     armour_class: Int!
     team: String!
@@ -39,6 +48,7 @@ type Combatant
     prone: Boolean!
     restrained: Boolean!
     stunned: Boolean!
+    unconscious: Boolean!
     disadvantage: Boolean!
     advantage: Boolean!
 }
