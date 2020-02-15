@@ -32,6 +32,7 @@
             height: $height;
             position: relative;
             top: 1px;
+            margin: 0 -7px;
         }
     }
 </style>
