@@ -25,11 +25,17 @@ const routes = [
         path: '/characters',
         name: 'characters',
         component: Characters,
+        meta: {
+            dmOnly: true,
+        },
     },
     {
         path: '/characters/:id',
         name: 'character',
         component: Character,
+        meta: {
+            dmOnly: true,
+        },
         props: {
             id: '',
         },
@@ -38,6 +44,9 @@ const routes = [
         path: '/players/:id',
         name: 'player',
         component: Player,
+        meta: {
+            dmOnly: true,
+        },
         props: {
             id: '',
         },
@@ -46,6 +55,9 @@ const routes = [
         path: '/encounters/:id',
         name: 'encounter',
         component: Encounter,
+        meta: {
+            dmOnly: true,
+        },
         props: {
             id: '',
         },
@@ -55,18 +67,24 @@ const routes = [
         name: 'identity',
         component: Identity,
         meta: {
-            signedOutOnly: true,
+            dmOnly: true,
         },
     },
     {
         path: '/logs',
         name: 'campaign_logs',
         component: CampaignLogs,
+        meta: {
+            dmOnly: true,
+        },
         children: [
             {
                 path: ':logId',
                 name: 'campaign_log',
                 component: CampaignLog,
+                meta: {
+                    dmOnly: true,
+                },
             },
         ],
     },
@@ -74,16 +92,25 @@ const routes = [
         path: '/create/npc',
         name: 'createNPC',
         component: CreateNonPlayerCharacter,
+        meta: {
+            dmOnly: true,
+        },
     },
     {
         path: '/create/player',
         name: 'createPlayer',
         component: CreatePlayerCharacter,
+        meta: {
+            dmOnly: true,
+        },
     },
     {
         path: '/create/encounter',
         name: 'createEncounter',
         component: CreateEncounter,
+        meta: {
+            dmOnly: true,
+        },
     },
 ];
 
@@ -92,7 +119,7 @@ const router = new VueRouter({
 });
 
 router.beforeResolve((to, from, next) => {
-    if (to.path !== '*') {
+    if (to.path !== '*' && to.meta.dmOnly) {
         Vue.prototype.$Amplify.Auth.currentAuthenticatedUser()
             .then(data => {
                 store.commit('dungeonMaster/id', data.attributes.sub);

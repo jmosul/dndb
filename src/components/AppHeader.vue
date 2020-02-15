@@ -5,14 +5,14 @@
         >
             <template slot="brand">
                 <b-navbar-item href="/">
-                    Home
+                    <logo></logo>
                 </b-navbar-item>
             </template>
             <template slot="start">
-                <b-navbar-item tag="router-link" to="/logs">
+                <b-navbar-item tag="router-link" to="/logs" v-if="dungeonMasterId">
                     Campaign Logs
                 </b-navbar-item>
-                <b-navbar-dropdown label="Create">
+                <b-navbar-dropdown label="Create" v-if="dungeonMasterId">
                     <b-navbar-item tag="router-link" to="/create/npc">
                         NPC
                     </b-navbar-item>
@@ -24,7 +24,7 @@
                     </b-navbar-item>
                 </b-navbar-dropdown>
 
-                <b-navbar-dropdown label="NPCs">
+                <b-navbar-dropdown label="NPCs" v-if="dungeonMasterId">
                     <amplify-connect :query="listCharactersQuery">
                         <template slot-scope="{loading, data, errors}">
                             <div v-if="loading">Loading...</div>
@@ -49,7 +49,7 @@
                     </amplify-connect>
                 </b-navbar-dropdown>
 
-                <b-navbar-dropdown label="Players">
+                <b-navbar-dropdown label="Players" v-if="dungeonMasterId">
                     <amplify-connect :query="listPlayersQuery">
                         <template slot-scope="{loading, data, errors}">
                             <div v-if="loading">Loading...</div>
@@ -68,6 +68,11 @@
                     </amplify-connect>
                 </b-navbar-dropdown>
             </template>
+            <template slot="end" v-if="!dungeonMasterId">
+                <b-navbar-item tag="router-link" to="/create/encounter">
+                    Sign In
+                </b-navbar-item>
+            </template>
         </b-navbar>
     </header>
 </template>
@@ -79,13 +84,20 @@
     import {components} from 'aws-amplify-vue';
     import {listNonPlayerCharacters, listPlayerCharacters} from '../graphql/queries';
     import AppComponent from '../AppComponent';
+    import {Getter} from 'vuex-class';
+    import Logo from './Logo';
 
     Vue.use(Navbar);
 
     @Component({
-        components,
+        components: {
+            ...components,
+            Logo,
+        },
     })
     export default class AppHeader extends AppComponent {
+        @Getter('dungeonMaster/id') dungeonMasterId;
+
         get listCharactersQuery() {
             return this.$Amplify.graphqlOperation(listNonPlayerCharacters);
         }

@@ -2,7 +2,7 @@
 <template>
     <div class="app">
         <app-header></app-header>
-        <main>
+        <main class="view">
             <router-view></router-view>
         </main>
         <app-footer></app-footer>
@@ -99,9 +99,17 @@
         box-sizing: border-box;
         position: relative;
         padding-bottom: 180px; /* Height of footer */
-        min-height: 100%;
+        height: 100%;
+
+        .view {
+            position: absolute;
+            min-height: 100%;
+            width: 100%;
+            bottom: 0;
+        }
 
         main {
+            top: 50px;
             padding-bottom: 15px;
 
             p {
