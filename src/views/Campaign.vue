@@ -12,21 +12,21 @@
                         <div class="card-image">
                             <div class="image is-4by3" v-bind:style="imageStyle"></div>
                         </div>
-                    </div>
 
-                    <div class="panel">
-                        <p class="panel-heading">
-                            Sessions
-                        </p>
-                        <a
-                            class="panel-block logs__log"
-                            v-for="log in logs"
-                            :key="log.id"
-                            @click="openLog(log)"
-                        >
-                            <small class="has-text-grey-lighter"> {{log.date}}</small>
-                            <strong>&nbsp;{{log.title}}</strong>
-                        </a>
+                        <div class="panel">
+                            <h4 class="panel-heading">
+                                Sessions
+                            </h4>
+                            <a
+                                class="panel-block logs__log"
+                                v-for="log in logs"
+                                :key="log.id"
+                                @click="openLog(log)"
+                            >
+                                <small class="has-text-grey-lighter"> {{log.date}}</small>
+                                <strong>&nbsp;{{log.title}}</strong>
+                            </a>
+                        </div>
                     </div>
                 </div>
 
@@ -124,6 +124,11 @@
             .card-image .image {
                 background-position: center;
                 background-size: cover;
+            }
+
+            .panel .panel-heading {
+                border-radius: 0;
+                font-family: $font-goblin-family;
             }
         }
 
