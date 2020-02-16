@@ -1,6 +1,33 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateCampaign = /* GraphQL */ `
+  subscription OnCreateCampaign($dm: String!) {
+    onCreateCampaign(dm: $dm) {
+      id
+      dm
+      name
+    }
+  }
+`;
+export const onUpdateCampaign = /* GraphQL */ `
+  subscription OnUpdateCampaign($dm: String!) {
+    onUpdateCampaign(dm: $dm) {
+      id
+      dm
+      name
+    }
+  }
+`;
+export const onDeleteCampaign = /* GraphQL */ `
+  subscription OnDeleteCampaign($dm: String!) {
+    onDeleteCampaign(dm: $dm) {
+      id
+      dm
+      name
+    }
+  }
+`;
 export const onCreateCombatant = /* GraphQL */ `
   subscription OnCreateCombatant($dm: String!) {
     onCreateCombatant(dm: $dm) {
@@ -243,6 +270,7 @@ export const onCreateCampaignLog = /* GraphQL */ `
     onCreateCampaignLog(dm: $dm) {
       id
       dm
+      campaignId
       date
       title
       content
@@ -255,6 +283,7 @@ export const onUpdateCampaignLog = /* GraphQL */ `
     onUpdateCampaignLog(dm: $dm) {
       id
       dm
+      campaignId
       date
       title
       content
@@ -267,6 +296,7 @@ export const onDeleteCampaignLog = /* GraphQL */ `
     onDeleteCampaignLog(dm: $dm) {
       id
       dm
+      campaignId
       date
       title
       content

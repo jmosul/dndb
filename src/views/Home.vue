@@ -6,15 +6,19 @@
             <img src="../assets/dnd.png">
             <br>Databases
         </h1>
+        <div class="campaigns">
+            <campaign-selector></campaign-selector>
+        </div>
     </section>
 </template>
 
 <script>
     import AppComponent from '../AppComponent';
     import Component from 'vue-class-component';
+    import CampaignSelector from '../components/CampaignSelector';
 
     @Component({
-        components: {},
+        components: {CampaignSelector},
     })
     export default class Home extends AppComponent {
 
@@ -29,7 +33,7 @@
 
         h1 {
             position: relative;
-            margin: 150px auto 0;
+            margin: 50px auto 0;
             text-align: center;
 
             color: $color-dnd-red;
@@ -42,6 +46,12 @@
                 margin: 20px 0 -10px;
                 width: 100px;
             }
+        }
+
+        .campaigns {
+            max-width: 500px;
+            margin: 60px auto 0;
+            text-align: center;
         }
     }
 </style>

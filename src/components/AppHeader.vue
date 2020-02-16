@@ -8,7 +8,15 @@
                     <logo></logo>
                 </b-navbar-item>
             </template>
-            <template slot="start">
+            <template slot="start" v-if="campaignId">
+                <b-navbar-item tag="router-link" to="/campaign">
+                    {{campaignName}}:
+                </b-navbar-item>
+                <b-navbar-item tag="router-link" to="/campaign">
+                    Story
+                </b-navbar-item>
+            </template>
+            <template slot="end">
                 <b-navbar-item tag="router-link" to="/logs" v-if="dungeonMasterId">
                     Campaign Logs
                 </b-navbar-item>
@@ -21,6 +29,9 @@
                     </b-navbar-item>
                     <b-navbar-item tag="router-link" to="/create/encounter">
                         Encounter
+                    </b-navbar-item>
+                    <b-navbar-item tag="router-link" to="/create/campaign">
+                        Campaign
                     </b-navbar-item>
                 </b-navbar-dropdown>
 
@@ -97,6 +108,8 @@
     })
     export default class AppHeader extends AppComponent {
         @Getter('dungeonMaster/id') dungeonMasterId;
+        @Getter('campaign/id') campaignId;
+        @Getter('campaign/name') campaignName;
 
         get listCharactersQuery() {
             return this.$Amplify.graphqlOperation(listNonPlayerCharacters);

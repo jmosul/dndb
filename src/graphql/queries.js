@@ -142,37 +142,6 @@ export const listEncounters = /* GraphQL */ `
     }
   }
 `;
-export const getCampaignLog = /* GraphQL */ `
-  query GetCampaignLog($id: ID!) {
-    getCampaignLog(id: $id) {
-      id
-      dm
-      date
-      title
-      content
-      highlights
-    }
-  }
-`;
-export const listCampaignLogs = /* GraphQL */ `
-  query ListCampaignLogs(
-    $filter: ModelCampaignLogFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listCampaignLogs(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        dm
-        date
-        title
-        content
-        highlights
-      }
-      nextToken
-    }
-  }
-`;
 export const getNonPlayerCharacter = /* GraphQL */ `
   query GetNonPlayerCharacter($id: ID!) {
     getNonPlayerCharacter(id: $id) {
@@ -318,6 +287,64 @@ export const listPlayerCharacters = /* GraphQL */ `
         secrets
         notes
         image
+      }
+      nextToken
+    }
+  }
+`;
+export const getCampaign = /* GraphQL */ `
+  query GetCampaign($id: ID!) {
+    getCampaign(id: $id) {
+      id
+      dm
+      name
+    }
+  }
+`;
+export const listCampaigns = /* GraphQL */ `
+  query ListCampaigns(
+    $filter: ModelCampaignFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listCampaigns(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        dm
+        name
+      }
+      nextToken
+    }
+  }
+`;
+export const getCampaignLog = /* GraphQL */ `
+  query GetCampaignLog($id: ID!) {
+    getCampaignLog(id: $id) {
+      id
+      dm
+      campaignId
+      date
+      title
+      content
+      highlights
+    }
+  }
+`;
+export const listCampaignLogs = /* GraphQL */ `
+  query ListCampaignLogs(
+    $filter: ModelCampaignLogFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listCampaignLogs(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        dm
+        campaignId
+        date
+        title
+        content
+        highlights
       }
       nextToken
     }

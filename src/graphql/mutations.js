@@ -1,6 +1,42 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createCampaign = /* GraphQL */ `
+  mutation CreateCampaign(
+    $input: CreateCampaignInput!
+    $condition: ModelCampaignConditionInput
+  ) {
+    createCampaign(input: $input, condition: $condition) {
+      id
+      dm
+      name
+    }
+  }
+`;
+export const updateCampaign = /* GraphQL */ `
+  mutation UpdateCampaign(
+    $input: UpdateCampaignInput!
+    $condition: ModelCampaignConditionInput
+  ) {
+    updateCampaign(input: $input, condition: $condition) {
+      id
+      dm
+      name
+    }
+  }
+`;
+export const deleteCampaign = /* GraphQL */ `
+  mutation DeleteCampaign(
+    $input: DeleteCampaignInput!
+    $condition: ModelCampaignConditionInput
+  ) {
+    deleteCampaign(input: $input, condition: $condition) {
+      id
+      dm
+      name
+    }
+  }
+`;
 export const createCombatant = /* GraphQL */ `
   mutation CreateCombatant(
     $input: CreateCombatantInput!
@@ -264,6 +300,7 @@ export const createCampaignLog = /* GraphQL */ `
     createCampaignLog(input: $input, condition: $condition) {
       id
       dm
+      campaignId
       date
       title
       content
@@ -279,6 +316,7 @@ export const updateCampaignLog = /* GraphQL */ `
     updateCampaignLog(input: $input, condition: $condition) {
       id
       dm
+      campaignId
       date
       title
       content
@@ -294,6 +332,7 @@ export const deleteCampaignLog = /* GraphQL */ `
     deleteCampaignLog(input: $input, condition: $condition) {
       id
       dm
+      campaignId
       date
       title
       content

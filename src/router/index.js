@@ -12,6 +12,8 @@ import Player from '../views/creations/Player';
 import CreatePlayerCharacter from '../views/create/CreatePlayerCharacter';
 import CreateEncounter from '../views/create/CreateEncounter';
 import Encounter from '../views/creations/Encounter';
+import CreateCampaign from '../views/create/CreateCampaign';
+import Campaign from '../views/Campaign';
 
 Vue.use(VueRouter);
 
@@ -20,6 +22,18 @@ const routes = [
         path: '/',
         name: 'home',
         component: Home,
+    },
+    {
+        path: '/campaign',
+        name: 'campaign',
+        component: Campaign,
+        children: [
+            {
+                path: ':logId',
+                name: 'session',
+                component: CampaignLog,
+            },
+        ],
     },
     {
         path: '/characters',
@@ -111,6 +125,11 @@ const routes = [
         meta: {
             dmOnly: true,
         },
+    },
+    {
+        path: '/create/campaign',
+        name: 'createCampaign',
+        component: CreateCampaign,
     },
 ];
 
