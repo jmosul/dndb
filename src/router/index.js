@@ -138,12 +138,8 @@ const router = new VueRouter({
 
 router.beforeResolve((to, from, next) => {
     if (to.path !== '*') {
-        console.log('to', to);
-
         Vue.prototype.$Amplify.Auth.currentAuthenticatedUser()
             .then(data => {
-                console.log('auth', data);
-
                 store.commit('dungeonMaster/id', data.attributes.sub);
 
                 next();
