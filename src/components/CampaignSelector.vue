@@ -27,20 +27,20 @@
     import Component from 'vue-class-component';
     import {listCampaigns} from '../graphql/queries';
     import {Action} from 'vuex-class';
-    import {API, graphqlOperation} from 'aws-amplify';
+    // import {API, graphqlOperation} from 'aws-amplify';
 
     @Component()
     export default class CampaignSelector extends Vue {
         @Action('campaign/setCampaign') setCampaignState;
-
-        mounted() {
-            console.log('hi mojjknjkn');
-
-            API.graphql(graphqlOperation(listCampaigns)).then(
-                console.log,
-                console.log,
-            );
-        }
+        //
+        // mounted() {
+        //     console.log('hi mojjknjkn');
+        //
+        //     API.graphql(graphqlOperation(listCampaigns)).then(
+        //         console.log,
+        //         console.log,
+        //     );
+        // }
 
         get listCampaignsQuery() {
             return this.$Amplify.graphqlOperation(listCampaigns, {});
