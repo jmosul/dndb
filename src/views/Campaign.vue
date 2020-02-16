@@ -130,6 +130,10 @@
                 border-radius: 0;
                 font-family: $font-goblin-family;
             }
+
+            .logs__log strong {
+                margin-left: 5px;
+            }
         }
 
         .hero {
