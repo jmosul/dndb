@@ -12,7 +12,7 @@
                             <small class="has-text-grey">({{data.getCampaignLog.date}})</small>
                         </p>
                         <button
-                            v-if="showContent"
+                            v-if="showContent && !dungeonMasterId"
                             class="button is-success"
                             @click="toggleEdit"
                         >
@@ -29,7 +29,7 @@
                     <div class="card-content">
                         <div
                             class="content"
-                            v-if="(data.getCampaignLog.content || data.getCampaignLog.highlights) && showContent"
+                            v-if="(data.getCampaignLog.content || data.getCampaignLog.highlights) && showContent || !this.dungeonMasterId"
                         >
                             <div class="hero is-info" v-if="data.getCampaignLog.highlights">
                                 <div class="hero-body">

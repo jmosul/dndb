@@ -1,4 +1,4 @@
-type CampaignLog
+type Campaign
 @model
 @aws_iam
 @auth(
@@ -18,9 +18,5 @@ type CampaignLog
 {
     id: ID!
     dm: String!
-    campaignId: String!
-    date: String!,
-    title: String!,
-    content: String,
-    highlights: String,
+    name: String!
 }

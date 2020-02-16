@@ -1,82 +1,150 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getCampaignLog = `query GetCampaignLog($id: ID!) {
-  getCampaignLog(id: $id) {
-    id
-    dm
-    date
-    title
-    content
-    highlights
-  }
-}
-`;
-export const listCampaignLogs = `query ListCampaignLogs(
-  $filter: ModelCampaignLogFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listCampaignLogs(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
+export const getCombatant = /* GraphQL */ `
+  query GetCombatant($id: ID!) {
+    getCombatant(id: $id) {
       id
       dm
-      date
-      title
-      content
-      highlights
+      encounterId
+      name
+      creature
+      type
+      type_id
+      initiative
+      damage_taken
+      hit_points
+      armour_class
+      team
+      blinded
+      charmed
+      deafened
+      exhaustion
+      frightened
+      grappled
+      incapacitated
+      invisible
+      paralyzed
+      petrified
+      poisoned
+      prone
+      restrained
+      stunned
+      unconscious
+      disadvantage
+      advantage
     }
-    nextToken
   }
-}
 `;
-export const getNonPlayerCharacter = `query GetNonPlayerCharacter($id: ID!) {
-  getNonPlayerCharacter(id: $id) {
-    dm
-    id
-    name
-    class
-    occupation
-    race
-    age
-    height
-    weight
-    description
-    history
-    voice
-    strength
-    dexterity
-    constitution
-    intelligence
-    wisdom
-    charisma
-    alignment_moral
-    alignment_order
-    personality
-    ideal
-    bond
-    flaw
-    talent
-    mannerisms
-    interaction
-    secrets
-    notes
-    image
-    party_opinion
-  }
-}
-`;
-export const listNonPlayerCharacters = `query ListNonPlayerCharacters(
-  $filter: ModelNonPlayerCharacterFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listNonPlayerCharacters(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
+export const listCombatants = /* GraphQL */ `
+  query ListCombatants(
+    $filter: ModelCombatantFilterInput
+    $limit: Int
+    $nextToken: String
   ) {
-    items {
+    listCombatants(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        dm
+        encounterId
+        name
+        creature
+        type
+        type_id
+        initiative
+        damage_taken
+        hit_points
+        armour_class
+        team
+        blinded
+        charmed
+        deafened
+        exhaustion
+        frightened
+        grappled
+        incapacitated
+        invisible
+        paralyzed
+        petrified
+        poisoned
+        prone
+        restrained
+        stunned
+        unconscious
+        disadvantage
+        advantage
+      }
+      nextToken
+    }
+  }
+`;
+export const getEncounter = /* GraphQL */ `
+  query GetEncounter($id: ID!) {
+    getEncounter(id: $id) {
+      id
+      dm
+      name
+      started
+      combatants {
+        items {
+          id
+          dm
+          encounterId
+          name
+          creature
+          type
+          type_id
+          initiative
+          damage_taken
+          hit_points
+          armour_class
+          team
+          blinded
+          charmed
+          deafened
+          exhaustion
+          frightened
+          grappled
+          incapacitated
+          invisible
+          paralyzed
+          petrified
+          poisoned
+          prone
+          restrained
+          stunned
+          unconscious
+          disadvantage
+          advantage
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const listEncounters = /* GraphQL */ `
+  query ListEncounters(
+    $filter: ModelEncounterFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listEncounters(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        dm
+        name
+        started
+        combatants {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const getNonPlayerCharacter = /* GraphQL */ `
+  query GetNonPlayerCharacter($id: ID!) {
+    getNonPlayerCharacter(id: $id) {
       dm
       id
       name
@@ -109,43 +177,59 @@ export const listNonPlayerCharacters = `query ListNonPlayerCharacters(
       image
       party_opinion
     }
-    nextToken
   }
-}
 `;
-export const getPlayerCharacter = `query GetPlayerCharacter($id: ID!) {
-  getPlayerCharacter(id: $id) {
-    dm
-    id
-    name
-    player
-    class
-    race
-    status
-    age
-    height
-    weight
-    description
-    alignment_moral
-    alignment_order
-    ideal
-    bond
-    flaw
-    history
-    joined
-    secrets
-    notes
-    image
+export const listNonPlayerCharacters = /* GraphQL */ `
+  query ListNonPlayerCharacters(
+    $filter: ModelNonPlayerCharacterFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listNonPlayerCharacters(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        dm
+        id
+        name
+        class
+        occupation
+        race
+        age
+        height
+        weight
+        description
+        history
+        voice
+        strength
+        dexterity
+        constitution
+        intelligence
+        wisdom
+        charisma
+        alignment_moral
+        alignment_order
+        personality
+        ideal
+        bond
+        flaw
+        talent
+        mannerisms
+        interaction
+        secrets
+        notes
+        image
+        party_opinion
+      }
+      nextToken
+    }
   }
-}
 `;
-export const listPlayerCharacters = `query ListPlayerCharacters(
-  $filter: ModelPlayerCharacterFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listPlayerCharacters(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
+export const getPlayerCharacter = /* GraphQL */ `
+  query GetPlayerCharacter($id: ID!) {
+    getPlayerCharacter(id: $id) {
       dm
       id
       name
@@ -168,7 +252,101 @@ export const listPlayerCharacters = `query ListPlayerCharacters(
       notes
       image
     }
-    nextToken
   }
-}
+`;
+export const listPlayerCharacters = /* GraphQL */ `
+  query ListPlayerCharacters(
+    $filter: ModelPlayerCharacterFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPlayerCharacters(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        dm
+        id
+        name
+        player
+        class
+        race
+        status
+        age
+        height
+        weight
+        description
+        alignment_moral
+        alignment_order
+        ideal
+        bond
+        flaw
+        history
+        joined
+        secrets
+        notes
+        image
+      }
+      nextToken
+    }
+  }
+`;
+export const getCampaign = /* GraphQL */ `
+  query GetCampaign($id: ID!) {
+    getCampaign(id: $id) {
+      id
+      dm
+      name
+    }
+  }
+`;
+export const listCampaigns = /* GraphQL */ `
+  query ListCampaigns(
+    $filter: ModelCampaignFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listCampaigns(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        dm
+        name
+      }
+      nextToken
+    }
+  }
+`;
+export const getCampaignLog = /* GraphQL */ `
+  query GetCampaignLog($id: ID!) {
+    getCampaignLog(id: $id) {
+      id
+      dm
+      campaignId
+      date
+      title
+      content
+      highlights
+    }
+  }
+`;
+export const listCampaignLogs = /* GraphQL */ `
+  query ListCampaignLogs(
+    $filter: ModelCampaignLogFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listCampaignLogs(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        dm
+        campaignId
+        date
+        title
+        content
+        highlights
+      }
+      nextToken
+    }
+  }
 `;

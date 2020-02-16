@@ -9,6 +9,8 @@ import {AmplifyPlugin} from 'aws-amplify-vue';
 import awsconfig from './aws-exports';
 import Buefy from 'buefy';
 
+import './styles.scss';
+
 Amplify.configure(awsconfig);
 
 Vue.use(AmplifyPlugin, AmplifyModules);

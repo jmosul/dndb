@@ -267,7 +267,7 @@
             this.$router.push({
                 name: 'character',
                 params: {
-                    characterId: this.model.id,
+                    id: this.model.id,
                 },
             });
         }
