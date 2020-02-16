@@ -2,9 +2,8 @@
     <section class="home view">
         <h1>
             Dungeons
-            <br>
-            <img src="../assets/dnd.png">
-            <br>Databases
+            <br><i class="fab fa-d-and-d"></i>
+            Databases
         </h1>
         <div class="campaigns">
             <campaign-selector></campaign-selector>
@@ -33,18 +32,17 @@
 
         h1 {
             position: relative;
-            margin: 50px auto 0;
-            text-align: center;
+            margin: 5rem 0 0 10rem;
+            text-align: left;
 
             color: $color-dnd-red;
             font-family: $font-goblin-family;
             font-size: 6em;
-            line-height: 100px;
+            line-height: 115px;
             height: 300px;
 
-            img {
-                margin: 20px 0 -10px;
-                width: 100px;
+            i {
+                margin-right: -30px;
             }
         }
 
