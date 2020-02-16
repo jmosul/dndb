@@ -89,6 +89,7 @@
     html, body {
         height: 100%;
         margin: 0;
+        background: #f9f9f9 url('/images/background.png') repeat;
 
         --color-primary: #{$primary};
         --color-primary-accent: #{$primary-invert};
@@ -98,7 +99,7 @@
         --color-secondary-accent: #{$secondary-invert};
         --color-danger: #{$colors("danger")};
         --color-error: #d0021b;
-        --gradient-blaze: linear-gradient(270deg,#{$secondary},#{$primary});
+        --gradient-blaze: linear-gradient(270deg, #{$secondary}, #{$primary});
         --button-background-color: #{$primary};
         --button-color: #{$primary-invert};
     }
