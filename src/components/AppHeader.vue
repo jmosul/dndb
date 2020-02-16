@@ -1,8 +1,6 @@
 <template>
     <header>
-        <b-navbar
-            type="is-dark"
-        >
+        <b-navbar>
             <template slot="brand">
                 <b-navbar-item href="/">
                     <logo></logo>

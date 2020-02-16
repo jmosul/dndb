@@ -298,6 +298,7 @@ export const getCampaign = /* GraphQL */ `
       id
       dm
       name
+      image
     }
   }
 `;
@@ -312,6 +313,7 @@ export const listCampaigns = /* GraphQL */ `
         id
         dm
         name
+        image
       }
       nextToken
     }

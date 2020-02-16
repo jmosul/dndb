@@ -8,6 +8,12 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-one-third">
+                    <div class="card" v-if="image">
+                        <div class="card-image">
+                            <div class="image is-4by3" v-bind:style="imageStyle"></div>
+                        </div>
+                    </div>
+
                     <div class="panel">
                         <p class="panel-heading">
                             Sessions
@@ -24,8 +30,7 @@
                     </div>
                 </div>
 
-                <section class="column is-two-thirds campaign_log">
-
+                <article class="column is-two-thirds campaign_log">
                     <div class="hero is-info">
                         <div class="hero-body">
                             <h2 class="title">{{logTitle}}</h2>
@@ -34,7 +39,7 @@
                     </div>
 
                     <div class="content" id="content"></div>
-                </section>
+                </article>
             </div>
         </div>
     </div>
@@ -52,6 +57,7 @@
     export default class Campaign extends Vue {
         @Getter('campaign/id') id;
         @Getter('campaign/name') name;
+        @Getter('campaign/image') image;
 
         logs = [];
 
@@ -60,6 +66,10 @@
 
         mounted() {
             this.loadLogs();
+        }
+
+        get imageStyle() {
+            return this.image ? {'background-image': `url(/images/campaigns/${this.image})`} : {};
         }
 
         sortCampaigns(logs) {
@@ -108,6 +118,15 @@
             padding-top: 1rem;
         }
 
+        .card {
+            margin-bottom: 1rem;
+
+            .card-image .image {
+                background-position: center;
+                background-size: cover;
+            }
+        }
+
         .hero {
             margin-bottom: 1.5rem;
 
@@ -143,7 +162,6 @@
                         left: 50%;
                         top: -11px;
                         line-height: 18px;
-                        z-index: 50;
                         position: relative;
                         padding: 5px;
                     }

@@ -43,8 +43,6 @@
 
 <style scoped>
     footer {
-        position: absolute;
-        bottom: 0;
         width: 100%;
         padding-bottom: 4em;
     }
