@@ -29,6 +29,8 @@ const processMatch = (match) => {
             return renderAbilityCheck(...matchParts);
         case 'act':
             return renderAction(...matchParts);
+        case 'r':
+            return renderRest(...matchParts);
     }
 
     return match[0];
@@ -54,4 +56,8 @@ const renderAction = (type, name) => {
     }
 
     return `<span class="tag content__action is-dark"><i class="${icon}"></i>&nbsp;${name}</span>`;
+};
+
+const renderRest = (type) => {
+    return `<span class="tag content__rest is-light"><i class="fas fa-campground"></i>&nbsp;${type} Rest</span>`;
 };

@@ -37,6 +37,7 @@
         newLog = {
             content: '',
             highlights: '',
+            image: '',
         };
 
         mounted() {

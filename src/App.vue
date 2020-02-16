@@ -47,9 +47,14 @@
     // Import Bulma's core
     @import "~bulma/sass/utilities/_all";
 
+    $font-goblin-family: 'Goblin One', cursive;
+    $color-dnd-red: #ec2128;
+    $color-dnd-black: #040404;
+    $color-dnd-grey: #959595;
+
     // Set your colors
-    $primary: #8c67ef;
-    $primary-invert: findColorInvert($primary);
+    $primary: $dark;
+    $primary-invert: $color-dnd-red;
     $secondary: #4099FF;
     $secondary-invert: findColorInvert($secondary);
 
@@ -71,6 +76,9 @@
     $link: $primary;
     $link-invert: $primary-invert;
     $link-focus-border: $primary;
+
+    $navbar-background-color: $color-dnd-black;
+    $navbar-item-color: $white;
 
     $margins: 0, 5, 10, 15;
 
@@ -102,7 +110,6 @@
         height: 100%;
 
         .view {
-            position: absolute;
             min-height: 100%;
             width: 100%;
             bottom: 0;
@@ -142,6 +149,10 @@
             .ml-#{$margin} {
                 margin-left: #{$margin}px;
             }
+        }
+
+        .hero .hero-body .title {
+            font-family: $font-goblin-family;
         }
     }
 </style>

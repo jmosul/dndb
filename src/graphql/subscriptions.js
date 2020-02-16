@@ -7,6 +7,7 @@ export const onCreateCampaign = /* GraphQL */ `
       id
       dm
       name
+      image
     }
   }
 `;
@@ -16,6 +17,7 @@ export const onUpdateCampaign = /* GraphQL */ `
       id
       dm
       name
+      image
     }
   }
 `;
@@ -25,6 +27,7 @@ export const onDeleteCampaign = /* GraphQL */ `
       id
       dm
       name
+      image
     }
   }
 `;

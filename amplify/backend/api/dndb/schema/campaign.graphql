@@ -19,4 +19,5 @@ type Campaign
     id: ID!
     dm: String!
     name: String!
+    image: String
 }
