@@ -1,6 +1,6 @@
 <template>
     <section class="logs__add">
-        <amplify-connect :mutation="createMutation" v-if="model.dm" @done="handleComplete">
+        <amplify-connect :mutation="createMutation" v-if="model.dm && model.campaignId" @done="handleComplete">
             <template slot-scope="{loading, mutate}">
                 <b-field grouped>
                     <b-field label="Date" expanded>
@@ -22,6 +22,7 @@
                 </b-field>
             </template>
         </amplify-connect>
+        <campaign-selector v-else></campaign-selector>
     </section>
 </template>
 
@@ -31,10 +32,14 @@
     import uuid from 'uuid';
     import {createCampaignLog} from '../graphql/mutations';
     import {Getter} from 'vuex-class';
+    import CampaignSelector from './CampaignSelector';
 
-    @Component()
+    @Component({
+        components: {CampaignSelector},
+    })
     export default class AddCampaignLog extends Vue {
         @Getter('dungeonMaster/id') dungeonMasterId;
+        @Getter('campaign/id') campaignId;
 
         model = {
             id: undefined,
@@ -46,6 +51,7 @@
         mounted() {
             this.model.id = uuid.v4();
             this.model.dm = this.dungeonMasterId;
+            this.model.campaignId = this.campaignId;
         }
 
         get createMutation() {

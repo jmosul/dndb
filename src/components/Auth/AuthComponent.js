@@ -11,10 +11,7 @@ export default class AuthComponent extends Vue {
     _registerListeners() {
         AmplifyEventBus.$on('authState', info => {
             const event = info.charAt(0).toUpperCase() + info.slice(1);
-
             const handler = `handle${event}`;
-
-            console.log('auth event', handler);
 
             if (this[handler]) {
                 this[handler]();

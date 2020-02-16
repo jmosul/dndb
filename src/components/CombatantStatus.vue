@@ -76,8 +76,6 @@
 
         toggle() {
             this.isActive = !this.isActive;
-
-            console.log('tog', this.isActive);
         }
     }
 </script>

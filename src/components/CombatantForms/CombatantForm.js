@@ -49,9 +49,7 @@ export default class CombatantForm extends Vue {
         this._input.armour_class = parseInt(this.model.armour_class);
         this._input.team = this.model.team;
 
-        const res = await API.graphql(this.createMutation);
-
-        console.log(res);
+        await API.graphql(this.createMutation);
     }
 
     handleComplete() {
@@ -99,7 +97,5 @@ export default class CombatantForm extends Vue {
         };
 
         this.initiativeModifier = 0;
-
-        console.log('reset');
     }
 }

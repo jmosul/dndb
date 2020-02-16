@@ -1,8 +1,6 @@
 <template>
     <div class="logo">
-        D
-        <img src="../assets/dnd.png">
-        DB
+        D<i class="fab fa-d-and-d"></i>DB
     </div>
 </template>
 
