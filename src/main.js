@@ -9,12 +9,14 @@ import {AmplifyPlugin} from 'aws-amplify-vue';
 import awsconfig from './aws-exports';
 import Buefy from 'buefy';
 
+import '../node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss';
+import '../node_modules/@fortawesome/fontawesome-free/scss/solid.scss';
+import '../node_modules/@fortawesome/fontawesome-free/scss/brands.scss';
 import './styles.scss';
 
 Amplify.configure(awsconfig);
 
 Vue.use(AmplifyPlugin, AmplifyModules);
-
 Vue.use(Buefy);
 Vue.use(Vuex);
 

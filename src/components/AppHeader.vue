@@ -80,7 +80,7 @@
                 </b-navbar-dropdown>
             </template>
             <template slot="end" v-if="!dungeonMasterId">
-                <b-navbar-item tag="router-link" to="/create/encounter">
+                <b-navbar-item tag="router-link" to="/identity">
                     Sign In
                 </b-navbar-item>
             </template>

@@ -14,6 +14,7 @@ import CreateEncounter from '../views/create/CreateEncounter';
 import Encounter from '../views/creations/Encounter';
 import CreateCampaign from '../views/create/CreateCampaign';
 import Campaign from '../views/Campaign';
+import {Auth} from 'aws-amplify';
 
 Vue.use(VueRouter);
 
@@ -28,11 +29,11 @@ const routes = [
         name: 'campaign',
         component: Campaign,
         children: [
-            {
-                path: ':logId',
-                name: 'session',
-                component: CampaignLog,
-            },
+            // {
+            //     path: ':logId',
+            //     name: 'session',
+            //     component: CampaignLog,
+            // },
         ],
     },
     {
@@ -80,9 +81,7 @@ const routes = [
         path: '/identity',
         name: 'identity',
         component: Identity,
-        meta: {
-            dmOnly: true,
-        },
+        meta: {},
     },
     {
         path: '/logs',
@@ -138,15 +137,20 @@ const router = new VueRouter({
 });
 
 router.beforeResolve((to, from, next) => {
-    if (to.path !== '*' && to.meta.dmOnly) {
+    if (to.path !== '*') {
+        console.log('to', to);
+
         Vue.prototype.$Amplify.Auth.currentAuthenticatedUser()
             .then(data => {
+                console.log('auth', data);
+
                 store.commit('dungeonMaster/id', data.attributes.sub);
 
                 next();
             })
-            .catch((e) => next({path: '/identity'})
-            );
+            .catch((e) => {
+                to.meta.dmOnly ? next({path: '/identity'}) : next();
+            });
     } else {
         next();
     }

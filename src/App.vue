@@ -106,6 +106,7 @@
             min-height: 100%;
             width: 100%;
             bottom: 0;
+            overflow: scroll;
         }
 
         main {
