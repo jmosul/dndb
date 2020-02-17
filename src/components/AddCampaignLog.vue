@@ -6,6 +6,11 @@
                     <b-field label="Date" expanded>
                         <b-input v-model="model.date"></b-input>
                     </b-field>
+                    <b-field label="Dale" expanded>
+                        <b-input v-model="model.dale_reckoning"></b-input>
+                    </b-field>
+                </b-field>
+                <b-field grouped>
                     <b-field label="Title">
                         <b-input v-model="model.title"></b-input>
                     </b-field>
@@ -46,6 +51,7 @@
             dm: undefined,
             title: '',
             date: '',
+            dale_reckoning: '',
         };
 
         mounted() {

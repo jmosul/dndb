@@ -34,6 +34,9 @@
                     <div class="hero is-info">
                         <div class="hero-body">
                             <h2 class="title">{{logTitle}}</h2>
+                            <p>
+                                <dale-reckoning :date="logDaleReckoning"></dale-reckoning>
+                            </p>
                             <div id="highlights"></div>
                         </div>
                     </div>
@@ -52,8 +55,11 @@
     import {listCampaignLogs} from '../graphql/queries';
     import {API} from 'aws-amplify';
     import logParser from '../LogParser';
+    import DaleReckoning from '../components/DaleReckoning';
 
-    @Component({})
+    @Component({
+        components: {DaleReckoning}
+    })
     export default class Campaign extends Vue {
         @Getter('campaign/id') id;
         @Getter('campaign/name') name;
@@ -63,6 +69,7 @@
 
         logId = '';
         logTitle = '';
+        logDaleReckoning = '';
 
         mounted() {
             this.loadLogs();
@@ -103,6 +110,7 @@
         openLog(log) {
             this.logId = log.id;
             this.logTitle = log.title;
+            this.logDaleReckoning = log.dale_reckoning;
 
             document.getElementById('content').innerHTML = logParser(log.content);
             document.getElementById('highlights').innerHTML = logParser(log.highlights);

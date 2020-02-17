@@ -20,6 +20,7 @@ type CampaignLog
     dm: String!
     campaignId: String!
     date: String!,
+    dale_reckoning: String,
     title: String!,
     content: String,
     highlights: String,
