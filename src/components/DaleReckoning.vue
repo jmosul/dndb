@@ -1,10 +1,12 @@
 <template>
-    <b-tooltip
-        :label="description"
-        multilined
-    >
-        <span class="dale-reckoning">{{day}} {{month}} {{year}} DR</span>
-    </b-tooltip>
+    <span>
+        <b-tooltip
+            :label="description"
+            multilined
+        >
+            <span class="dale-reckoning">{{day}} {{month}} {{year}} DR</span>
+        </b-tooltip>
+    </span>
 </template>
 
 <script>
