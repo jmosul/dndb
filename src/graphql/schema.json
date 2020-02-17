@@ -4333,6 +4333,18 @@
               "deprecationReason": null
             },
             {
+              "name": "dale_reckoning",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "title",
               "description": null,
               "args": [],
@@ -4455,6 +4467,16 @@
             },
             {
               "name": "date",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "ModelStringInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "dale_reckoning",
               "description": null,
               "type": {
                 "kind": "INPUT_OBJECT",
@@ -6734,6 +6756,16 @@
               "defaultValue": null
             },
             {
+              "name": "dale_reckoning",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
               "name": "title",
               "description": null,
               "type": {
@@ -6790,6 +6822,16 @@
             },
             {
               "name": "date",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "ModelStringInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "dale_reckoning",
               "description": null,
               "type": {
                 "kind": "INPUT_OBJECT",
@@ -6913,6 +6955,16 @@
             },
             {
               "name": "date",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "dale_reckoning",
               "description": null,
               "type": {
                 "kind": "SCALAR",
