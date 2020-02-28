@@ -338,3 +338,67 @@ export const listCampaignLogs = `query ListCampaignLogs(
   }
 }
 `;
+export const getOccurrence = `query GetOccurrence($id: ID!) {
+  getOccurrence(id: $id) {
+    id
+    dm
+    dale_reckoning
+    public
+    title
+    history {
+      id
+      dm
+      content
+    }
+  }
+}
+`;
+export const listOccurrences = `query ListOccurrences(
+  $filter: ModelOccurrenceFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listOccurrences(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      dm
+      dale_reckoning
+      public
+      title
+      history {
+        id
+        dm
+        content
+      }
+    }
+    nextToken
+  }
+}
+`;
+export const listHistoryOccurrences = `query ListHistoryOccurrences(
+  $filter: ModelHistoryOccurrenceFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listHistoryOccurrences(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      dm
+      content
+    }
+    nextToken
+  }
+}
+`;
+export const getHistoryOccurrence = `query GetHistoryOccurrence($id: ID!) {
+  getHistoryOccurrence(id: $id) {
+    id
+    dm
+    content
+  }
+}
+`;

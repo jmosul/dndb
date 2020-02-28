@@ -15,6 +15,9 @@ import Encounter from '../views/creations/Encounter';
 import CreateCampaign from '../views/create/CreateCampaign';
 import Campaign from '../views/Campaign';
 import {Auth} from 'aws-amplify';
+import CreateHistory from '../views/create/CreateHistory';
+import Timeline from '../views/Timeline';
+import Occurrence from '../views/Occurrence';
 
 Vue.use(VueRouter);
 
@@ -102,6 +105,24 @@ const routes = [
         ],
     },
     {
+        path: '/timeline',
+        name: 'timeline',
+        component: Timeline,
+        meta: {
+            dmOnly: true,
+        },
+        children: [
+            {
+                path: ':id',
+                name: 'occurrence',
+                component: Occurrence,
+                meta: {
+                    dmOnly: true,
+                },
+            },
+        ],
+    },
+    {
         path: '/create/npc',
         name: 'createNPC',
         component: CreateNonPlayerCharacter,
@@ -129,6 +150,11 @@ const routes = [
         path: '/create/campaign',
         name: 'createCampaign',
         component: CreateCampaign,
+    },
+    {
+        path: '/create/history',
+        name: 'createHistory',
+        component: CreateHistory,
     },
 ];
 

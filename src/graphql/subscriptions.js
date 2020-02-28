@@ -406,6 +406,75 @@ export const onDeleteNonPlayerCharacter = `subscription OnDeleteNonPlayerCharact
   }
 }
 `;
+export const onCreateOccurrence = `subscription OnCreateOccurrence($dm: String!) {
+  onCreateOccurrence(dm: $dm) {
+    id
+    dm
+    dale_reckoning
+    public
+    title
+    history {
+      id
+      dm
+      content
+    }
+  }
+}
+`;
+export const onUpdateOccurrence = `subscription OnUpdateOccurrence($dm: String!) {
+  onUpdateOccurrence(dm: $dm) {
+    id
+    dm
+    dale_reckoning
+    public
+    title
+    history {
+      id
+      dm
+      content
+    }
+  }
+}
+`;
+export const onDeleteOccurrence = `subscription OnDeleteOccurrence($dm: String!) {
+  onDeleteOccurrence(dm: $dm) {
+    id
+    dm
+    dale_reckoning
+    public
+    title
+    history {
+      id
+      dm
+      content
+    }
+  }
+}
+`;
+export const onCreateHistoryOccurrence = `subscription OnCreateHistoryOccurrence($dm: String!) {
+  onCreateHistoryOccurrence(dm: $dm) {
+    id
+    dm
+    content
+  }
+}
+`;
+export const onUpdateHistoryOccurrence = `subscription OnUpdateHistoryOccurrence($dm: String!) {
+  onUpdateHistoryOccurrence(dm: $dm) {
+    id
+    dm
+    content
+  }
+}
+`;
+export const onDeleteHistoryOccurrence = `subscription OnDeleteHistoryOccurrence($dm: String!) {
+  onDeleteHistoryOccurrence(dm: $dm) {
+    id
+    dm
+    content
+  }
+}
+`;
 export const onCreatePlayerCharacter = `subscription OnCreatePlayerCharacter($dm: String!) {
   onCreatePlayerCharacter(dm: $dm) {
     dm

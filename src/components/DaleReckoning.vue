@@ -3,6 +3,7 @@
         <b-tooltip
             :label="description"
             multilined
+            v-if="date"
         >
             <span class="dale-reckoning">{{day}} {{month}} {{year}} DR</span>
         </b-tooltip>
@@ -51,6 +52,10 @@
         get day() {
             const day = this.dateSplit[2];
 
+            if (!day) {
+                return '';
+            }
+
             switch (day) {
                 case 1:
                 case 21:
@@ -69,6 +74,14 @@
          */
         get monthDetails() {
             const month = this.dateSplit[1] - 1;
+
+            if (month === -1) {
+                return {
+                    num: -1,
+                    name: '',
+                    common: '',
+                };
+            }
 
             return this.months[month];
         }

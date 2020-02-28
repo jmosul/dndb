@@ -451,6 +451,93 @@ export const deleteNonPlayerCharacter = `mutation DeleteNonPlayerCharacter(
   }
 }
 `;
+export const createOccurrence = `mutation CreateOccurrence(
+  $input: CreateOccurrenceInput!
+  $condition: ModelOccurrenceConditionInput
+) {
+  createOccurrence(input: $input, condition: $condition) {
+    id
+    dm
+    dale_reckoning
+    public
+    title
+    history {
+      id
+      dm
+      content
+    }
+  }
+}
+`;
+export const updateOccurrence = `mutation UpdateOccurrence(
+  $input: UpdateOccurrenceInput!
+  $condition: ModelOccurrenceConditionInput
+) {
+  updateOccurrence(input: $input, condition: $condition) {
+    id
+    dm
+    dale_reckoning
+    public
+    title
+    history {
+      id
+      dm
+      content
+    }
+  }
+}
+`;
+export const deleteOccurrence = `mutation DeleteOccurrence(
+  $input: DeleteOccurrenceInput!
+  $condition: ModelOccurrenceConditionInput
+) {
+  deleteOccurrence(input: $input, condition: $condition) {
+    id
+    dm
+    dale_reckoning
+    public
+    title
+    history {
+      id
+      dm
+      content
+    }
+  }
+}
+`;
+export const createHistoryOccurrence = `mutation CreateHistoryOccurrence(
+  $input: CreateHistoryOccurrenceInput!
+  $condition: ModelHistoryOccurrenceConditionInput
+) {
+  createHistoryOccurrence(input: $input, condition: $condition) {
+    id
+    dm
+    content
+  }
+}
+`;
+export const updateHistoryOccurrence = `mutation UpdateHistoryOccurrence(
+  $input: UpdateHistoryOccurrenceInput!
+  $condition: ModelHistoryOccurrenceConditionInput
+) {
+  updateHistoryOccurrence(input: $input, condition: $condition) {
+    id
+    dm
+    content
+  }
+}
+`;
+export const deleteHistoryOccurrence = `mutation DeleteHistoryOccurrence(
+  $input: DeleteHistoryOccurrenceInput!
+  $condition: ModelHistoryOccurrenceConditionInput
+) {
+  deleteHistoryOccurrence(input: $input, condition: $condition) {
+    id
+    dm
+    content
+  }
+}
+`;
 export const createPlayerCharacter = `mutation CreatePlayerCharacter(
   $input: CreatePlayerCharacterInput!
   $condition: ModelPlayerCharacterConditionInput

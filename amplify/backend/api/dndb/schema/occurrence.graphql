@@ -1,0 +1,46 @@
+type Occurrence
+@model
+@auth(
+    rules: [
+        {
+            allow: owner,
+            ownerField: "dm",
+            operations: [create, update, delete, read]
+        },
+        {
+            allow: public,
+            provider: iam,
+            operations: [read]
+        }
+    ]
+)
+{
+    id: ID!
+    dm: String!
+    dale_reckoning: String!
+    public: Boolean!
+    title: String!
+    history: HistoryOccurrence @connection
+}
+
+type HistoryOccurrence
+@model
+@auth(
+    rules: [
+        {
+            allow: owner,
+            ownerField: "dm",
+            operations: [create, update, delete, read]
+        },
+        {
+            allow: public,
+            provider: iam,
+            operations: [read]
+        }
+    ]
+)
+{
+    id: ID!
+    dm: String!
+    content: String!
+}
