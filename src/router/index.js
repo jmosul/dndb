@@ -15,6 +15,7 @@ import Encounter from '../views/creations/Encounter';
 import CreateCampaign from '../views/create/CreateCampaign';
 import Campaign from '../views/Campaign';
 import {Auth} from 'aws-amplify';
+import CreateHistory from '../views/create/CreateHistory';
 
 Vue.use(VueRouter);
 
@@ -129,6 +130,11 @@ const routes = [
         path: '/create/campaign',
         name: 'createCampaign',
         component: CreateCampaign,
+    },
+    {
+        path: '/create/history',
+        name: 'createHistory',
+        component: CreateHistory,
     },
 ];
 

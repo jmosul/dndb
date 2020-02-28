@@ -31,6 +31,9 @@
                     <b-navbar-item tag="router-link" to="/create/campaign">
                         Campaign
                     </b-navbar-item>
+                    <b-navbar-item tag="router-link" to="/create/history">
+                        History
+                    </b-navbar-item>
                 </b-navbar-dropdown>
 
                 <b-navbar-dropdown label="NPCs" v-if="dungeonMasterId">
