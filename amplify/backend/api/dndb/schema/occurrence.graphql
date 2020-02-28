@@ -7,6 +7,11 @@ type Occurrence
             ownerField: "dm",
             operations: [create, update, delete, read]
         },
+        {
+            allow: public,
+            provider: iam,
+            operations: [read]
+        }
     ]
 )
 {
@@ -14,6 +19,7 @@ type Occurrence
     dm: String!
     dale_reckoning: String!
     public: Boolean!
+    title: String!
     history: HistoryOccurrence @connection
 }
 
@@ -26,6 +32,11 @@ type HistoryOccurrence
             ownerField: "dm",
             operations: [create, update, delete, read]
         },
+        {
+            allow: public,
+            provider: iam,
+            operations: [read]
+        }
     ]
 )
 {

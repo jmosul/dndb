@@ -3,6 +3,7 @@
         <b-tooltip
             :label="description"
             multilined
+            v-if="date"
         >
             <span class="dale-reckoning">{{day}} {{month}} {{year}} DR</span>
         </b-tooltip>

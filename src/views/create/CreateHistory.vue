@@ -11,6 +11,10 @@
                 <b-input v-model="model.dale_reckoning"></b-input>
             </b-field>
 
+            <b-field label="Title">
+                <b-input v-model="model.title"></b-input>
+            </b-field>
+
             <b-field label="Content">
                 <b-input type="textarea" v-model="model.content"></b-input>
             </b-field>
@@ -49,6 +53,7 @@
         model = {
             dale_reckoning: '',
             public: false,
+            title: '',
             content: '',
         };
 
@@ -81,6 +86,7 @@
             const input = {
                 id: this.historyId,
                 dm: this.dungeonMasterId,
+                title: this.model.title,
                 content: this.model.content,
             };
 

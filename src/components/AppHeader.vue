@@ -18,6 +18,9 @@
                 <b-navbar-item tag="router-link" to="/logs" v-if="dungeonMasterId">
                     Campaign Logs
                 </b-navbar-item>
+                <b-navbar-item tag="router-link" to="/timeline" v-if="dungeonMasterId">
+                    Timeline
+                </b-navbar-item>
                 <b-navbar-dropdown label="Create" v-if="dungeonMasterId">
                     <b-navbar-item tag="router-link" to="/create/npc">
                         NPC

@@ -34,14 +34,14 @@
                     <div class="hero is-info">
                         <div class="hero-body">
                             <h2 class="title">{{logTitle}}</h2>
-                            <p>
+                            <h3 class="subtitle">
                                 <dale-reckoning :date="logDaleReckoning"></dale-reckoning>
-                            </p>
-                            <div id="highlights"></div>
+                            </h3>
+                            <div v-html="logHighlights"></div>
                         </div>
                     </div>
 
-                    <div class="content" id="content"></div>
+                    <div class="content" v-html="logContent"></div>
                 </article>
             </div>
         </div>
@@ -58,7 +58,7 @@
     import DaleReckoning from '../components/DaleReckoning';
 
     @Component({
-        components: {DaleReckoning}
+        components: {DaleReckoning},
     })
     export default class Campaign extends Vue {
         @Getter('campaign/id') id;
@@ -70,6 +70,8 @@
         logId = '';
         logTitle = '';
         logDaleReckoning = '';
+        logHighlights = '';
+        logContent = '';
 
         mounted() {
             this.loadLogs();
@@ -112,8 +114,8 @@
             this.logTitle = log.title;
             this.logDaleReckoning = log.dale_reckoning;
 
-            document.getElementById('content').innerHTML = logParser(log.content);
-            document.getElementById('highlights').innerHTML = logParser(log.highlights);
+            this.logContent = logParser(log.content);
+            this.logHighlights = logParser(log.highlights);
         }
     }
 </script>

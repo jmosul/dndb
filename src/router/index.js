@@ -16,6 +16,8 @@ import CreateCampaign from '../views/create/CreateCampaign';
 import Campaign from '../views/Campaign';
 import {Auth} from 'aws-amplify';
 import CreateHistory from '../views/create/CreateHistory';
+import Timeline from '../views/Timeline';
+import Occurrence from '../views/Occurrence';
 
 Vue.use(VueRouter);
 
@@ -96,6 +98,24 @@ const routes = [
                 path: ':logId',
                 name: 'campaign_log',
                 component: CampaignLog,
+                meta: {
+                    dmOnly: true,
+                },
+            },
+        ],
+    },
+    {
+        path: '/timeline',
+        name: 'timeline',
+        component: Timeline,
+        meta: {
+            dmOnly: true,
+        },
+        children: [
+            {
+                path: ':id',
+                name: 'occurrence',
+                component: Occurrence,
                 meta: {
                     dmOnly: true,
                 },
