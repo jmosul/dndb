@@ -134,13 +134,14 @@
 
     .timeline {
         .timeline__occurrence {
-            padding-top: 55px;
+            padding: 60px 0;
         }
 
         .timeline__container {
             position: relative;
-            padding: 30px 0;
+            padding: 35px 0;
             color: white;
+            height: 100%;
 
             &::after {
                 content: "";

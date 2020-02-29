@@ -21,15 +21,16 @@
                     </a>
                 </b-navbar-dropdown>
                 <b-navbar-item tag="router-link" to="/campaign" v-if="campaignId">
-                    Story
+                    Overview
+                </b-navbar-item>
+
+                <b-navbar-item tag="router-link" to="/timeline">
+                    Timeline
                 </b-navbar-item>
             </template>
             <template slot="end">
                 <b-navbar-item tag="router-link" to="/logs" v-if="dungeonMasterId">
                     Campaign Logs
-                </b-navbar-item>
-                <b-navbar-item tag="router-link" to="/timeline" v-if="dungeonMasterId">
-                    Timeline
                 </b-navbar-item>
 
                 <b-navbar-item :to="{name: 'characters'}" tag="router-link" v-if="dungeonMasterId">
