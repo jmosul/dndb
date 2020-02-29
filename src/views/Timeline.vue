@@ -26,6 +26,7 @@
                             v-for="occurrence in timeline"
                             :key="occurrence.id"
                             class="timeline__item"
+                            :class="{'timeline__item--active': $route.params.id === occurrence.id}"
                         >
                             <div class="timeline__icon">
                                 <span class="fa-stack">
@@ -40,7 +41,10 @@
                                 </h3>
                                 <p class="timeline__content">
                                     {{occurrence.title}}
-                                    <small v-if="!filter.campaignId && occurrence.campaign">
+                                    <small
+                                        v-if="!filter.campaignId && occurrence.campaign"
+                                        :class="{'has-text-grey-light': $route.params.id !== occurrence.id}"
+                                    >
                                         <br>
                                         {{occurrence.campaign.name}}
                                     </small>
@@ -48,6 +52,7 @@
                                 <router-link
                                     class="button is-white is-small timeline__link"
                                     :to="{name: 'occurrence', params: {id: occurrence.id}}"
+                                    v-if="$route.params.id !== occurrence.id"
                                 >
                                     More
                                 </router-link>
@@ -130,7 +135,6 @@
 
 <style scoped lang="scss">
     @import "../styles";
-    @import "~bulma/sass/utilities/_all";
 
     .timeline {
         .timeline__occurrence {
@@ -139,7 +143,7 @@
 
         .timeline__container {
             position: relative;
-            padding: 35px 0;
+            padding: 34px 0;
             color: white;
             height: 100%;
 
@@ -194,11 +198,15 @@
                         float: right;
                         top: -28px;
                     }
+                }
 
-                    &content {
-                        small {
-                            color: $color-dnd-grey;
-                        }
+                &.timeline__item--active {
+                    &::before {
+                        border-right-color: $color-dnd-red-darker;
+                    }
+
+                    .timeline__body {
+                        background-color: $color-dnd-red-darker;
                     }
                 }
             }
