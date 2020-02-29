@@ -110,6 +110,10 @@
         padding-bottom: 180px;
         height: 100%;
 
+        .is-goblin {
+            font-family: $font-goblin-family;
+        }
+
         .view {
             min-height: 100%;
             width: 100%;

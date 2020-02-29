@@ -6,11 +6,21 @@
                     <logo></logo>
                 </b-navbar-item>
             </template>
-            <template slot="start" v-if="campaignId">
-                <b-navbar-item tag="router-link" to="/campaign">
-                    {{campaignName}}:
+            <template slot="start">
+                <b-navbar-item tag="router-link" to="/campaign" v-if="campaignId" :key="campaignId" class="is-goblin">
+                    {{currentCampaignName}}
                 </b-navbar-item>
-                <b-navbar-item tag="router-link" to="/campaign">
+                <b-navbar-dropdown>
+                    <a
+                        v-for="campaign in campaigns"
+                        :key="campaign.id"
+                        @click="setCampaign(campaign)"
+                        class="navbar-item"
+                    >
+                        {{campaign.name}}
+                    </a>
+                </b-navbar-dropdown>
+                <b-navbar-item tag="router-link" to="/campaign" v-if="campaignId">
                     Story
                 </b-navbar-item>
             </template>
@@ -79,7 +89,7 @@
     import {components} from 'aws-amplify-vue';
     import {listNonPlayerCharacters, listPlayerCharacters} from '../graphql/queries';
     import AppComponent from '../AppComponent';
-    import {Getter} from 'vuex-class';
+    import {Action, Getter} from 'vuex-class';
     import Logo from './Logo';
 
     Vue.use(Navbar);
@@ -92,8 +102,10 @@
     })
     export default class AppHeader extends AppComponent {
         @Getter('dungeonMaster/id') dungeonMasterId;
+        @Getter('campaigns/all') campaigns;
         @Getter('campaign/id') campaignId;
         @Getter('campaign/name') campaignName;
+        @Action('campaign/setCampaign') setCampaign;
 
         get listCharactersQuery() {
             return this.$Amplify.graphqlOperation(listNonPlayerCharacters);
@@ -101,6 +113,10 @@
 
         get listPlayersQuery() {
             return this.$Amplify.graphqlOperation(listPlayerCharacters);
+        }
+
+        get currentCampaignName() {
+            return this.campaignName || 'Select Campaign';
         }
     }
 </script>

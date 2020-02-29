@@ -159,7 +159,23 @@ const router = new VueRouter({
     routes,
 });
 
+const setDefaultCampaign = () => {
+    if (!store.getters['campaign/id']) {
+        const campaigns = store.getters['campaigns/all'];
+
+        if (campaigns.length) {
+            store.dispatch('campaign/setCampaign', campaigns[0]);
+        }
+    }
+};
+
 router.beforeResolve((to, from, next) => {
+    if (store.getters['campaigns/isEmpty']) {
+        store.dispatch('campaigns/load').then(() => setDefaultCampaign());
+    } else {
+        setDefaultCampaign();
+    }
+
     if (to.path !== '*') {
         Vue.prototype.$Amplify.Auth.currentAuthenticatedUser()
             .then(data => {
