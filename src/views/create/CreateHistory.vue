@@ -2,21 +2,34 @@
     <section class="create npc">
         <div class="hero">
             <div class="hero-body">
-                <h1 class="title">Create Campaign</h1>
+                <h1 class="title">Create History</h1>
             </div>
         </div>
 
         <section class="container">
-            <b-field label="Dale Reckoning">
-                <b-input v-model="model.dale_reckoning"></b-input>
-            </b-field>
-
             <b-field label="Title">
                 <b-input v-model="model.title"></b-input>
             </b-field>
 
+            <b-field label="Dale Reckoning">
+                <b-input v-model="model.dale_reckoning"></b-input>
+            </b-field>
+
             <b-field label="Content">
                 <b-input type="textarea" v-model="model.content"></b-input>
+            </b-field>
+
+            <b-field label="Campaign">
+                <b-select v-model="model.campaignId">
+                    <option value=""></option>
+                    <option
+                        v-for="option in campaigns"
+                        :value="option.id"
+                        :key="option.id"
+                    >
+                        {{ option.name }}
+                    </option>
+                </b-select>
             </b-field>
 
             <b-field>
@@ -47,6 +60,7 @@
     })
     export default class CreateHistory extends AppComponent {
         @Getter('dungeonMaster/id') dungeonMasterId;
+        @Getter('campaigns/all') campaigns;
 
         saving = false;
 
@@ -55,6 +69,7 @@
             public: false,
             title: '',
             content: '',
+            campaignId: '',
         };
 
         mounted() {
@@ -102,6 +117,10 @@
                 public: this.model.public,
                 occurrenceHistoryId: this.historyId,
             };
+
+            if (this.model.campaignId) {
+                input.occurrenceCampaignId = this.model.campaignId;
+            }
 
             return graphqlOperation(createOccurrence, {input});
         }
