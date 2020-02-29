@@ -13,7 +13,6 @@
                         <b-input v-model="model.name"></b-input>
                     </b-field>
 
-
                     <b-field label="Image">
                         <b-input type="text" v-model="model.image"></b-input>
                     </b-field>

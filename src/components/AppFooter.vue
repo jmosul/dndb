@@ -4,22 +4,22 @@
             <p>
                 <small>
                     Dungeons and Databases | James O'Sullivan | &copy; {{year}}
+                    <br>
+                    <a
+                        href="https://github.com/jmosul/dndb"
+                        target="_blank"
+                        title="See code or report issues Dungeons and Database in GitHub"
+                        class="has-text-grey-light"
+                    >
+                        <b-icon
+                            icon="github"
+                            pack="fab"
+                            size="is-small"
+                        ></b-icon>
+                        <span>&nbsp;Github</span>
+                    </a>
                 </small>
             </p>
-
-            <a
-                class="button is-small"
-                href="https://github.com/jmosul/dndb"
-                target="_blank"
-                title="See code or report issues Dungeons and Database in GitHub"
-            >
-                <b-icon
-                    icon="github"
-                    pack="fab"
-                    size="is-small"
-                ></b-icon>
-                <span>&nbsp;Github</span>
-            </a>
         </div>
     </footer>
 </template>
@@ -41,9 +41,13 @@
     }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+    @import '../styles';
+
     footer {
         width: 100%;
-        padding-bottom: 4em;
+        height: $footer-height;
+        padding: 1em;
+        background-color: $dark;
     }
 </style>

@@ -2,7 +2,7 @@
     <div class="timeline public">
         <div class="hero is-primary">
             <div class="hero-body">
-                <h1 class="title">Timeline</h1>
+                <h1 class="title">World Timeline</h1>
             </div>
         </div>
         <div class="container">
@@ -26,21 +26,33 @@
                             v-for="occurrence in timeline"
                             :key="occurrence.id"
                             class="timeline__item"
+                            :class="{'timeline__item--active': $route.params.id === occurrence.id}"
                         >
                             <div class="timeline__icon">
                                 <span class="fa-stack">
                                   <i class="fas fa-circle fa-stack-2x"></i>
-                                  <i class="fas fa-flag fa-stack-1x fa-inverse"></i>
+                                  <i class="fas fa-dice-d20 fa-stack-1x fa-inverse" v-if="occurrence.type === 'Log'"></i>
+                                  <i class="fas fa-flag fa-stack-1x fa-inverse" v-else></i>
                                 </span>
                             </div>
                             <div class="timeline__body">
                                 <h3 class="timeline__date">
                                     <dale-reckoning :date="occurrence.dale_reckoning"></dale-reckoning>
                                 </h3>
-                                <p class="timeline__content">{{occurrence.title}}</p>
+                                <p class="timeline__content">
+                                    {{occurrence.title}}
+                                    <small
+                                        v-if="!filter.campaignId && occurrence.campaign"
+                                        :class="{'has-text-grey-light': $route.params.id !== occurrence.id}"
+                                    >
+                                        <br>
+                                        {{occurrence.campaign.name}}
+                                    </small>
+                                </p>
                                 <router-link
                                     class="button is-white is-small timeline__link"
                                     :to="{name: 'occurrence', params: {id: occurrence.id}}"
+                                    v-if="$route.params.id !== occurrence.id"
                                 >
                                     More
                                 </router-link>
@@ -59,7 +71,7 @@
 <script>
     import Vue from 'vue';
     import Component from 'vue-class-component';
-    import {API, graphqlOperation} from 'aws-amplify';
+    import {API} from 'aws-amplify';
     import {listOccurrences} from '../graphql/queries';
     import {Getter} from 'vuex-class';
     import DaleReckoning from '../components/DaleReckoning';
@@ -72,6 +84,7 @@
 
         loading = true;
         timeline = [];
+        filter = {};
 
         mounted() {
             this.loadTimeline();
@@ -80,10 +93,10 @@
         async loadTimeline() {
             this.loading = true;
 
+            let authMode = 'AMAZON_COGNITO_USER_POOLS';
             const variables = {
                 limit: 100,
             };
-            let authMode = 'AMAZON_COGNITO_USER_POOLS';
 
             if (!this.dungeonMasterId) {
                 variables.filter = {
@@ -122,17 +135,17 @@
 
 <style scoped lang="scss">
     @import "../styles";
-    @import "~bulma/sass/utilities/_all";
 
     .timeline {
         .timeline__occurrence {
-            padding-top: 55px;
+            padding: 60px 0;
         }
 
         .timeline__container {
             position: relative;
-            padding: 30px 0;
+            padding: 34px 0;
             color: white;
+            height: 100%;
 
             &::after {
                 content: "";
@@ -184,6 +197,16 @@
                     &link {
                         float: right;
                         top: -28px;
+                    }
+                }
+
+                &.timeline__item--active {
+                    &::before {
+                        border-right-color: $color-dnd-red-darker;
+                    }
+
+                    .timeline__body {
+                        background-color: $color-dnd-red-darker;
                     }
                 }
             }

@@ -6,30 +6,40 @@
                     <logo></logo>
                 </b-navbar-item>
             </template>
-            <template slot="start" v-if="campaignId">
-                <b-navbar-item tag="router-link" to="/campaign">
-                    {{campaignName}}:
+            <template slot="start">
+                <b-navbar-item tag="router-link" to="/campaign" v-if="campaignId" :key="campaignId" class="is-goblin">
+                    {{currentCampaignName}}
                 </b-navbar-item>
-                <b-navbar-item tag="router-link" to="/campaign">
-                    Story
+                <b-navbar-dropdown>
+                    <a
+                        v-for="campaign in campaigns"
+                        :key="campaign.id"
+                        @click="setCampaign(campaign)"
+                        class="navbar-item"
+                    >
+                        {{campaign.name}}
+                    </a>
+                </b-navbar-dropdown>
+                <b-navbar-item tag="router-link" to="/campaign" v-if="campaignId">
+                    Overview
+                </b-navbar-item>
+
+                <b-navbar-item tag="router-link" to="/timeline">
+                    Timeline
                 </b-navbar-item>
             </template>
             <template slot="end">
                 <b-navbar-item tag="router-link" to="/logs" v-if="dungeonMasterId">
                     Campaign Logs
                 </b-navbar-item>
-                <b-navbar-item tag="router-link" to="/timeline" v-if="dungeonMasterId">
-                    Timeline
+
+                <b-navbar-item :to="{name: 'characters'}" tag="router-link" v-if="dungeonMasterId">
+                    NPCs
                 </b-navbar-item>
+
                 <b-navbar-dropdown label="Create" v-if="dungeonMasterId">
                     <b-navbar-item tag="router-link" to="/create/npc">
                         NPC
-                    </b-navbar-item>
-                    <b-navbar-item tag="router-link" to="/create/player">
-                        Player
-                    </b-navbar-item>
-                    <b-navbar-item tag="router-link" to="/create/encounter">
-                        Encounter
                     </b-navbar-item>
                     <b-navbar-item tag="router-link" to="/create/campaign">
                         Campaign
@@ -37,50 +47,6 @@
                     <b-navbar-item tag="router-link" to="/create/history">
                         History
                     </b-navbar-item>
-                </b-navbar-dropdown>
-
-                <b-navbar-dropdown label="NPCs" v-if="dungeonMasterId">
-                    <amplify-connect :query="listCharactersQuery">
-                        <template slot-scope="{loading, data, errors}">
-                            <div v-if="loading">Loading...</div>
-                            <div v-else-if="errors.length > 0">Error</div>
-                            <div v-else-if="data">
-                                <b-navbar-item
-                                    v-for="npc in data.listNonPlayerCharacters.items"
-                                    :key="npc.id"
-                                    :to="{name: 'character', params: {id: npc.id}}"
-                                    tag="router-link"
-                                >
-                                    {{npc.name}}
-                                </b-navbar-item>
-                                <b-navbar-item
-                                    :to="{name: 'characters'}"
-                                    tag="router-link"
-                                >
-                                    More...
-                                </b-navbar-item>
-                            </div>
-                        </template>
-                    </amplify-connect>
-                </b-navbar-dropdown>
-
-                <b-navbar-dropdown label="Players" v-if="dungeonMasterId">
-                    <amplify-connect :query="listPlayersQuery">
-                        <template slot-scope="{loading, data, errors}">
-                            <div v-if="loading">Loading...</div>
-                            <div v-else-if="errors.length > 0">Error</div>
-                            <div v-else-if="data">
-                                <b-navbar-item
-                                    v-for="player in data.listPlayerCharacters.items"
-                                    :key="player.id"
-                                    :to="{name: 'player', params: {id: player.id}}"
-                                    tag="router-link"
-                                >
-                                    {{npc.name}}
-                                </b-navbar-item>
-                            </div>
-                        </template>
-                    </amplify-connect>
                 </b-navbar-dropdown>
             </template>
             <template slot="end" v-if="!dungeonMasterId">
@@ -99,7 +65,7 @@
     import {components} from 'aws-amplify-vue';
     import {listNonPlayerCharacters, listPlayerCharacters} from '../graphql/queries';
     import AppComponent from '../AppComponent';
-    import {Getter} from 'vuex-class';
+    import {Action, Getter} from 'vuex-class';
     import Logo from './Logo';
 
     Vue.use(Navbar);
@@ -112,8 +78,10 @@
     })
     export default class AppHeader extends AppComponent {
         @Getter('dungeonMaster/id') dungeonMasterId;
+        @Getter('campaigns/all') campaigns;
         @Getter('campaign/id') campaignId;
         @Getter('campaign/name') campaignName;
+        @Action('campaign/setCampaign') setCampaign;
 
         get listCharactersQuery() {
             return this.$Amplify.graphqlOperation(listNonPlayerCharacters);
@@ -122,9 +90,31 @@
         get listPlayersQuery() {
             return this.$Amplify.graphqlOperation(listPlayerCharacters);
         }
+
+        get currentCampaignName() {
+            return this.campaignName || 'Select Campaign';
+        }
     }
 </script>
 
-<style scoped>
+<style lang="scss">
+    @import "~bulma/sass/utilities/_all";
 
+    header {
+        position: fixed;
+        width: 100%;
+        z-index: 9;
+
+        nav {
+            .navbar-item.has-dropdown.is-active .navbar-link {
+                color: $dark;
+            }
+
+            .navbar-dropdown {
+                .navbar-item {
+                    color: $dark;
+                }
+            }
+        }
+    }
 </style>

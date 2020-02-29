@@ -37,11 +37,11 @@
                             <h3 class="subtitle">
                                 <dale-reckoning :date="logDaleReckoning"></dale-reckoning>
                             </h3>
-                            <div v-html="logHighlights"></div>
+                            <div class="occurrence__highlights" v-html="logHighlights"></div>
                         </div>
                     </div>
 
-                    <div class="content" v-html="logContent"></div>
+                    <div class="occurrence__content" v-html="logContent"></div>
                 </article>
             </div>
         </div>
@@ -151,48 +151,6 @@
 
             .hero-body {
                 padding: 2rem 1.5rem;
-            }
-        }
-
-        #content, #highlights {
-            ul {
-                list-style: initial;
-                padding: 0 1.5rem;
-            }
-
-            p {
-                margin-left: 0;
-                margin-right: 0;
-            }
-
-            .content {
-
-                &__combat--start, &__combat--end {
-                    border-color: $color-dnd-red;
-                    background-color: $color-dnd-red;
-                    position: relative;
-                    overflow: visible;
-
-                    &::after {
-                        background-color: white;
-                        color: $color-dnd-grey;
-                        width: 100px;
-                        margin-left: -50px;
-                        left: 50%;
-                        top: -11px;
-                        line-height: 18px;
-                        position: relative;
-                        padding: 5px;
-                    }
-                }
-
-                &__combat--start::after {
-                    content: "Combat Start";
-                }
-
-                &__combat--end::after {
-                    content: "Combat End";
-                }
             }
         }
     }

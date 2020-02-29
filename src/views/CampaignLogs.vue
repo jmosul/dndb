@@ -82,7 +82,9 @@
         }
 
         onCreateCampaignLog(prevData, newData) {
-            prevData.data.listCampaignLogs.items.push(newData.onCreateCampaignLog);
+            const newLog = newData.onCreateCampaignLog;
+
+            prevData.data.listCampaignLogs.items.push(newLog);
 
             return prevData.data;
         }

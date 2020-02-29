@@ -17,26 +17,12 @@
 <script>
     import Vue from 'vue';
     import Component from 'vue-class-component';
-    import {listCampaigns} from '../graphql/queries';
-    import {Action} from 'vuex-class';
-    import {API} from 'aws-amplify';
+    import {Action, Getter} from 'vuex-class';
 
     @Component()
     export default class CampaignSelector extends Vue {
         @Action('campaign/setCampaign') setCampaignState;
-
-        campaigns = [];
-
-        mounted() {
-            this.loadCampaigns();
-        }
-
-        async loadCampaigns() {
-            this.campaigns = await API.graphql({
-                query: listCampaigns,
-                authMode: 'AWS_IAM',
-            }).then((response) => response.data.listCampaigns.items);
-        }
+        @Getter('campaigns/all') campaigns;
 
         setCampaign(campaign) {
             this.setCampaignState(campaign);

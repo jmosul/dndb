@@ -44,45 +44,7 @@
 </script>
 
 <style lang="scss">
-    // Import Bulma's core
-    @import "~bulma/sass/utilities/_all";
-
-    $font-goblin-family: 'Goblin One', cursive;
-    $color-dnd-red: #ec2128;
-    $color-dnd-black: #040404;
-    $color-dnd-grey: #959595;
-
-    // Set your colors
-    $primary: $dark;
-    $primary-invert: $color-dnd-red;
-    $secondary: #4099FF;
-    $secondary-invert: findColorInvert($secondary);
-
-    // Setup $colors to use as bulma classes (e.g. 'is-twitter')
-    $colors: (
-        "white": ($white, $black),
-        "black": ($black, $white),
-        "light": ($light, $light-invert),
-        "dark": ($dark, $dark-invert),
-        "primary": ($primary, $primary-invert),
-        "info": ($info, $info-invert),
-        "success": ($success, $success-invert),
-        "warning": ($warning, $warning-invert),
-        "danger": ($danger, $danger-invert),
-        "secondary": ($secondary, $secondary-invert)
-    );
-
-    // Links
-    $link: $primary;
-    $link-invert: $primary-invert;
-    $link-focus-border: $primary;
-
-    $navbar-background-color: $color-dnd-black;
-    $navbar-item-color: $white;
-
-    $margins: 0, 5, 10, 15;
-
-    // Import Bulma and Buefy styles
+    @import "styles";
     @import "~bulma";
     @import "~buefy/src/scss/buefy";
 
@@ -107,8 +69,12 @@
     .app {
         box-sizing: border-box;
         position: relative;
-        padding-bottom: 180px; /* Height of footer */
+        padding-bottom: $footer-height;
         height: 100%;
+
+        .is-goblin {
+            font-family: $font-goblin-family;
+        }
 
         .view {
             min-height: 100%;
@@ -118,8 +84,10 @@
         }
 
         main {
+            position: relative;
             top: 50px;
             padding-bottom: 15px;
+            margin-bottom: 35px;
 
             p {
                 margin: 10px;
@@ -155,5 +123,49 @@
         .hero .hero-body .title {
             font-family: $font-goblin-family;
         }
+
+        .occurrence__content, .occurrence__highlights {
+            ul {
+                list-style: initial;
+                padding: 0 1.5rem;
+            }
+
+            p {
+                margin-left: 0;
+                margin-right: 0;
+            }
+
+            .content {
+
+                &__combat--start, &__combat--end {
+                    border-color: $color-dnd-red;
+                    background-color: $color-dnd-red;
+                    position: relative;
+                    overflow: visible;
+
+                    &::after {
+                        background-color: white;
+                        color: $color-dnd-grey;
+                        width: 100px;
+                        margin-left: -50px;
+                        left: 50%;
+                        top: -11px;
+                        line-height: 18px;
+                        position: relative;
+                        padding: 5px;
+                    }
+                }
+
+                &__combat--start::after {
+                    content: "Combat Start";
+                }
+
+                &__combat--end::after {
+                    content: "Combat End";
+                }
+            }
+        }
+
+
     }
 </style>

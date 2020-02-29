@@ -35,9 +35,10 @@
     import Vue from 'vue';
     import Component from 'vue-class-component';
     import uuid from 'uuid';
-    import {createCampaignLog} from '../graphql/mutations';
+    import {createCampaignLog, createOccurrence} from '../graphql/mutations';
     import {Getter} from 'vuex-class';
     import CampaignSelector from './CampaignSelector';
+    import {API, graphqlOperation} from 'aws-amplify';
 
     @Component({
         components: {CampaignSelector},
@@ -64,7 +65,23 @@
             return this.$Amplify.graphqlOperation(createCampaignLog, {input: this.model});
         }
 
-        handleComplete() {
+        get occurrenceMutation() {
+            const input = {
+                id: uuid.v4(),
+                title: this.model.title,
+                dale_reckoning: this.model.dale_reckoning,
+                dm: this.dungeonMasterId,
+                type: 'Log',
+                public: true,
+                occurrenceLogId: this.model.id,
+            };
+
+            return graphqlOperation(createOccurrence, {input});
+        }
+
+        async handleComplete() {
+            await API.graphql(this.occurrenceMutation);
+
             this.$router.push({
                 name: 'campaign_log',
                 params: {

@@ -1,4 +1,39 @@
+@import "~bulma/sass/utilities/_all";
+
 $font-goblin-family: 'Goblin One', cursive;
 $color-dnd-red: #ec2128;
+$color-dnd-red-darker: darken($color-dnd-red, 5%);
 $color-dnd-black: #040404;
 $color-dnd-grey: #959595;
+
+$footer-height: 80px;
+
+// Set your colors
+$primary: $dark;
+$primary-invert: $color-dnd-red;
+$secondary: #4099FF;
+$secondary-invert: findColorInvert($secondary);
+
+// Setup $colors to use as bulma classes (e.g. 'is-twitter')
+$colors: (
+  "white": ($white, $black),
+  "black": ($black, $white),
+  "light": ($light, $light-invert),
+  "dark": ($dark, $dark-invert),
+  "primary": ($primary, $primary-invert),
+  "info": ($color-dnd-red-darker, $info-invert),
+  "success": ($success, $success-invert),
+  "warning": ($warning, $warning-invert),
+  "danger": ($danger, $danger-invert),
+  "secondary": ($secondary, $secondary-invert)
+);
+
+// Links
+$link: $primary;
+$link-invert: $primary-invert;
+$link-focus-border: $primary;
+
+$navbar-background-color: $color-dnd-black;
+$navbar-item-color: $white;
+
+$margins: 0, 5, 10, 15;
