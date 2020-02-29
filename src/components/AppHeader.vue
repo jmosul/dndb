@@ -32,7 +32,7 @@
                     Timeline
                 </b-navbar-item>
 
-                <b-navbar-item :to="{name: 'characters'}" tag="router-link">
+                <b-navbar-item :to="{name: 'characters'}" tag="router-link" v-if="dungeonMasterId">
                     NPCs
                 </b-navbar-item>
 
