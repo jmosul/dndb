@@ -21,48 +21,10 @@
                 <b-navbar-item tag="router-link" to="/timeline" v-if="dungeonMasterId">
                     Timeline
                 </b-navbar-item>
-                <b-navbar-dropdown label="Create" v-if="dungeonMasterId">
-                    <b-navbar-item tag="router-link" to="/create/npc">
-                        NPC
-                    </b-navbar-item>
-                    <b-navbar-item tag="router-link" to="/create/player">
-                        Player
-                    </b-navbar-item>
-                    <b-navbar-item tag="router-link" to="/create/encounter">
-                        Encounter
-                    </b-navbar-item>
-                    <b-navbar-item tag="router-link" to="/create/campaign">
-                        Campaign
-                    </b-navbar-item>
-                    <b-navbar-item tag="router-link" to="/create/history">
-                        History
-                    </b-navbar-item>
-                </b-navbar-dropdown>
 
-                <b-navbar-dropdown label="NPCs" v-if="dungeonMasterId">
-                    <amplify-connect :query="listCharactersQuery">
-                        <template slot-scope="{loading, data, errors}">
-                            <div v-if="loading">Loading...</div>
-                            <div v-else-if="errors.length > 0">Error</div>
-                            <div v-else-if="data">
-                                <b-navbar-item
-                                    v-for="npc in data.listNonPlayerCharacters.items"
-                                    :key="npc.id"
-                                    :to="{name: 'character', params: {id: npc.id}}"
-                                    tag="router-link"
-                                >
-                                    {{npc.name}}
-                                </b-navbar-item>
-                                <b-navbar-item
-                                    :to="{name: 'characters'}"
-                                    tag="router-link"
-                                >
-                                    More...
-                                </b-navbar-item>
-                            </div>
-                        </template>
-                    </amplify-connect>
-                </b-navbar-dropdown>
+                <b-navbar-item :to="{name: 'characters'}" tag="router-link">
+                    NPCs
+                </b-navbar-item>
 
                 <b-navbar-dropdown label="Players" v-if="dungeonMasterId">
                     <amplify-connect :query="listPlayersQuery">
@@ -81,6 +43,24 @@
                             </div>
                         </template>
                     </amplify-connect>
+                </b-navbar-dropdown>
+
+                <b-navbar-dropdown label="Create" v-if="dungeonMasterId">
+                    <b-navbar-item tag="router-link" to="/create/npc">
+                        NPC
+                    </b-navbar-item>
+                    <b-navbar-item tag="router-link" to="/create/player">
+                        Player
+                    </b-navbar-item>
+                    <b-navbar-item tag="router-link" to="/create/encounter">
+                        Encounter
+                    </b-navbar-item>
+                    <b-navbar-item tag="router-link" to="/create/campaign">
+                        Campaign
+                    </b-navbar-item>
+                    <b-navbar-item tag="router-link" to="/create/history">
+                        History
+                    </b-navbar-item>
                 </b-navbar-dropdown>
             </template>
             <template slot="end" v-if="!dungeonMasterId">
@@ -125,6 +105,24 @@
     }
 </script>
 
-<style scoped>
+<style lang="scss">
+    @import "~bulma/sass/utilities/_all";
 
+    header {
+        position: fixed;
+        width: 100%;
+        z-index: 9;
+
+        nav {
+            .navbar-item.has-dropdown.is-active .navbar-link {
+                color: $dark;
+            }
+
+            .navbar-dropdown {
+                .navbar-item {
+                    color: $dark;
+                }
+            }
+        }
+    }
 </style>

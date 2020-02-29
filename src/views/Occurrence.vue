@@ -1,63 +1,73 @@
 <template>
-    <section class="occurrence">
-        <article v-if="occurrence.id">
-            <div class="hero is-info">
-                <div class="hero-body">
-                    <h2 class="title">
-                        {{occurrence.title}}
-                    </h2>
-                    <h3 class="subtitle">
-                        <dale-reckoning :date="occurrence.dale_reckoning"></dale-reckoning>
-                    </h3>
-                    <div class="content" v-html="content"></div>
-                </div>
+    <article v-if="occurrence.id">
+        <div class="hero is-info mb-15">
+            <div class="hero-body">
+                <h3 class="subtitle">
+                    <dale-reckoning :date="occurrence.dale_reckoning"></dale-reckoning>
+                </h3>
+                <h2 class="title">
+                    {{occurrence.title}}
+                </h2>
             </div>
-        </article>
-    </section>
+        </div>
+        <log-occurrence :occurrence="occurrence" :key="occurrence.id" v-if="occurrence.type === 'Log'"></log-occurrence>
+        <history-occurrence :occurrence="occurrence" :key="occurrence.id" v-else></history-occurrence>
+    </article>
 </template>
 
 <script>
     import Vue from 'vue';
     import Component from 'vue-class-component';
-    import {components} from 'aws-amplify-vue';
     import {getOccurrence} from '../graphql/queries';
-    import DaleReckoning from '../components/DaleReckoning';
     import {API} from 'aws-amplify';
-    import logParser from '../LogParser';
+    import HistoryOccurrence from './HistoryOccurrence';
+    import DaleReckoning from '../components/DaleReckoning';
+    import {Watch} from 'vue-property-decorator';
+    import LogOccurrence from './LogOccurrence';
 
     @Component({
         components: {
+            LogOccurrence,
             DaleReckoning,
-            ...components,
+            HistoryOccurrence,
         },
     })
     export default class Occurrence extends Vue {
         occurrence = {};
+        hasLoaded = false;
         content = '';
 
-        get occurrenceQuery() {
-            return this.$Amplify.graphqlOperation(getOccurrence, {id: this.$route.params.id});
+        @Watch('$route.params.id')
+        onChildChanged(id) {
+            this.loadOccurrence(id);
         }
 
         mounted() {
-            this.loadOccurrence();
+            this.loadOccurrence(this.$route.params.id);
         }
 
-        async loadOccurrence() {
+        async loadOccurrence(id) {
+            const variables = {id};
+            const authMode = this.dungeonMasterId ? 'AMAZON_COGNITO_USER_POOLS' : 'AWS_IAM';
+
+            this.hasLoaded = false;
+
             return API.graphql({
                 query: getOccurrence,
-                variables: {
-                    id: this.$route.params.id,
-                },
+                variables,
+                authMode,
             }).then(
                 (response) => {
-                    this.occurrence = response.data.getOccurrence;
+                    console.log('res', response);
 
-                    if (this.occurrence.history) {
-                        this.content = logParser(this.occurrence.history.content);
-                    }
+                    this.occurrence = response.data.getOccurrence;
+                    this.hasLoaded = true;
                 }
             );
         }
     }
 </script>
+
+<style scoped>
+
+</style>

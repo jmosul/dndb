@@ -14,7 +14,6 @@ import CreateEncounter from '../views/create/CreateEncounter';
 import Encounter from '../views/creations/Encounter';
 import CreateCampaign from '../views/create/CreateCampaign';
 import Campaign from '../views/Campaign';
-import {Auth} from 'aws-amplify';
 import CreateHistory from '../views/create/CreateHistory';
 import Timeline from '../views/Timeline';
 import Occurrence from '../views/Occurrence';
@@ -108,17 +107,13 @@ const routes = [
         path: '/timeline',
         name: 'timeline',
         component: Timeline,
-        meta: {
-            dmOnly: true,
-        },
+        meta: {},
         children: [
             {
                 path: ':id',
                 name: 'occurrence',
                 component: Occurrence,
-                meta: {
-                    dmOnly: true,
-                },
+                meta: {},
             },
         ],
     },

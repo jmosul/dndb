@@ -107,7 +107,7 @@
     .app {
         box-sizing: border-box;
         position: relative;
-        padding-bottom: 180px; /* Height of footer */
+        padding-bottom: 180px;
         height: 100%;
 
         .view {
@@ -118,6 +118,7 @@
         }
 
         main {
+            position: relative;
             top: 50px;
             padding-bottom: 15px;
 
@@ -155,5 +156,49 @@
         .hero .hero-body .title {
             font-family: $font-goblin-family;
         }
+
+        .occurrence__content, .occurrence__highlights {
+            ul {
+                list-style: initial;
+                padding: 0 1.5rem;
+            }
+
+            p {
+                margin-left: 0;
+                margin-right: 0;
+            }
+
+            .content {
+
+                &__combat--start, &__combat--end {
+                    border-color: $color-dnd-red;
+                    background-color: $color-dnd-red;
+                    position: relative;
+                    overflow: visible;
+
+                    &::after {
+                        background-color: white;
+                        color: $color-dnd-grey;
+                        width: 100px;
+                        margin-left: -50px;
+                        left: 50%;
+                        top: -11px;
+                        line-height: 18px;
+                        position: relative;
+                        padding: 5px;
+                    }
+                }
+
+                &__combat--start::after {
+                    content: "Combat Start";
+                }
+
+                &__combat--end::after {
+                    content: "Combat End";
+                }
+            }
+        }
+
+
     }
 </style>

@@ -88,6 +88,7 @@
                 dm: this.dungeonMasterId,
                 title: this.model.title,
                 content: this.model.content,
+                occurrenceType: 'History',
             };
 
             return graphqlOperation(createHistoryOccurrence, {input});
