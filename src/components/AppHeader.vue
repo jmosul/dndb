@@ -37,34 +37,9 @@
                     NPCs
                 </b-navbar-item>
 
-                <b-navbar-dropdown label="Players" v-if="dungeonMasterId">
-                    <amplify-connect :query="listPlayersQuery">
-                        <template slot-scope="{loading, data, errors}">
-                            <div v-if="loading">Loading...</div>
-                            <div v-else-if="errors.length > 0">Error</div>
-                            <div v-else-if="data">
-                                <b-navbar-item
-                                    v-for="player in data.listPlayerCharacters.items"
-                                    :key="player.id"
-                                    :to="{name: 'player', params: {id: player.id}}"
-                                    tag="router-link"
-                                >
-                                    {{npc.name}}
-                                </b-navbar-item>
-                            </div>
-                        </template>
-                    </amplify-connect>
-                </b-navbar-dropdown>
-
                 <b-navbar-dropdown label="Create" v-if="dungeonMasterId">
                     <b-navbar-item tag="router-link" to="/create/npc">
                         NPC
-                    </b-navbar-item>
-                    <b-navbar-item tag="router-link" to="/create/player">
-                        Player
-                    </b-navbar-item>
-                    <b-navbar-item tag="router-link" to="/create/encounter">
-                        Encounter
                     </b-navbar-item>
                     <b-navbar-item tag="router-link" to="/create/campaign">
                         Campaign
