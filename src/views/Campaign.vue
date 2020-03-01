@@ -17,32 +17,22 @@
                             <h4 class="panel-heading">
                                 Sessions
                             </h4>
-                            <a
+                            <router-link
                                 class="panel-block logs__log"
-                                v-for="log in logs"
-                                :key="log.id"
-                                @click="openLog(log)"
+                                v-for="occurrence in occurrences"
+                                :key="occurrence.id"
+                                :to="{name: 'campaignOccurrence', params: {id: occurrence.id}}"
                             >
-                                <small class="has-text-grey-lighter"> {{log.date}}</small>
-                                <strong>&nbsp;{{log.title}}</strong>
-                            </a>
+                                <small class="has-text-grey-lighter"> {{occurrence.log.date}}</small>
+                                <strong>&nbsp;{{occurrence.title}}</strong>
+                            </router-link>
                         </div>
                     </div>
                 </div>
 
-                <article class="column is-two-thirds campaign_log">
-                    <div class="hero is-info">
-                        <div class="hero-body">
-                            <h2 class="title">{{logTitle}}</h2>
-                            <h3 class="subtitle">
-                                <dale-reckoning :date="logDaleReckoning"></dale-reckoning>
-                            </h3>
-                            <div class="occurrence__highlights" v-html="logHighlights"></div>
-                        </div>
-                    </div>
-
-                    <div class="occurrence__content" v-html="logContent"></div>
-                </article>
+                <section class="column is-two-thirds">
+                    <router-view></router-view>
+                </section>
             </div>
         </div>
     </div>
@@ -52,10 +42,11 @@
     import Vue from 'vue';
     import Component from 'vue-class-component';
     import {Getter} from 'vuex-class';
-    import {listCampaignLogs} from '../graphql/queries';
+    import {listOccurrences} from '../graphql/queries';
     import {API} from 'aws-amplify';
-    import logParser from '../LogParser';
     import DaleReckoning from '../components/DaleReckoning';
+    import sortOccurrences from '../methods/sortOccurrences';
+    import {Watch} from 'vue-property-decorator';
 
     @Component({
         components: {DaleReckoning},
@@ -65,57 +56,53 @@
         @Getter('campaign/name') name;
         @Getter('campaign/image') image;
 
-        logs = [];
-
-        logId = '';
-        logTitle = '';
-        logDaleReckoning = '';
-        logHighlights = '';
-        logContent = '';
-
-        mounted() {
-            this.loadLogs();
-        }
+        occurrences = [];
 
         get imageStyle() {
             return this.image ? {'background-image': `url(/images/campaigns/${this.image})`} : {};
         }
 
-        sortCampaigns(logs) {
-            return [...logs].sort((logA, logB) => {
-                if (logA.date > logB.date) {
-                    return -1;
-                } else if (logA.date < logB.date) {
-                    return 1;
-                }
-
-                return 0;
-            });
+        mounted() {
+            this.loadOccurrences();
         }
 
-        async loadLogs() {
+        async loadOccurrences() {
             return API.graphql({
-                query: listCampaignLogs,
+                query: listOccurrences,
                 variables: {
-                    campaignId: this.id,
+                    filter: {
+                        type: {eq: 'Log'},
+                    },
                 },
                 authMode: 'AWS_IAM',
             }).then(
                 (response) => {
-                    this.logs = this.sortCampaigns(response.data.listCampaignLogs.items);
+                    this.occurrences = sortOccurrences(response.data.listOccurrences.items);
 
-                    this.openLog(this.logs[0]);
+
+                    if (!this.$route.params.id) {
+                        this.openLatest();
+                    }
                 }
             );
         }
 
-        openLog(log) {
-            this.logId = log.id;
-            this.logTitle = log.title;
-            this.logDaleReckoning = log.dale_reckoning;
+        @Watch('$route.params.id')
+        handleOccurrenceChange(id) {
+            if (!id) {
+                this.openLatest();
+            }
+        }
 
-            this.logContent = logParser(log.content);
-            this.logHighlights = logParser(log.highlights);
+        openLatest() {
+            const latestIndex = this.occurrences.length - 1;
+
+            this.$router.push({
+                name: 'campaignOccurrence',
+                params: {
+                    id: this.occurrences[latestIndex].id,
+                },
+            });
         }
     }
 </script>
