@@ -12,11 +12,14 @@
                         <div class="card-image">
                             <div class="image is-4by3" v-bind:style="imageStyle"></div>
                         </div>
+                    </div>
 
+                    <h4 class="side__heading">
+                        Sessions
+                    </h4>
+
+                    <div class="card">
                         <div class="panel">
-                            <h4 class="panel-heading">
-                                Sessions
-                            </h4>
                             <router-link
                                 class="panel-block logs__log"
                                 v-for="occurrence in occurrences"
@@ -28,8 +31,16 @@
                             </router-link>
                         </div>
                     </div>
-                </div>
 
+                    <h4 class="side__heading">Characters</h4>
+                    <character-card
+                        v-for="partyMember in partyMembers"
+                        :key="partyMember.id"
+                        :character="partyMember.character"
+                        class="character"
+                        collapseable
+                    ></character-card>
+                </div>
                 <section class="column is-two-thirds">
                     <router-view></router-view>
                 </section>
@@ -42,14 +53,15 @@
     import Vue from 'vue';
     import Component from 'vue-class-component';
     import {Getter} from 'vuex-class';
-    import {listOccurrences} from '../graphql/queries';
+    import {listOccurrences, listPartyMembers} from '../graphql/queries';
     import {API} from 'aws-amplify';
     import DaleReckoning from '../components/DaleReckoning';
-    import sortOccurrences from '../methods/sortOccurrences';
+    import {sortOccurrences, sortBySubDoc} from '../methods';
     import {Watch} from 'vue-property-decorator';
+    import CharacterCard from '../components/CharacterCard';
 
     @Component({
-        components: {DaleReckoning},
+        components: {CharacterCard, DaleReckoning},
     })
     export default class Campaign extends Vue {
         @Getter('campaign/id') id;
@@ -57,6 +69,7 @@
         @Getter('campaign/image') image;
 
         occurrences = [];
+        partyMembers = [];
 
         get imageStyle() {
             return this.image ? {'background-image': `url(/images/campaigns/${this.image})`} : {};
@@ -64,6 +77,7 @@
 
         mounted() {
             this.loadOccurrences();
+            this.loadPartyMembers();
         }
 
         async loadOccurrences() {
@@ -71,6 +85,7 @@
                 query: listOccurrences,
                 variables: {
                     filter: {
+                        occurrenceCampaignId: {eq: this.id},
                         type: {eq: 'Log'},
                     },
                 },
@@ -79,30 +94,37 @@
                 (response) => {
                     this.occurrences = sortOccurrences(response.data.listOccurrences.items);
 
-
-                    if (!this.$route.params.id) {
-                        this.openLatest();
-                    }
+                    this.openLatest();
                 }
             );
         }
 
-        @Watch('$route.params.id')
-        handleOccurrenceChange(id) {
-            if (!id) {
-                this.openLatest();
-            }
+        async loadPartyMembers() {
+            return API.graphql({
+                query: listPartyMembers,
+                variables: {
+                    filter: {
+                        campaignId: {eq: this.id},
+                    },
+                },
+                authMode: 'AWS_IAM',
+            }).then(
+                ({data}) => this.partyMembers = sortBySubDoc(data.listPartyMembers.items, 'character', 'name')
+            );
         }
 
+        @Watch('$route.params.id')
         openLatest() {
-            const latestIndex = this.occurrences.length - 1;
+            if (!this.$route.params.id) {
+                const latestIndex = this.occurrences.length - 1;
 
-            this.$router.push({
-                name: 'campaignOccurrence',
-                params: {
-                    id: this.occurrences[latestIndex].id,
-                },
-            });
+                this.$router.push({
+                    name: 'campaignOccurrence',
+                    params: {
+                        id: this.occurrences[latestIndex].id,
+                    },
+                });
+            }
         }
     }
 </script>
@@ -115,8 +137,20 @@
             padding-top: 1rem;
         }
 
+        .side__heading {
+            font-family: $font-goblin-family;
+            font-size: 1.25em;
+            margin-bottom: 10px;
+        }
+
         .card {
             margin-bottom: 1rem;
+
+            &.character {
+                .card-content {
+                    padding: 15px;
+                }
+            }
 
             .card-image .image {
                 background-position: center;

@@ -33,6 +33,10 @@
     }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+    .media-content {
+        .title {
+            margin-top: 0;
+        }
+    }
 </style>

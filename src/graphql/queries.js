@@ -223,6 +223,7 @@ export const getOccurrence = /* GraphQL */ `
       public
       title
       type
+      occurrenceCampaignId
       campaign {
         id
         dm
@@ -264,6 +265,7 @@ export const listOccurrences = /* GraphQL */ `
         public
         title
         type
+        occurrenceCampaignId
         campaign {
           id
           dm

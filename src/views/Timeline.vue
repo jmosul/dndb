@@ -75,7 +75,7 @@
     import {listOccurrences} from '../graphql/queries';
     import {Getter} from 'vuex-class';
     import DaleReckoning from '../components/DaleReckoning';
-    import sortOccurrences from '../methods/sortOccurrences';
+    import sortOccurrences from '../methods';
 
     @Component({
         components: {DaleReckoning},

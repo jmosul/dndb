@@ -58,8 +58,6 @@
                 authMode,
             }).then(
                 (response) => {
-                    console.log('res', response);
-
                     this.occurrence = response.data.getOccurrence;
                     this.hasLoaded = true;
                 }

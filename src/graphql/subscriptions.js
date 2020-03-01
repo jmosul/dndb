@@ -298,6 +298,7 @@ export const onCreateOccurrence = /* GraphQL */ `
       public
       title
       type
+      occurrenceCampaignId
       campaign {
         id
         dm
@@ -334,6 +335,7 @@ export const onUpdateOccurrence = /* GraphQL */ `
       public
       title
       type
+      occurrenceCampaignId
       campaign {
         id
         dm
@@ -370,6 +372,7 @@ export const onDeleteOccurrence = /* GraphQL */ `
       public
       title
       type
+      occurrenceCampaignId
       campaign {
         id
         dm

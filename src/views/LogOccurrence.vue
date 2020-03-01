@@ -25,8 +25,6 @@
         content = '';
 
         mounted() {
-            console.log('mount', this.occurrence);
-
             this.highlights = this.logParser(this.occurrence.log.highlights);
             this.content = this.logParser(this.occurrence.log.content);
         }

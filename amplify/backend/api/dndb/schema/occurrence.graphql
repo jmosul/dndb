@@ -26,7 +26,8 @@ type Occurrence
     public: Boolean!
     title: String!
     type: OccurrenceType!
-    campaign: Campaign @connection
+    occurrenceCampaignId: ID!
+    campaign: Campaign @connection(fields: ["occurrenceCampaignId"])
     history: HistoryOccurrence @connection
     log: CampaignLog @connection
 }
