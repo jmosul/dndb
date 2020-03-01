@@ -86,6 +86,60 @@ export const listNonPlayerCharacters = /* GraphQL */ `
     }
   }
 `;
+export const getPartyMember = /* GraphQL */ `
+  query GetPartyMember($id: ID!) {
+    getPartyMember(id: $id) {
+      id
+      dm
+      status
+      campaignId
+      player {
+        id
+        dm
+        name
+      }
+      character {
+        id
+        dm
+        name
+        image
+        sheet {
+          id
+          dm
+          secrets
+        }
+      }
+    }
+  }
+`;
+export const listPartyMembers = /* GraphQL */ `
+  query ListPartyMembers(
+    $filter: ModelPartyMemberFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPartyMembers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        dm
+        status
+        campaignId
+        player {
+          id
+          dm
+          name
+        }
+        character {
+          id
+          dm
+          name
+          image
+        }
+      }
+      nextToken
+    }
+  }
+`;
 export const listCampaigns = /* GraphQL */ `
   query ListCampaigns(
     $filter: ModelCampaignFilterInput
@@ -98,6 +152,9 @@ export const listCampaigns = /* GraphQL */ `
         dm
         name
         image
+        partyMembers {
+          nextToken
+        }
       }
       nextToken
     }
@@ -110,6 +167,15 @@ export const getCampaign = /* GraphQL */ `
       dm
       name
       image
+      partyMembers {
+        items {
+          id
+          dm
+          status
+          campaignId
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -162,6 +228,9 @@ export const getOccurrence = /* GraphQL */ `
         dm
         name
         image
+        partyMembers {
+          nextToken
+        }
       }
       log {
         id
@@ -247,6 +316,121 @@ export const getHistoryOccurrence = /* GraphQL */ `
       id
       dm
       content
+    }
+  }
+`;
+export const listPlayers = /* GraphQL */ `
+  query ListPlayers(
+    $filter: ModelPlayerFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPlayers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        dm
+        name
+      }
+      nextToken
+    }
+  }
+`;
+export const getPlayer = /* GraphQL */ `
+  query GetPlayer($id: ID!) {
+    getPlayer(id: $id) {
+      id
+      dm
+      name
+    }
+  }
+`;
+export const listPlayerCharacters = /* GraphQL */ `
+  query ListPlayerCharacters(
+    $filter: ModelPlayerCharacterFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPlayerCharacters(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        dm
+        name
+        image
+        sheet {
+          id
+          dm
+          secrets
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const getPlayerCharacter = /* GraphQL */ `
+  query GetPlayerCharacter($id: ID!) {
+    getPlayerCharacter(id: $id) {
+      id
+      dm
+      name
+      image
+      sheet {
+        id
+        dm
+        abilities {
+          strength
+          dexterity
+          constitution
+          intelligence
+          wisdom
+          charisma
+        }
+        secrets
+      }
+    }
+  }
+`;
+export const listCharacterSheets = /* GraphQL */ `
+  query ListCharacterSheets(
+    $filter: ModelCharacterSheetFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listCharacterSheets(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        dm
+        abilities {
+          strength
+          dexterity
+          constitution
+          intelligence
+          wisdom
+          charisma
+        }
+        secrets
+      }
+      nextToken
+    }
+  }
+`;
+export const getCharacterSheet = /* GraphQL */ `
+  query GetCharacterSheet($id: ID!) {
+    getCharacterSheet(id: $id) {
+      id
+      dm
+      abilities {
+        strength
+        dexterity
+        constitution
+        intelligence
+        wisdom
+        charisma
+      }
+      secrets
     }
   }
 `;

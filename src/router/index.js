@@ -13,6 +13,10 @@ import CreateHistory from '../views/create/CreateHistory';
 import CreateNonPlayerCharacter from '../views/create/CreateNonPlayerCharacter';
 import Timeline from '../views/Timeline';
 import Occurrence from '../views/Occurrence';
+import ManagePlayers from '../views/create/ManagePlayers';
+import CreatePlayerCharacter from '../views/create/CreatePlayerCharacter';
+import PlayerCharacter from '../views/creations/PlayerCharacter';
+import ManagePlayer from '../components/ManagePlayer';
 
 Vue.use(VueRouter);
 
@@ -26,6 +30,14 @@ const routes = [
         path: '/campaign',
         name: 'campaign',
         component: Campaign,
+        children: [
+            {
+                path: ':id',
+                name: 'campaignOccurrence',
+                component: Occurrence,
+                meta: {},
+            },
+        ],
     },
     {
         path: '/characters',
@@ -45,6 +57,12 @@ const routes = [
         props: {
             id: '',
         },
+    },
+    {
+        path: '/player-characters/:id',
+        name: 'playerCharacter',
+        component: PlayerCharacter,
+        meta: {},
     },
     {
         path: '/identity',
@@ -85,6 +103,19 @@ const routes = [
         ],
     },
     {
+        path: '/players',
+        name: 'players',
+        component: ManagePlayers,
+        children: [
+            {
+                path: ':id',
+                name: 'managePlayer',
+                component: ManagePlayer,
+                meta: {},
+            },
+        ],
+    },
+    {
         path: '/create/npc',
         name: 'createNPC',
         component: CreateNonPlayerCharacter,
@@ -101,6 +132,11 @@ const routes = [
         path: '/create/history',
         name: 'createHistory',
         component: CreateHistory,
+    },
+    {
+        path: '/create/player-character',
+        name: 'createPlayerCharacter',
+        component: CreatePlayerCharacter,
     },
 ];
 

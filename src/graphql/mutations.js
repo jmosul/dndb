@@ -1,6 +1,93 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createPartyMember = /* GraphQL */ `
+  mutation CreatePartyMember(
+    $input: CreatePartyMemberInput!
+    $condition: ModelPartyMemberConditionInput
+  ) {
+    createPartyMember(input: $input, condition: $condition) {
+      id
+      dm
+      status
+      campaignId
+      player {
+        id
+        dm
+        name
+      }
+      character {
+        id
+        dm
+        name
+        image
+        sheet {
+          id
+          dm
+          secrets
+        }
+      }
+    }
+  }
+`;
+export const updatePartyMember = /* GraphQL */ `
+  mutation UpdatePartyMember(
+    $input: UpdatePartyMemberInput!
+    $condition: ModelPartyMemberConditionInput
+  ) {
+    updatePartyMember(input: $input, condition: $condition) {
+      id
+      dm
+      status
+      campaignId
+      player {
+        id
+        dm
+        name
+      }
+      character {
+        id
+        dm
+        name
+        image
+        sheet {
+          id
+          dm
+          secrets
+        }
+      }
+    }
+  }
+`;
+export const deletePartyMember = /* GraphQL */ `
+  mutation DeletePartyMember(
+    $input: DeletePartyMemberInput!
+    $condition: ModelPartyMemberConditionInput
+  ) {
+    deletePartyMember(input: $input, condition: $condition) {
+      id
+      dm
+      status
+      campaignId
+      player {
+        id
+        dm
+        name
+      }
+      character {
+        id
+        dm
+        name
+        image
+        sheet {
+          id
+          dm
+          secrets
+        }
+      }
+    }
+  }
+`;
 export const createCampaign = /* GraphQL */ `
   mutation CreateCampaign(
     $input: CreateCampaignInput!
@@ -11,6 +98,15 @@ export const createCampaign = /* GraphQL */ `
       dm
       name
       image
+      partyMembers {
+        items {
+          id
+          dm
+          status
+          campaignId
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -24,6 +120,15 @@ export const updateCampaign = /* GraphQL */ `
       dm
       name
       image
+      partyMembers {
+        items {
+          id
+          dm
+          status
+          campaignId
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -37,6 +142,15 @@ export const deleteCampaign = /* GraphQL */ `
       dm
       name
       image
+      partyMembers {
+        items {
+          id
+          dm
+          status
+          campaignId
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -228,6 +342,9 @@ export const createOccurrence = /* GraphQL */ `
         dm
         name
         image
+        partyMembers {
+          nextToken
+        }
       }
       log {
         id
@@ -264,6 +381,9 @@ export const updateOccurrence = /* GraphQL */ `
         dm
         name
         image
+        partyMembers {
+          nextToken
+        }
       }
       log {
         id
@@ -300,6 +420,9 @@ export const deleteOccurrence = /* GraphQL */ `
         dm
         name
         image
+        partyMembers {
+          nextToken
+        }
       }
       log {
         id
@@ -352,6 +475,180 @@ export const deleteHistoryOccurrence = /* GraphQL */ `
       id
       dm
       content
+    }
+  }
+`;
+export const createPlayer = /* GraphQL */ `
+  mutation CreatePlayer(
+    $input: CreatePlayerInput!
+    $condition: ModelPlayerConditionInput
+  ) {
+    createPlayer(input: $input, condition: $condition) {
+      id
+      dm
+      name
+    }
+  }
+`;
+export const updatePlayer = /* GraphQL */ `
+  mutation UpdatePlayer(
+    $input: UpdatePlayerInput!
+    $condition: ModelPlayerConditionInput
+  ) {
+    updatePlayer(input: $input, condition: $condition) {
+      id
+      dm
+      name
+    }
+  }
+`;
+export const deletePlayer = /* GraphQL */ `
+  mutation DeletePlayer(
+    $input: DeletePlayerInput!
+    $condition: ModelPlayerConditionInput
+  ) {
+    deletePlayer(input: $input, condition: $condition) {
+      id
+      dm
+      name
+    }
+  }
+`;
+export const createPlayerCharacter = /* GraphQL */ `
+  mutation CreatePlayerCharacter(
+    $input: CreatePlayerCharacterInput!
+    $condition: ModelPlayerCharacterConditionInput
+  ) {
+    createPlayerCharacter(input: $input, condition: $condition) {
+      id
+      dm
+      name
+      image
+      sheet {
+        id
+        dm
+        abilities {
+          strength
+          dexterity
+          constitution
+          intelligence
+          wisdom
+          charisma
+        }
+        secrets
+      }
+    }
+  }
+`;
+export const updatePlayerCharacter = /* GraphQL */ `
+  mutation UpdatePlayerCharacter(
+    $input: UpdatePlayerCharacterInput!
+    $condition: ModelPlayerCharacterConditionInput
+  ) {
+    updatePlayerCharacter(input: $input, condition: $condition) {
+      id
+      dm
+      name
+      image
+      sheet {
+        id
+        dm
+        abilities {
+          strength
+          dexterity
+          constitution
+          intelligence
+          wisdom
+          charisma
+        }
+        secrets
+      }
+    }
+  }
+`;
+export const deletePlayerCharacter = /* GraphQL */ `
+  mutation DeletePlayerCharacter(
+    $input: DeletePlayerCharacterInput!
+    $condition: ModelPlayerCharacterConditionInput
+  ) {
+    deletePlayerCharacter(input: $input, condition: $condition) {
+      id
+      dm
+      name
+      image
+      sheet {
+        id
+        dm
+        abilities {
+          strength
+          dexterity
+          constitution
+          intelligence
+          wisdom
+          charisma
+        }
+        secrets
+      }
+    }
+  }
+`;
+export const createCharacterSheet = /* GraphQL */ `
+  mutation CreateCharacterSheet(
+    $input: CreateCharacterSheetInput!
+    $condition: ModelCharacterSheetConditionInput
+  ) {
+    createCharacterSheet(input: $input, condition: $condition) {
+      id
+      dm
+      abilities {
+        strength
+        dexterity
+        constitution
+        intelligence
+        wisdom
+        charisma
+      }
+      secrets
+    }
+  }
+`;
+export const updateCharacterSheet = /* GraphQL */ `
+  mutation UpdateCharacterSheet(
+    $input: UpdateCharacterSheetInput!
+    $condition: ModelCharacterSheetConditionInput
+  ) {
+    updateCharacterSheet(input: $input, condition: $condition) {
+      id
+      dm
+      abilities {
+        strength
+        dexterity
+        constitution
+        intelligence
+        wisdom
+        charisma
+      }
+      secrets
+    }
+  }
+`;
+export const deleteCharacterSheet = /* GraphQL */ `
+  mutation DeleteCharacterSheet(
+    $input: DeleteCharacterSheetInput!
+    $condition: ModelCharacterSheetConditionInput
+  ) {
+    deleteCharacterSheet(input: $input, condition: $condition) {
+      id
+      dm
+      abilities {
+        strength
+        dexterity
+        constitution
+        intelligence
+        wisdom
+        charisma
+      }
+      secrets
     }
   }
 `;

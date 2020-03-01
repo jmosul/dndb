@@ -37,15 +37,18 @@
                     NPCs
                 </b-navbar-item>
 
-                <b-navbar-dropdown label="Create" v-if="dungeonMasterId">
-                    <b-navbar-item tag="router-link" to="/create/npc">
-                        NPC
+                <b-navbar-dropdown label="Manage and Create" v-if="dungeonMasterId">
+                    <b-navbar-item
+                        v-for="creation in creations"
+                        :key="creation.route"
+                        tag="router-link"
+                        :to="{name: creation.route}"
+                    >
+                        {{creation.label}}
                     </b-navbar-item>
-                    <b-navbar-item tag="router-link" to="/create/campaign">
-                        Campaign
-                    </b-navbar-item>
-                    <b-navbar-item tag="router-link" to="/create/history">
-                        History
+
+                    <b-navbar-item tag="router-link" :to="{name: 'players'}">
+                        Players
                     </b-navbar-item>
                 </b-navbar-dropdown>
             </template>
@@ -82,6 +85,13 @@
         @Getter('campaign/id') campaignId;
         @Getter('campaign/name') campaignName;
         @Action('campaign/setCampaign') setCampaign;
+
+        creations = [
+            {route: 'createNPC', label: 'NPC'},
+            {route: 'createCampaign', label: 'Campaign'},
+            {route: 'createHistory', label: 'History'},
+            {route: 'createPlayerCharacter', label: 'Player Character'},
+        ];
 
         get listCharactersQuery() {
             return this.$Amplify.graphqlOperation(listNonPlayerCharacters);
