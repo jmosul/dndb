@@ -75,12 +75,15 @@
     import {listOccurrences} from '../graphql/queries';
     import {Getter} from 'vuex-class';
     import DaleReckoning from '../components/DaleReckoning';
+    import sortOccurrences from '../methods';
 
     @Component({
         components: {DaleReckoning},
     })
     export default class Timeline extends Vue {
         @Getter('dungeonMaster/id') dungeonMasterId;
+
+        sortTimeline = sortOccurrences;
 
         loading = true;
         timeline = [];
@@ -117,18 +120,6 @@
                     this.loading = false;
                 }
             );
-        }
-
-        sortTimeline(occurrences) {
-            return [...occurrences].sort((occurrenceA, occurrenceB) => {
-                if (occurrenceA.dale_reckoning > occurrenceB.dale_reckoning) {
-                    return 1;
-                } else if (occurrenceA.dale_reckoning < occurrenceB.dale_reckoning) {
-                    return -1;
-                }
-
-                return 0;
-            });
         }
     }
 </script>

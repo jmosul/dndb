@@ -1,6 +1,5 @@
-type Campaign
+type Player
 @model
-@aws_iam
 @auth(
     rules: [
         {
@@ -16,9 +15,7 @@ type Campaign
     ]
 )
 {
-    id: ID!
+    id: ID!,
     dm: String!
     name: String!
-    image: String
-    partyMembers: [PartyMember] @connection(keyName: "byCampaign", fields: ["id"])
 }

@@ -1,6 +1,84 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreatePartyMember = /* GraphQL */ `
+  subscription OnCreatePartyMember($dm: String!) {
+    onCreatePartyMember(dm: $dm) {
+      id
+      dm
+      status
+      campaignId
+      player {
+        id
+        dm
+        name
+      }
+      character {
+        id
+        dm
+        name
+        image
+        sheet {
+          id
+          dm
+          secrets
+        }
+      }
+    }
+  }
+`;
+export const onUpdatePartyMember = /* GraphQL */ `
+  subscription OnUpdatePartyMember($dm: String!) {
+    onUpdatePartyMember(dm: $dm) {
+      id
+      dm
+      status
+      campaignId
+      player {
+        id
+        dm
+        name
+      }
+      character {
+        id
+        dm
+        name
+        image
+        sheet {
+          id
+          dm
+          secrets
+        }
+      }
+    }
+  }
+`;
+export const onDeletePartyMember = /* GraphQL */ `
+  subscription OnDeletePartyMember($dm: String!) {
+    onDeletePartyMember(dm: $dm) {
+      id
+      dm
+      status
+      campaignId
+      player {
+        id
+        dm
+        name
+      }
+      character {
+        id
+        dm
+        name
+        image
+        sheet {
+          id
+          dm
+          secrets
+        }
+      }
+    }
+  }
+`;
 export const onCreateCampaign = /* GraphQL */ `
   subscription OnCreateCampaign($dm: String!) {
     onCreateCampaign(dm: $dm) {
@@ -8,6 +86,15 @@ export const onCreateCampaign = /* GraphQL */ `
       dm
       name
       image
+      partyMembers {
+        items {
+          id
+          dm
+          status
+          campaignId
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -18,6 +105,15 @@ export const onUpdateCampaign = /* GraphQL */ `
       dm
       name
       image
+      partyMembers {
+        items {
+          id
+          dm
+          status
+          campaignId
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -28,6 +124,15 @@ export const onDeleteCampaign = /* GraphQL */ `
       dm
       name
       image
+      partyMembers {
+        items {
+          id
+          dm
+          status
+          campaignId
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -193,11 +298,15 @@ export const onCreateOccurrence = /* GraphQL */ `
       public
       title
       type
+      occurrenceCampaignId
       campaign {
         id
         dm
         name
         image
+        partyMembers {
+          nextToken
+        }
       }
       log {
         id
@@ -226,11 +335,15 @@ export const onUpdateOccurrence = /* GraphQL */ `
       public
       title
       type
+      occurrenceCampaignId
       campaign {
         id
         dm
         name
         image
+        partyMembers {
+          nextToken
+        }
       }
       log {
         id
@@ -259,11 +372,15 @@ export const onDeleteOccurrence = /* GraphQL */ `
       public
       title
       type
+      occurrenceCampaignId
       campaign {
         id
         dm
         name
         image
+        partyMembers {
+          nextToken
+        }
       }
       log {
         id
@@ -307,6 +424,153 @@ export const onDeleteHistoryOccurrence = /* GraphQL */ `
       id
       dm
       content
+    }
+  }
+`;
+export const onCreatePlayer = /* GraphQL */ `
+  subscription OnCreatePlayer($dm: String!) {
+    onCreatePlayer(dm: $dm) {
+      id
+      dm
+      name
+    }
+  }
+`;
+export const onUpdatePlayer = /* GraphQL */ `
+  subscription OnUpdatePlayer($dm: String!) {
+    onUpdatePlayer(dm: $dm) {
+      id
+      dm
+      name
+    }
+  }
+`;
+export const onDeletePlayer = /* GraphQL */ `
+  subscription OnDeletePlayer($dm: String!) {
+    onDeletePlayer(dm: $dm) {
+      id
+      dm
+      name
+    }
+  }
+`;
+export const onCreatePlayerCharacter = /* GraphQL */ `
+  subscription OnCreatePlayerCharacter($dm: String!) {
+    onCreatePlayerCharacter(dm: $dm) {
+      id
+      dm
+      name
+      image
+      sheet {
+        id
+        dm
+        abilities {
+          strength
+          dexterity
+          constitution
+          intelligence
+          wisdom
+          charisma
+        }
+        secrets
+      }
+    }
+  }
+`;
+export const onUpdatePlayerCharacter = /* GraphQL */ `
+  subscription OnUpdatePlayerCharacter($dm: String!) {
+    onUpdatePlayerCharacter(dm: $dm) {
+      id
+      dm
+      name
+      image
+      sheet {
+        id
+        dm
+        abilities {
+          strength
+          dexterity
+          constitution
+          intelligence
+          wisdom
+          charisma
+        }
+        secrets
+      }
+    }
+  }
+`;
+export const onDeletePlayerCharacter = /* GraphQL */ `
+  subscription OnDeletePlayerCharacter($dm: String!) {
+    onDeletePlayerCharacter(dm: $dm) {
+      id
+      dm
+      name
+      image
+      sheet {
+        id
+        dm
+        abilities {
+          strength
+          dexterity
+          constitution
+          intelligence
+          wisdom
+          charisma
+        }
+        secrets
+      }
+    }
+  }
+`;
+export const onCreateCharacterSheet = /* GraphQL */ `
+  subscription OnCreateCharacterSheet($dm: String!) {
+    onCreateCharacterSheet(dm: $dm) {
+      id
+      dm
+      abilities {
+        strength
+        dexterity
+        constitution
+        intelligence
+        wisdom
+        charisma
+      }
+      secrets
+    }
+  }
+`;
+export const onUpdateCharacterSheet = /* GraphQL */ `
+  subscription OnUpdateCharacterSheet($dm: String!) {
+    onUpdateCharacterSheet(dm: $dm) {
+      id
+      dm
+      abilities {
+        strength
+        dexterity
+        constitution
+        intelligence
+        wisdom
+        charisma
+      }
+      secrets
+    }
+  }
+`;
+export const onDeleteCharacterSheet = /* GraphQL */ `
+  subscription OnDeleteCharacterSheet($dm: String!) {
+    onDeleteCharacterSheet(dm: $dm) {
+      id
+      dm
+      abilities {
+        strength
+        dexterity
+        constitution
+        intelligence
+        wisdom
+        charisma
+      }
+      secrets
     }
   }
 `;

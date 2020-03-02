@@ -1,9 +1,4 @@
-enum OccurrenceType {
-    History,
-    Log,
-}
-
-type Occurrence
+type PlayerCharacter
 @model
 @auth(
     rules: [
@@ -20,19 +15,14 @@ type Occurrence
     ]
 )
 {
-    id: ID!
+    id: ID!,
     dm: String!
-    dale_reckoning: String!
-    public: Boolean!
-    title: String!
-    type: OccurrenceType!
-    occurrenceCampaignId: ID!
-    campaign: Campaign @connection(fields: ["occurrenceCampaignId"])
-    history: HistoryOccurrence @connection
-    log: CampaignLog @connection
+    name: String!
+    image: String
+    sheet: CharacterSheet @connection
 }
 
-type HistoryOccurrence
+type CharacterSheet
 @model
 @auth(
     rules: [
@@ -49,7 +39,17 @@ type HistoryOccurrence
     ]
 )
 {
-    id: ID!
+    id: ID!,
     dm: String!
-    content: String!
+    abilities: Abilities
+    secrets: String @auth(rules:[{allow: owner, ownerField: "dm"}])
+}
+
+type Abilities {
+    strength: Int,
+    dexterity: Int,
+    constitution: Int,
+    intelligence: Int,
+    wisdom: Int,
+    charisma: Int,
 }

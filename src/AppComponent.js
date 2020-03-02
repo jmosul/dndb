@@ -13,4 +13,8 @@ export default class AppComponent extends Vue {
             duration: 2500,
         });
     }
+
+    showGraphQlError(errorResponse) {
+        this.showMessage(errorResponse.errors[0].message);
+    }
 }

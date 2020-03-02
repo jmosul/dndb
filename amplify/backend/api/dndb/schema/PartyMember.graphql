@@ -1,6 +1,11 @@
-type Campaign
+enum PartyMemberStatus {
+    Active,
+    Guest,
+    Letf,
+}
+
+type PartyMember
 @model
-@aws_iam
 @auth(
     rules: [
         {
@@ -15,10 +20,12 @@ type Campaign
         }
     ]
 )
+@key(name: "byCampaign", fields: ["campaignId"])
 {
-    id: ID!
+    id: ID!,
     dm: String!
-    name: String!
-    image: String
-    partyMembers: [PartyMember] @connection(keyName: "byCampaign", fields: ["id"])
+    status: PartyMemberStatus!
+    campaignId: ID!
+    character: PlayerCharacter! @connection
+    player: Player! @connection
 }
