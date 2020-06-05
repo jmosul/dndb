@@ -1,4 +1,4 @@
-import AppComponent from '../AppComponent';
+import AppComponent from './AppComponent';
 import {API} from 'aws-amplify';
 import * as queries from '../graphql/queries';
 import {Watch} from 'vue-property-decorator';
