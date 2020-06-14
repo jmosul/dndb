@@ -63,7 +63,10 @@
 
                 case 2:
                 case 22:
-                    return `${day}st`;
+                    return `${day}nd`;
+
+                case 3:
+                    return `${day}rd`;
             }
 
             return `${day}th`;

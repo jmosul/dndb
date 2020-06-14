@@ -1,17 +1,17 @@
 {
-    "projectName": "dndb2",
-    "version": "3.0",
-    "frontend": "javascript",
-    "javascript": {
-        "framework": "vue",
-        "config": {
-            "SourceDir": "src",
-            "DistributionDir": "dist",
-            "BuildCommand": "npm.cmd run-script build",
-            "StartCommand": "npm.cmd run-script serve"
-        }
-    },
-    "providers": [
-        "awscloudformation"
-    ]
+  "projectName": "dndb",
+  "version": "3.0",
+  "frontend": "javascript",
+  "javascript": {
+    "framework": "vue",
+    "config": {
+      "SourceDir": "src",
+      "DistributionDir": "dist",
+      "BuildCommand": "npm run-script build",
+      "StartCommand": "npm run-script serve"
+    }
+  },
+  "providers": [
+    "awscloudformation"
+  ]
 }

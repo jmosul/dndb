@@ -1,6 +1,9 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '../views/Home.vue';
+import store from '../stores';
+import views from '../views';
+import WorldAdmin from '../views/world/admin/WorldAdmin';
+import worldAdmin from './worldAdmin';
 
 Vue.use(VueRouter);
 
@@ -8,7 +11,42 @@ const routes = [
     {
         path: '/',
         name: 'home',
-        component: Home,
+        component: views.Home,
+        meta: {
+            isBase: true,
+        },
+    },
+    {
+        path: '/identity',
+        name: 'identity',
+        component: views.Identity,
+        meta: {
+            isBase: true,
+        },
+    },
+    {
+        path: '/:world',
+        name: 'world',
+        component: views.World,
+        children: [
+            {
+                path: '',
+                name: 'world.timeline',
+                component: views.WorldTimeline,
+                meta: {
+                    title: 'Timeline',
+                },
+            },
+            {
+                path: 'admin',
+                name: 'world.admin',
+                component: WorldAdmin,
+                meta: {
+                    title: 'Admin',
+                },
+                children: worldAdmin,
+            },
+        ],
     },
 ];
 
@@ -17,37 +55,40 @@ const router = new VueRouter({
     base: process.env.BASE_URL,
     routes,
 });
-//
-// const setDefaultCampaign = () => {
-//     if (!store.getters['campaign/id']) {
-//         const campaigns = store.getters['campaigns/all'];
-//
-//         if (campaigns.length) {
-//             store.dispatch('campaign/setCampaign', campaigns[0]);
-//         }
-//     }
-// };
-//
-// router.beforeResolve((to, from, next) => {
-//     if (store.getters['campaigns/isEmpty']) {
-//         store.dispatch('campaigns/load').then(() => setDefaultCampaign());
-//     } else {
-//         setDefaultCampaign();
-//     }
-//
-//     if (to.path !== '*') {
-//         Vue.prototype.$Amplify.Auth.currentAuthenticatedUser()
-//             .then(data => {
-//                 store.commit('dungeonMaster/id', data.attributes.sub);
-//
-//                 next();
-//             })
-//             .catch((e) => {
-//                 to.meta.dmOnly ? next({path: '/identity'}) : next();
-//             });
-//     } else {
-//         next();
-//     }
-// });
+
+const getCurrentWorld = async({meta, params}) => {
+    if (store.getters['worlds/isEmpty']) {
+        await store.dispatch('worlds/load');
+    }
+
+    if (meta.isBase) {
+        store.commit('worlds/currentId', undefined);
+
+        return undefined;
+    }
+
+    // set from slug
+    if (params.world) {
+        store.dispatch('worlds/setCurrentBySlug', params.world);
+    }
+
+    return store.getters['world/current'];
+};
+
+router.beforeResolve((to, from, next) => {
+    if (to.path !== '*') {
+        Vue.prototype.$Amplify.Auth.currentAuthenticatedUser()
+            .then(data => {
+                store.dispatch('user/setCurrentUser', data.attributes);
+
+                getCurrentWorld(to).then(() => next());
+            })
+            .catch((e) => {
+                getCurrentWorld(to).then(() => to.meta.dmOnly ? next({path: '/identity'}) : next());
+            });
+    } else {
+        next();
+    }
+});
 
 export default router;
