@@ -19,6 +19,7 @@ const listWorlds = `
         id
         title
         slug
+        content
         createdAt
         updatedAt
       }

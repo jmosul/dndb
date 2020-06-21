@@ -7,12 +7,11 @@
                 </b-navbar-item>
             </template>
             <template slot="start" v-if="world">
-                <b-navbar-item tag="router-link" :to="{name: 'world.timeline', params: {world: world.slug}}">
-                    <span class="nav__world">{{world.title}}:</span>
+                <b-navbar-item tag="router-link" :to="{name: 'world.home', params: {world: world.slug}}">
+                    <span class="nav__world">{{world.title}}</span>
                 </b-navbar-item>
             </template>
             <template slot="end">
-                End
             </template>
             <template slot="end" v-if="!currentUserId">
                 <b-navbar-item tag="router-link" to="/identity">
@@ -53,6 +52,7 @@
         position: fixed;
         width: 100%;
         z-index: 9;
+        max-height: $header-height;
 
         nav {
             .nav__world {

@@ -28,9 +28,18 @@ const routes = [
         path: '/:world',
         name: 'world',
         component: views.World,
+        meta: {
+            menu: 'world',
+        },
         children: [
             {
                 path: '',
+                name: 'world.home',
+                component: views.WorldHome,
+                meta: {},
+            },
+            {
+                path: 'timeline',
                 name: 'world.timeline',
                 component: views.WorldTimeline,
                 meta: {
@@ -42,6 +51,7 @@ const routes = [
                 name: 'world.admin',
                 component: WorldAdmin,
                 meta: {
+                    menu: 'admin',
                     title: 'Admin',
                 },
                 children: worldAdmin,

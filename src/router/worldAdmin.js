@@ -1,13 +1,22 @@
 import OccurrenceEditor from '../views/world/admin/OccurrenceEditor';
 import OccurrenceList from '../views/world/admin/OccurrenceList';
+import WorldEditor from '../views/world/admin/WorldEditor';
 
 export default [
+    {
+        path: 'world',
+        name: 'world.admin.world.update',
+        component: WorldEditor,
+        meta: {
+            title: 'Update World',
+        },
+    },
     {
         path: 'occurrences',
         name: 'world.admin.occurrences',
         component: OccurrenceList,
         meta: {
-            title: 'List Occurrences',
+            title: 'Occurrences',
         },
     },
     {
@@ -20,10 +29,10 @@ export default [
     },
     {
         path: 'occurrences/:id',
-        name: 'world.admin.occurrences.edit',
+        name: 'world.admin.occurrences.update',
         component: OccurrenceEditor,
         meta: {
-            title: 'Edit Occurrence',
+            title: 'Update Occurrence',
         },
     },
 ];

@@ -6,7 +6,7 @@
             Databases
         </h1>
         <div class="worlds columns is-centered">
-            <router-link :to="{name: 'world.timeline', params: {world: world.slug}}" v-for="world in worlds" :key="world.id" class="column is-one-fifth-desktop">
+            <router-link :to="{name: 'world.home', params: {world: world.slug}}" v-for="world in worlds" :key="world.id" class="column is-one-fifth-desktop">
                 <div class="card">
                     <card-image :image="world.slug"></card-image>
                     <div class="content">

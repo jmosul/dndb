@@ -3,15 +3,11 @@
         <div class="hero is-primary">
             <div class="hero-body">
                 <h1 class="title">
-                    {{world.title}}
                     {{viewTitle}}
                 </h1>
             </div>
         </div>
-        <div class="columns">
-            <div class="column is-one-quarter"></div>
-            <router-view class="column is-three-quarters"></router-view>
-        </div>
+        <router-view class="px-4 py-4"></router-view>
     </div>
 </template>
 
@@ -19,22 +15,29 @@
     import AppComponent from '../components/AppComponent';
     import Component from 'vue-class-component';
     import {Getter} from 'vuex-class';
+    import CardImage from '../components/CardImage';
+    import WorldMenu from '../components/WorldMenu';
+    import router from '../router';
 
-    @Component({})
+    @Component({
+        components: {WorldMenu, CardImage},
+    })
     export default class World extends AppComponent {
         @Getter('worlds/current') world;
 
         viewTitle = '';
-        //
-        // mounted() {
-        //     router.on((to) => {
-        //         console.log('to', to);
-        //         this.viewTitle = to.meta && to.meta.viewTitle;
-        //     });
-        // }
+
+        created() {
+            this.updateView();
+
+            router.afterEach(() => this.updateView());
+        }
+
+        updateView() {
+            this.viewTitle = (this.$route.meta && this.$route.meta.title) || this.world.title;
+        }
     }
 </script>
 
 <style scoped lang="scss">
-
 </style>

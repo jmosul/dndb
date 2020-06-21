@@ -1,5 +1,5 @@
 <template>
-    <div class="card-image">
+    <div :class="typeClass" class="image-card">
         <div class="image" :style="imageStyle" :class="sizeClass"></div>
     </div>
 </template>
@@ -12,6 +12,7 @@
     @Component()
     export default class CardImage extends Vue {
         @Prop(String) image;
+        @Prop({default: 'card'}) type;
         @Prop({default: '4by3'}) size;
 
         get imageStyle() {
@@ -25,13 +26,34 @@
                 `is-${this.size}`,
             ];
         }
+
+        get typeClass() {
+            switch (this.type) {
+                case 'fullWidth':
+                    return '';
+
+                case 'panel':
+                    return 'panel-block';
+
+                case 'card':
+                default:
+                    return 'card-image';
+            }
+        }
     }
 </script>
 
 <style scoped lang="scss">
-    .card-image .image {
-        background-position: center;
-        background-size: cover;
-        background-repeat: no-repeat;
+    .image-card {
+        .image {
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            width: 100%;
+        }
+    }
+
+    .panel-block {
+        padding: 0;
     }
 </style>

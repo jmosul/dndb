@@ -8,13 +8,7 @@ export default class EditorComponent extends AppComponent {
     model = {};
     saving = false;
     loading = false;
-
-    /**
-     * @return {string}
-     */
-    get title() {
-        return this.$route.params.id ? `Edit ${this.modelName}` : `Create ${this.modelName}`;
-    }
+    action = 'create';
 
     /**
      * @return {Promise<{}>}
@@ -22,12 +16,19 @@ export default class EditorComponent extends AppComponent {
     async loadModel() {
         this.loading = true;
 
-        const id = this.$route.params.id;
+        const id = this.getId();
         let newModel;
 
         try {
             newModel = await API.graphql(graphqlOperation(this.getQuery(), {id}));
             newModel = newModel.data[this.getQueryName()];
+
+            delete newModel.world;
+            delete newModel.party;
+            delete newModel.character;
+            delete newModel.parties;
+            delete newModel.characters;
+            delete newModel.occurrences;
         }
         catch (e) {
             this.loading = false;
@@ -62,19 +63,26 @@ export default class EditorComponent extends AppComponent {
 
         this.showMessage(`${this.modelName} saved.`, 'is-success');
 
-        if (this.$route.name.indexOf('.create') > 0) {
-            const name = this.$route.name.replace('.create', '.edit');
+        if (this.action === 'create') {
+            const name = this.$route.name.replace('.create', '.update');
 
             this.$router.push({name, params: {id: newModel.id}});
         }
 
         this.saving = false;
+
+        return newModel;
     }
 
     mounted() {
-        if (this.$route.params.id) {
+        if (this.getId()) {
             this.loadModel();
+            this.action = 'update';
         }
+    }
+
+    getId() {
+        return this.$route.params.id;
     }
 
     /**
@@ -97,7 +105,7 @@ export default class EditorComponent extends AppComponent {
      * @return {string}
      */
     getMutationName() {
-        return `create${this.modelName}`;
+        return `${this.action}${this.modelName}`;
     }
 
     /**

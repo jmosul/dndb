@@ -1,6 +1,11 @@
 <template>
-    <main>
-        <h2 class="title">{{title}}</h2>
+    <section>
+        <div class="mb-4">
+            <router-link :to="{name: 'world.admin.occurrences'}" class="button">
+                <i class="fa fa-chevron-left"></i> Occurrences
+            </router-link>
+        </div>
+
         <form @submit.prevent="submit">
             <b-field label="Title" horizontal>
                 <b-input v-model="model.title"></b-input>
@@ -10,7 +15,7 @@
                 <b-input v-model="model.reckoning"></b-input>
             </b-field>
 
-            <b-field label="Type" horizontal>
+            <b-field label="Type" horizontal v-if="model.type">
                 <b-select v-model="model.type">
                     <option value="Session">Session</option>
                     <option value="PartyJoin">Party Join</option>
@@ -18,6 +23,17 @@
                     <option value="Death">Death</option>
                     <option value="Event">Event</option>
                 </b-select>
+            </b-field>
+
+            <b-field label="Status" horizontal v-if="model.status">
+                <b-select v-model="model.status">
+                    <option value="Private">Private</option>
+                    <option value="Public">Public</option>
+                </b-select>
+            </b-field>
+
+            <b-field label="Summary" horizontal>
+                <b-input type="textarea" v-model="model.summary"></b-input>
             </b-field>
 
             <b-field label="Content" horizontal>
@@ -35,7 +51,7 @@
                 </button>
             </b-field>
         </form>
-    </main>
+    </section>
 </template>
 
 <script>
@@ -50,6 +66,7 @@
         modelName = 'Occurrence';
 
         mounted() {
+            this.model.status = 'Private';
             this.model.type = 'Session';
 
             super.mounted();
@@ -59,12 +76,6 @@
             return Object.assign({
                 occurrenceWorldId: this.world.id,
             }, super.getMutationData());
-        }
-
-        async submit() {
-            const newOccurrence = await super.submit();
-
-            console.log(newOccurrence);
         }
     }
 </script>
