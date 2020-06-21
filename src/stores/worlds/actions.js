@@ -22,6 +22,14 @@ const listWorlds = `
         content
         createdAt
         updatedAt
+        parties {
+          items {
+            id
+            name
+            slug
+          }
+          nextToken
+        }
       }
     }
   }

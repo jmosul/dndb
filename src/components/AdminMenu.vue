@@ -10,6 +10,7 @@
     import {Getter} from 'vuex-class';
     import CardImage from './CardImage';
     import MenuSection from './MenuSection';
+    import adminRoutes from '../router/worldAdmin';
 
     @Component({
         components: {MenuSection, CardImage},
@@ -17,18 +18,19 @@
     export default class AdminMenu extends AppComponent {
         @Getter('worlds/current') world;
 
-        contentItems = [
-            {
-                icon: 'fa-globe',
-                name: 'world.admin.world.update',
-                label: 'World',
-            },
-            {
-                icon: 'fa-calendar',
-                name: 'world.admin.occurrences',
-                label: 'Occurrences',
-            },
-        ];
+        contentItems = [];
+
+        constructor() {
+            super();
+
+            this.contentItems = adminRoutes.filter(({meta}) => meta.icon)
+                .map((route) => ({
+                        name: route.name,
+                        icon: route.meta.icon,
+                        label: route.meta.title,
+                    })
+                );
+        }
     }
 </script>
 
