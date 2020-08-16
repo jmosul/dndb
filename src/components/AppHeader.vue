@@ -12,10 +12,11 @@
                 </b-navbar-item>
             </template>
             <template slot="end">
-            </template>
-            <template slot="end" v-if="!currentUserId">
-                <b-navbar-item tag="router-link" to="/identity">
+                <b-navbar-item tag="router-link" to="/identity" v-if="!currentUserId">
                     Sign In
+                </b-navbar-item>
+                <b-navbar-item tag="router-link" :to="{name: 'world.admin.world.update'}" v-if="currentUserId && world">
+                    Admin
                 </b-navbar-item>
             </template>
         </b-navbar>

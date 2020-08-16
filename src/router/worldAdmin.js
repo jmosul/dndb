@@ -1,38 +1,60 @@
-import OccurrenceEditor from '../views/world/admin/OccurrenceEditor';
-import OccurrenceList from '../views/world/admin/OccurrenceList';
-import WorldEditor from '../views/world/admin/WorldEditor';
+import components from '../views/world/admin';
+import pluralize from 'pluralize';
 
-export default [
+const resources = [
+    {name: 'occurrence', icon: 'fa-calendar'},
+    {name: 'character', icon: 'fa-user'},
+    {name: 'party', icon: 'fa-users'},
+];
+
+const adminRoutes = [
     {
         path: 'world',
         name: 'world.admin.world.update',
-        component: WorldEditor,
+        component: components.WorldEditor,
         meta: {
-            title: 'Update World',
-        },
-    },
-    {
-        path: 'occurrences',
-        name: 'world.admin.occurrences',
-        component: OccurrenceList,
-        meta: {
-            title: 'Occurrences',
-        },
-    },
-    {
-        path: 'occurrences/create',
-        name: 'world.admin.occurrences.create',
-        component: OccurrenceEditor,
-        meta: {
-            title: 'Create Occurrence',
-        },
-    },
-    {
-        path: 'occurrences/:id',
-        name: 'world.admin.occurrences.update',
-        component: OccurrenceEditor,
-        meta: {
-            title: 'Update Occurrence',
+            title: 'World',
+            icon: 'fa-globe',
         },
     },
 ];
+
+resources.forEach(({name, icon}) => {
+    const resourceUpper = name.charAt(0).toUpperCase() + name.slice(1);
+    const resourcePlural = pluralize(name);
+    const editor = `${resourceUpper}Editor`;
+    const list = `${resourceUpper}List`;
+
+    // Add create editor
+    adminRoutes.push({
+        name: `world.admin.${resourcePlural}.create`,
+        path: `${resourcePlural}/create`,
+        component: components[editor],
+        meta: {
+            title: `Create ${resourceUpper}`,
+        },
+    });
+
+    // Add update editor
+    adminRoutes.push({
+        name: `world.admin.${resourcePlural}.update`,
+        path: `${resourcePlural}/:id`,
+        component: components[editor],
+        meta: {
+            title: `Update ${resourceUpper}`,
+        },
+    });
+
+    // Add list
+    adminRoutes.push({
+        name: `world.admin.${resourcePlural}`,
+        path: `${resourcePlural}`,
+        component: components[list],
+        meta: {
+            title: pluralize(resourceUpper),
+            icon,
+        },
+    });
+});
+
+export default adminRoutes;

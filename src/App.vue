@@ -7,11 +7,11 @@
                 <b-sidebar
                     v-if="menu"
                     position="static"
-                    :mobile="mobile"
                     :expand-on-hover="expandOnHover"
                     :reduce="reduce"
                     type="is-light"
-                    open
+                    fullheight
+                    :open.sync="open"
                 >
                     <div class="menu-control has-text-right py-2 px-4">
                         <span @click="toggleMenu()">
@@ -50,9 +50,9 @@
     })
     export default class App extends Vue {
         menu = '';
-        mobile = 'reduce';
         expandOnHover = false;
         reduce = false;
+        open = true;
 
         beforeCreate() {
             AmplifyEventBus.$on('authState', info => {
@@ -119,6 +119,7 @@
         position: relative;
         // padding-bottom: $footer-height;
         height: 100%;
+        overflow: hidden;
 
         .is-goblin {
             font-family: $font-goblin-family;
@@ -128,7 +129,6 @@
             min-height: 100%;
             width: 100%;
             bottom: 0;
-            overflow: scroll;
         }
 
         .hero .hero-body .title {
@@ -197,6 +197,7 @@
 
             .content {
                 width: 100%;
+                overflow: scroll;
             }
         }
 
