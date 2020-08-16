@@ -1,0 +1,145 @@
+enum OccurrenceType {
+    PartyJoin,
+    Birth,
+    Death,
+    Event,
+    Session,
+}
+
+enum PublishStatus {
+    Private,
+    Public
+}
+
+enum CharacterType {
+    PlayerCharacter,
+    NonPlayerCharacter,
+}
+
+enum Race {
+    HighElf,
+    Human,
+    Tiefling,
+    Dwarf,
+}
+
+enum Alignment {
+    ChaoticGood,
+    NeutralGood,
+    LawfulGood,
+    ChaoticNeutral,
+    TrueNeutral,
+    LawfulNeutral,
+    ChaoticEvil,
+    NeutralEvil,
+    LawfulEvil,
+}
+
+type World
+@model
+@key(fields: ["id"])
+@key(fields: ["slug"], name: "slug")
+@aws_iam
+@aws_cognito_user_pools
+@auth(
+    rules: [
+        # Logged in users can access any operation.
+        { allow: private },
+
+        # Unauth users can read only.
+        { allow: public, provider: iam, operations: [read] }
+    ]
+)
+{
+    id: ID!
+    title: String!
+    slug: String!
+    content: String
+    createdAt: AWSDateTime
+    updatedAt: AWSDateTime
+    parties: [Party] @connection(name: "PartyWorld")
+    characters: [Character] @connection(name: "CharacterWorld")
+    occurrences: [Occurrence] @connection(name: "OccurrenceWorld")
+}
+
+type Party
+@model
+@aws_iam
+@aws_cognito_user_pools
+@auth(
+    rules: [
+        # Logged in users can access any operation.
+        { allow: private },
+
+        # Unauth users can read only.
+        { allow: public, provider: iam, operations: [read] }
+    ]
+)
+@key(fields: ["id"])
+@key(fields: ["slug"], name: "slug")
+{
+    id: ID!
+    name: String
+    slug: String!
+    characters: [Character] @connection(name: "CharacterParty")
+    occurrences: [Occurrence] @connection(name: "OccurrenceParty")
+    world: World @connection(name: "PartyWorld")
+}
+
+type Character
+@model
+@aws_iam
+@aws_cognito_user_pools
+@auth(
+    rules: [
+        # Logged in users can access any operation.
+        { allow: private },
+
+        # Unauth users can read only.
+        { allow: public, provider: iam, operations: [read] }
+    ]
+)
+@key(fields: ["id"])
+@key(fields: ["type"], queryField: "name", name: "character_type_name")
+{
+    id: ID!
+    name: String
+    type: CharacterType!
+    avatar: String
+    race: Race
+    alignment: Alignment
+    gender: String
+    status: PublishStatus
+    party: Party @connection(name: "CharacterParty")
+    world: World @connection(name: "CharacterWorld")
+    occurrences: [Occurrence] @connection(name: "OccurrenceCharacter")
+}
+
+type Occurrence
+@model
+@aws_iam
+@aws_cognito_user_pools
+@auth(
+    rules: [
+        # Logged in users can access any operation.
+        { allow: private },
+
+        # Unauth users can read only.
+        { allow: public, provider: iam, operations: [read] }
+    ]
+)
+@key(fields: ["id"])
+@key(fields: ["type"], queryField: "reckoning", name: "occurrence_type_reckoning")
+{
+    id: ID!
+    title: String!
+    summary: String
+    content: String
+    reckoning: String!
+    status: PublishStatus!
+    type: OccurrenceType
+    character: Character @connection(name: "OccurrenceCharacter")
+    party: Party @connection(name: "OccurrenceParty")
+    world: World @connection(name: "OccurrenceWorld")
+}
+
