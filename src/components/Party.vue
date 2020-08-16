@@ -28,48 +28,57 @@
     import {API, graphqlOperation} from 'aws-amplify';
     import AppComponent from './AppComponent';
     import {sortByKey} from '../methods';
-
-    const getParty = /* GraphQL */ `
-      query GetParty($id: ID!) {
-        getParty(id: $id) {
-          id
-          name
-          slug
-          characters {
-            items {
-              id
-              name
-              type
-              race
-              avatar
-            }
-            nextToken
-          }
-        }
-      }
-    `;
+    import {Getter} from 'vuex-class';
 
     @Component()
-    export default class Party extends AppComponent {
-        @Prop(String) partyId;
+    export default class Party extends AppComponent
+    {
+      @Prop(String) partyId;
+      @Getter('user/id') userId;
 
-        party = {};
-        members = [];
+      party = {};
+      members = [];
 
-        mounted() {
-            this.loadParty();
+      mounted()
+      {
+        this.loadParty();
+      }
+
+      get query()
+      {
+        const characterQuery = this.userId ? '' : '(filter: {status: {eq: Public}})';
+
+        return `
+              query GetParty($id: ID!) {
+                getParty(id: $id) {
+                  id
+                  name
+                  slug
+                  characters${characterQuery} {
+                    items {
+                      id
+                      name
+                      type
+                      race
+                      avatar
+                    }
+                    nextToken
+                  }
+                }
+              }
+            `;
+      }
+
+      async loadParty()
+      {
+        this.loading = true;
+
+        try {
+          const response = await API.graphql(graphqlOperation(this.query, {id: this.partyId}));
+
+          this.party = response.data['getParty'];
+          this.members = sortByKey(this.party.characters.items, 'name');
         }
-
-        async loadParty() {
-            this.loading = true;
-
-            try {
-                const response = await API.graphql(graphqlOperation(getParty, {id: this.partyId}));
-
-                this.party = response.data['getParty'];
-                this.members = sortByKey(this.party.characters.items, 'name');
-
-            }
             catch (e) {
                 this.loading = false;
 

@@ -101,8 +101,8 @@
         "Runtime": "nodejs10.x",
         "Timeout": "25",
         "Code": {
-          "S3Bucket": "amplify-dndb-production-155224-deployment",
-          "S3Key": "amplify-builds/dndb8a5ae48ePostConfirmation-43596370696b306b7341-build.zip"
+          "S3Bucket": "amplify-dndb-dev-145009-deployment",
+          "S3Key": "amplify-builds/dndb8a5ae48ePostConfirmation-7767506f68474f5a4b32-build.zip"
         }
       }
     },
