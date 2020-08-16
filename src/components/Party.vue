@@ -72,7 +72,7 @@
             try {
                 const operations = graphqlOperation(this.query, {id: this.partyId});
 
-                operations.authMode = this.userId ? 'AMAZON_COGNITO_USER_POOLS' : 'AWS_IAM';
+                operations.authMode = this.authMode;
 
                 const response = await API.graphql(operations);
 
