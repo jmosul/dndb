@@ -113,8 +113,6 @@
                 variables.filter = filter;
             }
 
-            console.log(this.type, variables);
-
             return API.graphql({
                 query: listOccurrences,
                 variables,
