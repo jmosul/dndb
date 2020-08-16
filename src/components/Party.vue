@@ -11,8 +11,8 @@
                                 </figure>
                             </div>
                             <div class="media-content">
-                                <p class="title is-5">{{member.name}}</p>
-                                <p class="subtitle is-6">{{member.race}}</p>
+                                <p class="title is-5">{{ member.name }}</p>
+                                <p class="subtitle is-6">{{ member.race }}</p>
                             </div>
                         </div>
                     </div>
@@ -27,54 +27,58 @@
     import {Prop} from 'vue-property-decorator';
     import {API, graphqlOperation} from 'aws-amplify';
     import AppComponent from './AppComponent';
-    import {sortByKey} from '../methods';
+    import {sortByKey} from '@/methods';
     import {Getter} from 'vuex-class';
 
     @Component()
     export default class Party extends AppComponent {
-      @Prop(String) partyId;
-      @Getter('user/id') userId;
+        @Prop(String) partyId;
+        @Getter('user/id') userId;
 
-      party = {};
-      members = [];
+        party = {};
+        members = [];
 
-      mounted() {
-        this.loadParty();
-      }
+        mounted() {
+            this.loadParty();
+        }
 
-      get query() {
-        const characterQuery = this.userId ? '' : '(filter: {status: {eq: Public}})';
+        get query() {
+            const characterQuery = this.userId ? '' : '(filter: {status: {eq: Public}})';
 
-        return `
-              query GetParty($id: ID!) {
-                getParty(id: $id) {
-                  id
-                  name
-                  slug
-                  characters${characterQuery} {
-                    items {
+            return `
+                  query GetParty($id: ID!) {
+                    getParty(id: $id) {
                       id
                       name
-                      type
-                      race
-                      avatar
+                      slug
+                      characters${characterQuery} {
+                        items {
+                          id
+                          name
+                          type
+                          race
+                          avatar
+                        }
+                        nextToken
+                      }
                     }
-                    nextToken
                   }
-                }
-              }
-            `;
-      }
+                `;
+        }
 
-      async loadParty() {
-        this.loading = true;
+        async loadParty() {
+            this.loading = true;
 
-        try {
-          const response = await API.graphql(graphqlOperation(this.query, {id: this.partyId}));
+            try {
+                const operations = graphqlOperation(this.query, {id: this.partyId});
 
-          this.party = response.data['getParty'];
-          this.members = sortByKey(this.party.characters.items, 'name');
-        } catch (e) {
+                operations.authMode = this.userId ? 'AMAZON_COGNITO_USER_POOLS' : 'AWS_IAM';
+
+                const response = await API.graphql(operations);
+
+                this.party = response.data['getParty'];
+                this.members = sortByKey(this.party.characters.items, 'name');
+            } catch (e) {
                 this.loading = false;
 
                 return this.showGraphQlError(e);
@@ -86,31 +90,31 @@
 </script>
 
 <style scoped lang="scss">
-    .party {
+.party {
+    width: 100%;
+
+    .party__avatars {
         width: 100%;
+        display: flex;
 
-        .party__avatars {
-            width: 100%;
-            display: flex;
+        flex-wrap: wrap;
 
-            flex-wrap: wrap;
-
-            > * {
-                flex: 0 0 50%;
-            }
+        > * {
+            flex: 0 0 50%;
         }
-
-        .media {
-            align-items: flex-start;
-
-            .media-left {
-                flex-shrink: 1;
-            }
-
-            .media-content {
-                flex-shrink: 0;
-            }
-        }
-
     }
+
+    .media {
+        align-items: flex-start;
+
+        .media-left {
+            flex-shrink: 1;
+        }
+
+        .media-content {
+            flex-shrink: 0;
+        }
+    }
+
+}
 </style>
