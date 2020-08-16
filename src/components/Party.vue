@@ -31,21 +31,18 @@
     import {Getter} from 'vuex-class';
 
     @Component()
-    export default class Party extends AppComponent
-    {
+    export default class Party extends AppComponent {
       @Prop(String) partyId;
       @Getter('user/id') userId;
 
       party = {};
       members = [];
 
-      mounted()
-      {
+      mounted() {
         this.loadParty();
       }
 
-      get query()
-      {
+      get query() {
         const characterQuery = this.userId ? '' : '(filter: {status: {eq: Public}})';
 
         return `
@@ -69,8 +66,7 @@
             `;
       }
 
-      async loadParty()
-      {
+      async loadParty() {
         this.loading = true;
 
         try {
@@ -78,8 +74,7 @@
 
           this.party = response.data['getParty'];
           this.members = sortByKey(this.party.characters.items, 'name');
-        }
-            catch (e) {
+        } catch (e) {
                 this.loading = false;
 
                 return this.showGraphQlError(e);
