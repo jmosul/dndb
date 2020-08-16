@@ -40,6 +40,7 @@
             <b-field label="Race" horizontal>
                 <b-select v-model="model.race">
                     <option value="HighElf">Elf (High)</option>
+                    <option value="WoodElf">Elf (Wood)</option>
                     <option value="Human">Human</option>
                     <option value="Tiefling">Tiefling</option>
                     <option value="Dwarf">Dwarf</option>
