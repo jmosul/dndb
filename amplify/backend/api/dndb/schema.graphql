@@ -21,6 +21,7 @@ enum Race {
     Human,
     Tiefling,
     Dwarf,
+    WoodElf,
 }
 
 enum Alignment {
@@ -101,6 +102,8 @@ type Character
 )
 @key(fields: ["id"])
 @key(fields: ["type"], queryField: "name", name: "character_type_name")
+@key(fields: ["type", "status"], queryField: "name", name: "character_type_name_status")
+@key(fields: ["status"], queryField: "status", name: "character_type_status")
 {
     id: ID!
     name: String
