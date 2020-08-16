@@ -1,158 +1,33 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getNonPlayerCharacter = /* GraphQL */ `
-  query GetNonPlayerCharacter($id: ID!) {
-    getNonPlayerCharacter(id: $id) {
-      dm
-      id
-      name
-      class
-      occupation
-      race
-      age
-      height
-      weight
-      description
-      history
-      voice
-      strength
-      dexterity
-      constitution
-      intelligence
-      wisdom
-      charisma
-      alignment_moral
-      alignment_order
-      personality
-      ideal
-      bond
-      flaw
-      talent
-      mannerisms
-      interaction
-      secrets
-      notes
-      image
-      party_opinion
-    }
-  }
-`;
-export const listNonPlayerCharacters = /* GraphQL */ `
-  query ListNonPlayerCharacters(
-    $filter: ModelNonPlayerCharacterFilterInput
+export const listWorlds = /* GraphQL */ `
+  query ListWorlds(
+    $id: ID
+    $filter: ModelWorldFilterInput
     $limit: Int
     $nextToken: String
+    $sortDirection: ModelSortDirection
   ) {
-    listNonPlayerCharacters(
+    listWorlds(
+      id: $id
       filter: $filter
       limit: $limit
       nextToken: $nextToken
+      sortDirection: $sortDirection
     ) {
       items {
-        dm
         id
-        name
-        class
-        occupation
-        race
-        age
-        height
-        weight
-        description
-        history
-        voice
-        strength
-        dexterity
-        constitution
-        intelligence
-        wisdom
-        charisma
-        alignment_moral
-        alignment_order
-        personality
-        ideal
-        bond
-        flaw
-        talent
-        mannerisms
-        interaction
-        secrets
-        notes
-        image
-        party_opinion
-      }
-      nextToken
-    }
-  }
-`;
-export const getPartyMember = /* GraphQL */ `
-  query GetPartyMember($id: ID!) {
-    getPartyMember(id: $id) {
-      id
-      dm
-      status
-      campaignId
-      player {
-        id
-        dm
-        name
-      }
-      character {
-        id
-        dm
-        name
-        image
-        sheet {
-          id
-          dm
-          secrets
+        title
+        slug
+        content
+        parties {
+          nextToken
         }
-      }
-    }
-  }
-`;
-export const listPartyMembers = /* GraphQL */ `
-  query ListPartyMembers(
-    $filter: ModelPartyMemberFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listPartyMembers(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        dm
-        status
-        campaignId
-        player {
-          id
-          dm
-          name
+        characters {
+          nextToken
         }
-        character {
-          id
-          dm
-          name
-          image
-        }
-      }
-      nextToken
-    }
-  }
-`;
-export const listCampaigns = /* GraphQL */ `
-  query ListCampaigns(
-    $filter: ModelCampaignFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listCampaigns(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        dm
-        name
-        image
-        partyMembers {
+        occurrences {
           nextToken
         }
       }
@@ -160,57 +35,252 @@ export const listCampaigns = /* GraphQL */ `
     }
   }
 `;
-export const getCampaign = /* GraphQL */ `
-  query GetCampaign($id: ID!) {
-    getCampaign(id: $id) {
+export const getWorld = /* GraphQL */ `
+  query GetWorld($id: ID!) {
+    getWorld(id: $id) {
       id
-      dm
-      name
-      image
-      partyMembers {
+      title
+      slug
+      content
+      parties {
         items {
           id
-          dm
+          name
+          slug
+        }
+        nextToken
+      }
+      characters {
+        items {
+          id
+          name
+          type
+        }
+        nextToken
+      }
+      occurrences {
+        items {
+          id
+          title
+          content
+          reckoning
           status
-          campaignId
+          type
         }
         nextToken
       }
     }
   }
 `;
-export const listCampaignLogs = /* GraphQL */ `
-  query ListCampaignLogs(
-    $filter: ModelCampaignLogFilterInput
+export const listPartys = /* GraphQL */ `
+  query ListPartys(
+    $id: ID
+    $filter: ModelPartyFilterInput
     $limit: Int
     $nextToken: String
+    $sortDirection: ModelSortDirection
   ) {
-    listCampaignLogs(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listPartys(
+      id: $id
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
       items {
         id
-        dm
-        campaignId
-        date
-        dale_reckoning
-        title
-        content
-        highlights
+        name
+        slug
+        world {
+          id
+          title
+          slug
+        }
+        characters {
+          nextToken
+        }
+        occurrences {
+          nextToken
+        }
       }
       nextToken
     }
   }
 `;
-export const getCampaignLog = /* GraphQL */ `
-  query GetCampaignLog($id: ID!) {
-    getCampaignLog(id: $id) {
+export const getParty = /* GraphQL */ `
+  query GetParty($id: ID!) {
+    getParty(id: $id) {
       id
-      dm
-      campaignId
-      date
-      dale_reckoning
-      title
-      content
-      highlights
+      name
+      slug
+      world {
+        id
+        title
+        slug
+        parties {
+          nextToken
+        }
+        characters {
+          nextToken
+        }
+        occurrences {
+          nextToken
+        }
+      }
+      characters {
+        items {
+          id
+          name
+          type
+          avatar
+        }
+        nextToken
+      }
+      occurrences {
+        items {
+          id
+          title
+          content
+          reckoning
+          status
+          type
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const listCharacters = /* GraphQL */ `
+  query ListCharacters(
+    $id: ID
+    $filter: ModelCharacterFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listCharacters(
+      id: $id
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        id
+        name
+        type
+        avatar
+        alignment
+        gender
+        name
+        race
+        world {
+          id
+          title
+          slug
+        }
+        party {
+          id
+          name
+          slug
+        }
+        occurrences {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const getCharacter = /* GraphQL */ `
+  query GetCharacter($id: ID!) {
+    getCharacter(id: $id) {
+      id
+      name
+      type
+      avatar
+      alignment
+      gender
+      name
+      race
+      world {
+        id
+        title
+        slug
+        parties {
+          nextToken
+        }
+        characters {
+          nextToken
+        }
+        occurrences {
+          nextToken
+        }
+      }
+      party {
+        id
+        name
+        slug
+        world {
+          id
+          title
+          slug
+        }
+        characters {
+          nextToken
+        }
+        occurrences {
+          nextToken
+        }
+      }
+      occurrences {
+        items {
+          id
+          title
+          content
+          reckoning
+          status
+          type
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const name = /* GraphQL */ `
+  query Name(
+    $type: CharacterType
+    $sortDirection: ModelSortDirection
+    $filter: ModelCharacterFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    name(
+      type: $type
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        name
+        type
+        world {
+          id
+          title
+          slug
+        }
+        party {
+          id
+          name
+          slug
+        }
+        occurrences {
+          nextToken
+        }
+      }
+      nextToken
     }
   }
 `;
@@ -218,221 +288,143 @@ export const getOccurrence = /* GraphQL */ `
   query GetOccurrence($id: ID!) {
     getOccurrence(id: $id) {
       id
-      dm
-      dale_reckoning
-      public
       title
+      content
+      reckoning
+      status
       type
-      occurrenceCampaignId
-      campaign {
+      world {
         id
-        dm
-        name
-        image
-        partyMembers {
+        title
+        slug
+        parties {
+          nextToken
+        }
+        characters {
+          nextToken
+        }
+        occurrences {
           nextToken
         }
       }
-      log {
+      party {
         id
-        dm
-        campaignId
-        date
-        dale_reckoning
-        title
-        content
-        highlights
+        name
+        slug
+        world {
+          id
+          title
+          slug
+        }
+        characters {
+          nextToken
+        }
+        occurrences {
+          nextToken
+        }
       }
-      history {
+      character {
         id
-        dm
-        content
+        name
+        type
+        world {
+          id
+          title
+          slug
+        }
+        party {
+          id
+          name
+          slug
+        }
+        occurrences {
+          nextToken
+        }
       }
     }
   }
 `;
 export const listOccurrences = /* GraphQL */ `
   query ListOccurrences(
+    $id: ID
+    $filter: ModelOccurrenceFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listOccurrences(
+      id: $id
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        id
+        title
+        content
+        reckoning
+        status
+        type
+        world {
+          id
+          title
+          slug
+        }
+        party {
+          id
+          name
+          slug
+        }
+        character {
+          id
+          name
+          type
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const reckoning = /* GraphQL */ `
+  query Reckoning(
+    $type: OccurrenceType
+    $sortDirection: ModelSortDirection
     $filter: ModelOccurrenceFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listOccurrences(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    reckoning(
+      type: $type
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
       items {
         id
-        dm
-        dale_reckoning
-        public
         title
-        type
-        occurrenceCampaignId
-        campaign {
-          id
-          dm
-          name
-          image
-        }
-        log {
-          id
-          dm
-          campaignId
-          date
-          dale_reckoning
-          title
-          content
-          highlights
-        }
-        history {
-          id
-          dm
-          content
-        }
-      }
-      nextToken
-    }
-  }
-`;
-export const listHistoryOccurrences = /* GraphQL */ `
-  query ListHistoryOccurrences(
-    $filter: ModelHistoryOccurrenceFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listHistoryOccurrences(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        dm
         content
-      }
-      nextToken
-    }
-  }
-`;
-export const getHistoryOccurrence = /* GraphQL */ `
-  query GetHistoryOccurrence($id: ID!) {
-    getHistoryOccurrence(id: $id) {
-      id
-      dm
-      content
-    }
-  }
-`;
-export const listPlayers = /* GraphQL */ `
-  query ListPlayers(
-    $filter: ModelPlayerFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listPlayers(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        dm
-        name
-      }
-      nextToken
-    }
-  }
-`;
-export const getPlayer = /* GraphQL */ `
-  query GetPlayer($id: ID!) {
-    getPlayer(id: $id) {
-      id
-      dm
-      name
-    }
-  }
-`;
-export const listPlayerCharacters = /* GraphQL */ `
-  query ListPlayerCharacters(
-    $filter: ModelPlayerCharacterFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listPlayerCharacters(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        dm
-        name
-        image
-        sheet {
+        reckoning
+        status
+        type
+        world {
           id
-          dm
-          secrets
+          title
+          slug
+        }
+        party {
+          id
+          name
+          slug
+        }
+        character {
+          id
+          name
+          type
         }
       }
       nextToken
-    }
-  }
-`;
-export const getPlayerCharacter = /* GraphQL */ `
-  query GetPlayerCharacter($id: ID!) {
-    getPlayerCharacter(id: $id) {
-      id
-      dm
-      name
-      image
-      sheet {
-        id
-        dm
-        abilities {
-          strength
-          dexterity
-          constitution
-          intelligence
-          wisdom
-          charisma
-        }
-        secrets
-      }
-    }
-  }
-`;
-export const listCharacterSheets = /* GraphQL */ `
-  query ListCharacterSheets(
-    $filter: ModelCharacterSheetFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listCharacterSheets(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        dm
-        abilities {
-          strength
-          dexterity
-          constitution
-          intelligence
-          wisdom
-          charisma
-        }
-        secrets
-      }
-      nextToken
-    }
-  }
-`;
-export const getCharacterSheet = /* GraphQL */ `
-  query GetCharacterSheet($id: ID!) {
-    getCharacterSheet(id: $id) {
-      id
-      dm
-      abilities {
-        strength
-        dexterity
-        constitution
-        intelligence
-        wisdom
-        charisma
-      }
-      secrets
     }
   }
 `;

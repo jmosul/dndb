@@ -1,7 +1,7 @@
 <template>
-  <section class="identity container">
-    <amplify-authenticator v-bind:authConfig="authConfig"></amplify-authenticator>
-  </section>
+    <section class="identity container">
+        <amplify-authenticator v-bind:authConfig="authConfig"></amplify-authenticator>
+    </section>
 </template>
 
 <script>
@@ -13,7 +13,6 @@
     export default class SignIn extends AuthComponent {
         constructor() {
             super();
-
             this.authConfig = {
                 signUpConfig,
             };

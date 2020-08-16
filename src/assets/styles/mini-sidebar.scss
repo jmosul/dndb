@@ -1,0 +1,15 @@
+aside.menu {
+  .menu-list {
+    a {
+      text-align: center;
+
+      span {
+        display: none;
+      }
+    }
+  }
+}
+
+.menu-control i:before {
+  content: "\f054" !important;
+}

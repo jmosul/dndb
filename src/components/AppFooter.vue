@@ -3,7 +3,8 @@
         <div class="content has-text-centered has-text-grey-light">
             <p>
                 <small>
-                    Dungeons and Databases | James O'Sullivan | &copy; {{year}}
+                    Dungeons and Databases
+                    <br>&copy; James O'Sullivan {{year}}
                     <br>
                     <a
                         href="https://github.com/jmosul/dndb"
@@ -45,9 +46,17 @@
     @import '../styles';
 
     footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
         width: 100%;
         height: $footer-height;
-        padding: 1em;
-        background-color: $dark;
+        background-color: transparent;
+    }
+
+    @media screen and (max-width: 1023px) {
+        footer {
+            display: none;
+        }
     }
 </style>

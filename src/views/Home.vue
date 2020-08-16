@@ -5,26 +5,34 @@
             <br><i class="fab fa-d-and-d"></i>
             Databases
         </h1>
-        <div class="campaigns">
-            <campaign-selector></campaign-selector>
+        <div class="worlds columns is-centered">
+            <router-link :to="{name: 'world.home', params: {world: world.slug}}" v-for="world in worlds" :key="world.id" class="column is-one-fifth-desktop">
+                <div class="card">
+                    <card-image :image="world.slug"></card-image>
+                    <div class="content">
+                        <h3>{{world.title}}</h3>
+                    </div>
+                </div>
+            </router-link>
         </div>
     </section>
 </template>
 
 <script>
-    import AppComponent from '../AppComponent';
+    import AppComponent from '../components/AppComponent';
     import Component from 'vue-class-component';
-    import CampaignSelector from '../components/CampaignSelector';
+    import {Getter} from 'vuex-class';
+    import CardImage from '../components/CardImage';
 
     @Component({
-        components: {CampaignSelector},
+        components: {CardImage},
     })
     export default class Home extends AppComponent {
-
+        @Getter('worlds/all') worlds;
     }
 </script>
 
-<style lang="scss" scoped>
+<style scoped lang="scss">
     @import '../styles.scss';
 
     section {
@@ -34,7 +42,6 @@
             position: relative;
             margin: 5rem 0 0 10rem;
             text-align: left;
-
             color: $color-dnd-red;
             font-family: $font-goblin-family;
             font-size: 6em;
@@ -46,10 +53,13 @@
             }
         }
 
-        .campaigns {
-            max-width: 500px;
-            margin: 60px auto 0;
-            text-align: center;
+        .worlds {
+            h3 {
+                text-align: center;
+                color: $color-dnd-black;
+                font-family: $font-goblin-family;
+                padding: 5px;
+            }
         }
     }
 </style>
