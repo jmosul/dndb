@@ -116,6 +116,12 @@ type Character
     party: Party @connection(name: "CharacterParty")
     world: World @connection(name: "CharacterWorld")
     occurrences: [Occurrence] @connection(name: "OccurrenceCharacter")
+    strength: Int
+    dexterity: Int
+    constitution: Int
+    intelligence: Int
+    wisdom: Int
+    charisma: Int
 }
 
 type Occurrence
