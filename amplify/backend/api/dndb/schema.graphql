@@ -139,11 +139,13 @@ type Occurrence
 )
 @key(fields: ["id"])
 @key(fields: ["type"], queryField: "reckoning", name: "occurrence_type_reckoning")
+@key(fields: ["type"], queryField: "dayStamp", name: "occurrence_type_dayS?tamp")
 {
     id: ID!
     title: String!
     summary: String
     content: String
+    dayStamp: Int
     reckoning: String!
     status: PublishStatus!
     type: OccurrenceType
