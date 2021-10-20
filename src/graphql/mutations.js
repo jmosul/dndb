@@ -10,6 +10,9 @@ export const createWorld = /* GraphQL */ `
       id
       title
       slug
+      content
+      createdAt
+      updatedAt
       parties {
         items {
           id
@@ -23,6 +26,11 @@ export const createWorld = /* GraphQL */ `
           id
           name
           type
+          avatar
+          race
+          alignment
+          gender
+          status
         }
         nextToken
       }
@@ -30,6 +38,7 @@ export const createWorld = /* GraphQL */ `
         items {
           id
           title
+          summary
           content
           reckoning
           status
@@ -49,6 +58,9 @@ export const updateWorld = /* GraphQL */ `
       id
       title
       slug
+      content
+      createdAt
+      updatedAt
       parties {
         items {
           id
@@ -62,6 +74,11 @@ export const updateWorld = /* GraphQL */ `
           id
           name
           type
+          avatar
+          race
+          alignment
+          gender
+          status
         }
         nextToken
       }
@@ -69,6 +86,7 @@ export const updateWorld = /* GraphQL */ `
         items {
           id
           title
+          summary
           content
           reckoning
           status
@@ -88,6 +106,9 @@ export const deleteWorld = /* GraphQL */ `
       id
       title
       slug
+      content
+      createdAt
+      updatedAt
       parties {
         items {
           id
@@ -101,6 +122,11 @@ export const deleteWorld = /* GraphQL */ `
           id
           name
           type
+          avatar
+          race
+          alignment
+          gender
+          status
         }
         nextToken
       }
@@ -108,6 +134,7 @@ export const deleteWorld = /* GraphQL */ `
         items {
           id
           title
+          summary
           content
           reckoning
           status
@@ -131,6 +158,9 @@ export const createParty = /* GraphQL */ `
         id
         title
         slug
+        content
+        createdAt
+        updatedAt
         parties {
           nextToken
         }
@@ -146,6 +176,11 @@ export const createParty = /* GraphQL */ `
           id
           name
           type
+          avatar
+          race
+          alignment
+          gender
+          status
         }
         nextToken
       }
@@ -153,6 +188,7 @@ export const createParty = /* GraphQL */ `
         items {
           id
           title
+          summary
           content
           reckoning
           status
@@ -176,6 +212,9 @@ export const updateParty = /* GraphQL */ `
         id
         title
         slug
+        content
+        createdAt
+        updatedAt
         parties {
           nextToken
         }
@@ -191,6 +230,11 @@ export const updateParty = /* GraphQL */ `
           id
           name
           type
+          avatar
+          race
+          alignment
+          gender
+          status
         }
         nextToken
       }
@@ -198,6 +242,7 @@ export const updateParty = /* GraphQL */ `
         items {
           id
           title
+          summary
           content
           reckoning
           status
@@ -221,6 +266,9 @@ export const deleteParty = /* GraphQL */ `
         id
         title
         slug
+        content
+        createdAt
+        updatedAt
         parties {
           nextToken
         }
@@ -236,6 +284,11 @@ export const deleteParty = /* GraphQL */ `
           id
           name
           type
+          avatar
+          race
+          alignment
+          gender
+          status
         }
         nextToken
       }
@@ -243,6 +296,7 @@ export const deleteParty = /* GraphQL */ `
         items {
           id
           title
+          summary
           content
           reckoning
           status
@@ -262,10 +316,18 @@ export const createCharacter = /* GraphQL */ `
       id
       name
       type
+      avatar
+      race
+      alignment
+      gender
+      status
       world {
         id
         title
         slug
+        content
+        createdAt
+        updatedAt
         parties {
           nextToken
         }
@@ -284,6 +346,9 @@ export const createCharacter = /* GraphQL */ `
           id
           title
           slug
+          content
+          createdAt
+          updatedAt
         }
         characters {
           nextToken
@@ -296,6 +361,7 @@ export const createCharacter = /* GraphQL */ `
         items {
           id
           title
+          summary
           content
           reckoning
           status
@@ -315,10 +381,18 @@ export const updateCharacter = /* GraphQL */ `
       id
       name
       type
+      avatar
+      race
+      alignment
+      gender
+      status
       world {
         id
         title
         slug
+        content
+        createdAt
+        updatedAt
         parties {
           nextToken
         }
@@ -337,6 +411,9 @@ export const updateCharacter = /* GraphQL */ `
           id
           title
           slug
+          content
+          createdAt
+          updatedAt
         }
         characters {
           nextToken
@@ -349,6 +426,7 @@ export const updateCharacter = /* GraphQL */ `
         items {
           id
           title
+          summary
           content
           reckoning
           status
@@ -368,10 +446,18 @@ export const deleteCharacter = /* GraphQL */ `
       id
       name
       type
+      avatar
+      race
+      alignment
+      gender
+      status
       world {
         id
         title
         slug
+        content
+        createdAt
+        updatedAt
         parties {
           nextToken
         }
@@ -390,6 +476,9 @@ export const deleteCharacter = /* GraphQL */ `
           id
           title
           slug
+          content
+          createdAt
+          updatedAt
         }
         characters {
           nextToken
@@ -402,6 +491,7 @@ export const deleteCharacter = /* GraphQL */ `
         items {
           id
           title
+          summary
           content
           reckoning
           status
@@ -420,6 +510,7 @@ export const createOccurrence = /* GraphQL */ `
     createOccurrence(input: $input, condition: $condition) {
       id
       title
+      summary
       content
       reckoning
       status
@@ -428,6 +519,9 @@ export const createOccurrence = /* GraphQL */ `
         id
         title
         slug
+        content
+        createdAt
+        updatedAt
         parties {
           nextToken
         }
@@ -446,6 +540,9 @@ export const createOccurrence = /* GraphQL */ `
           id
           title
           slug
+          content
+          createdAt
+          updatedAt
         }
         characters {
           nextToken
@@ -458,10 +555,18 @@ export const createOccurrence = /* GraphQL */ `
         id
         name
         type
+        avatar
+        race
+        alignment
+        gender
+        status
         world {
           id
           title
           slug
+          content
+          createdAt
+          updatedAt
         }
         party {
           id
@@ -483,6 +588,7 @@ export const updateOccurrence = /* GraphQL */ `
     updateOccurrence(input: $input, condition: $condition) {
       id
       title
+      summary
       content
       reckoning
       status
@@ -491,6 +597,9 @@ export const updateOccurrence = /* GraphQL */ `
         id
         title
         slug
+        content
+        createdAt
+        updatedAt
         parties {
           nextToken
         }
@@ -509,6 +618,9 @@ export const updateOccurrence = /* GraphQL */ `
           id
           title
           slug
+          content
+          createdAt
+          updatedAt
         }
         characters {
           nextToken
@@ -521,10 +633,18 @@ export const updateOccurrence = /* GraphQL */ `
         id
         name
         type
+        avatar
+        race
+        alignment
+        gender
+        status
         world {
           id
           title
           slug
+          content
+          createdAt
+          updatedAt
         }
         party {
           id
@@ -546,6 +666,7 @@ export const deleteOccurrence = /* GraphQL */ `
     deleteOccurrence(input: $input, condition: $condition) {
       id
       title
+      summary
       content
       reckoning
       status
@@ -554,6 +675,9 @@ export const deleteOccurrence = /* GraphQL */ `
         id
         title
         slug
+        content
+        createdAt
+        updatedAt
         parties {
           nextToken
         }
@@ -572,6 +696,9 @@ export const deleteOccurrence = /* GraphQL */ `
           id
           title
           slug
+          content
+          createdAt
+          updatedAt
         }
         characters {
           nextToken
@@ -584,10 +711,18 @@ export const deleteOccurrence = /* GraphQL */ `
         id
         name
         type
+        avatar
+        race
+        alignment
+        gender
+        status
         world {
           id
           title
           slug
+          content
+          createdAt
+          updatedAt
         }
         party {
           id

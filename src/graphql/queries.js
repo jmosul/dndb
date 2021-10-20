@@ -21,6 +21,8 @@ export const listWorlds = /* GraphQL */ `
         title
         slug
         content
+        createdAt
+        updatedAt
         parties {
           nextToken
         }
@@ -42,6 +44,8 @@ export const getWorld = /* GraphQL */ `
       title
       slug
       content
+      createdAt
+      updatedAt
       parties {
         items {
           id
@@ -55,6 +59,11 @@ export const getWorld = /* GraphQL */ `
           id
           name
           type
+          avatar
+          race
+          alignment
+          gender
+          status
         }
         nextToken
       }
@@ -62,6 +71,7 @@ export const getWorld = /* GraphQL */ `
         items {
           id
           title
+          summary
           content
           reckoning
           status
@@ -95,6 +105,9 @@ export const listPartys = /* GraphQL */ `
           id
           title
           slug
+          content
+          createdAt
+          updatedAt
         }
         characters {
           nextToken
@@ -117,6 +130,9 @@ export const getParty = /* GraphQL */ `
         id
         title
         slug
+        content
+        createdAt
+        updatedAt
         parties {
           nextToken
         }
@@ -133,6 +149,10 @@ export const getParty = /* GraphQL */ `
           name
           type
           avatar
+          race
+          alignment
+          gender
+          status
         }
         nextToken
       }
@@ -140,6 +160,7 @@ export const getParty = /* GraphQL */ `
         items {
           id
           title
+          summary
           content
           reckoning
           status
@@ -170,14 +191,17 @@ export const listCharacters = /* GraphQL */ `
         name
         type
         avatar
+        race
         alignment
         gender
-        name
-        race
+        status
         world {
           id
           title
           slug
+          content
+          createdAt
+          updatedAt
         }
         party {
           id
@@ -199,14 +223,17 @@ export const getCharacter = /* GraphQL */ `
       name
       type
       avatar
+      race
       alignment
       gender
-      name
-      race
+      status
       world {
         id
         title
         slug
+        content
+        createdAt
+        updatedAt
         parties {
           nextToken
         }
@@ -225,6 +252,9 @@ export const getCharacter = /* GraphQL */ `
           id
           title
           slug
+          content
+          createdAt
+          updatedAt
         }
         characters {
           nextToken
@@ -237,6 +267,7 @@ export const getCharacter = /* GraphQL */ `
         items {
           id
           title
+          summary
           content
           reckoning
           status
@@ -266,10 +297,63 @@ export const name = /* GraphQL */ `
         id
         name
         type
+        avatar
+        race
+        alignment
+        gender
+        status
         world {
           id
           title
           slug
+          content
+          createdAt
+          updatedAt
+        }
+        party {
+          id
+          name
+          slug
+        }
+        occurrences {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const status = /* GraphQL */ `
+  query Status(
+    $status: PublishStatus
+    $sortDirection: ModelSortDirection
+    $filter: ModelCharacterFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    status(
+      status: $status
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        name
+        type
+        avatar
+        race
+        alignment
+        gender
+        status
+        world {
+          id
+          title
+          slug
+          content
+          createdAt
+          updatedAt
         }
         party {
           id
@@ -289,6 +373,7 @@ export const getOccurrence = /* GraphQL */ `
     getOccurrence(id: $id) {
       id
       title
+      summary
       content
       reckoning
       status
@@ -297,6 +382,9 @@ export const getOccurrence = /* GraphQL */ `
         id
         title
         slug
+        content
+        createdAt
+        updatedAt
         parties {
           nextToken
         }
@@ -315,6 +403,9 @@ export const getOccurrence = /* GraphQL */ `
           id
           title
           slug
+          content
+          createdAt
+          updatedAt
         }
         characters {
           nextToken
@@ -327,10 +418,18 @@ export const getOccurrence = /* GraphQL */ `
         id
         name
         type
+        avatar
+        race
+        alignment
+        gender
+        status
         world {
           id
           title
           slug
+          content
+          createdAt
+          updatedAt
         }
         party {
           id
@@ -362,6 +461,7 @@ export const listOccurrences = /* GraphQL */ `
       items {
         id
         title
+        summary
         content
         reckoning
         status
@@ -370,6 +470,9 @@ export const listOccurrences = /* GraphQL */ `
           id
           title
           slug
+          content
+          createdAt
+          updatedAt
         }
         party {
           id
@@ -380,6 +483,11 @@ export const listOccurrences = /* GraphQL */ `
           id
           name
           type
+          avatar
+          race
+          alignment
+          gender
+          status
         }
       }
       nextToken
@@ -404,6 +512,7 @@ export const reckoning = /* GraphQL */ `
       items {
         id
         title
+        summary
         content
         reckoning
         status
@@ -412,6 +521,9 @@ export const reckoning = /* GraphQL */ `
           id
           title
           slug
+          content
+          createdAt
+          updatedAt
         }
         party {
           id
@@ -422,6 +534,11 @@ export const reckoning = /* GraphQL */ `
           id
           name
           type
+          avatar
+          race
+          alignment
+          gender
+          status
         }
       }
       nextToken
